@@ -16,17 +16,15 @@ tekniikoita käytetään ja mitä konkreettisesti on valmiina, kun projekti pä�
 
 ## Järjestelmän määrittely
 
-Määrittelyssä järjestelmää tarkastellaan käyttäjän näkökulmasta. Järjestelmän
-toiminnot hahmotellaan käyttötapausten tai käyttäjätarinoiden kautta, ja kuvataan järjestelmän
-käyttäjäryhmät.
+### Käyttäjäryhmät
 
--   Lyhyt kuvaus käyttäjäryhmistä (rooleista)
--   Käyttäjäroolit ja roolien tarvitsemat toiminnot, esim. käyttötapauskaaviona
-    (use case diagram) tai käyttäjätarinoina.
--   Lyhyt kuvaus käyttötapauksista tai käyttäjätarinat
+* Tapahtumavastaava = Liiketoiminnan pyörittäjä
+* Myyjä = Lipputoimiston myyntipisteen työntekijä
+* Lipuntarkastaja = Tapahtumissa työskentelevä lipuntarkastaja
+* Asiakas = Lipputoimistolta lippuja ostava kuluttaja
 
-Kuvauksissa kannattaa harkita, mikä on toteuttajalle ja asiakkaalle oleellista
-tietoa ja keskittyä siihen.
+### Käyttäjätarinat
+
 
 ## Käyttöliittymä
 
