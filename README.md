@@ -1,6 +1,6 @@
 # Ticket Guru
 
-Tiimi: KKVV Solutions
+Tiimi: KKVVR Solutions
 
 ## Johdanto
 
