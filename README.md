@@ -1,6 +1,6 @@
 # Ticket Guru
 
-Tiimi: KKVV Solutions
+Tiimi: KKVVR Solutions eli Salla Komppa, Katariina Kuismin, Perttu Virkki, Joona Virolainen & Jenna Räihä
 
 ## Johdanto
 
