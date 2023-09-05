@@ -25,6 +25,25 @@ tekniikoita käytetään ja mitä konkreettisesti on valmiina, kun projekti pä�
 
 ### Käyttäjätarinat
 
+* Tapahtumavastaavana haluan luoda uusia tapahtumia järjestelmään, jotta niiden liput saadaan myyntiin.
+
+* Tapahtumavastaavana haluan pystyä määrittämään eri ikäluokkien lipuille omat hintansa, jotta voimme tarjota reilut hinnat eri elmänätilanteissa oleville asiakkaillemme.
+
+* Tapahtumavastaavana haluan muokata tapahtuman tietoja ja lippujen hintoja, jotta muutosten tai alennusten tekeminen on mahdollista.
+
+* Tapahtumavastaavana haluan tarkastella yksittäisen tapahtuman myyntiraporttia, jotta voin tarkastella tapahtuman kannattavuutta.
+
+* Tapahtumavastaavana haluan listata kaikki myyntitapahtumat tietoineen, jotta voin kirjata tiedot kirjanpitoa varten.
+
+* Myyjänä haluan nähdä kaikki myynnissä olevat tapahtumat, jotta voin myydä liput asiakkaan haluamaan tapahtumaan.
+
+* Myyjänä haluan myydä useamman lipun kerrallaan eri asiakasryhmistä, jotta asiakaspalvelu on sujuvampaa.
+
+* Myyjänä haluan nähdä myymättä jääneet ennakkoliput, jotta voin tulostaa ne ovella myytäväksi.
+
+* Myyjänä haluan, että myyntitapahtumille muodostuu oma tunnisteensa, jotta virhetilanteiden selvitys helpottuuu.
+
+* Lipuntarkastajana haluan, että lipuilla on omat tunnistekoodinsa, jotta niiden tarkistaminen ovella on helpompaa.
 
 ## Käyttöliittymä
 
