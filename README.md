@@ -1,18 +1,12 @@
-# Ticket Guru
+# TicketGuru
 
 Tiimi: KKVVR Solutions eli Salla Komppa, Katariina Kuismin, Perttu Virkki, Joona Virolainen & Jenna Räihä
 
 ## Johdanto
 
-Johdantoon kirjoitetaan lyhyt, ytimekäs kuvaus siitä, mikä on projektin aihe,
-kuka on asiakas (käyttäjä), mitä hän haluaa ja saa järjestelmältä, mitä
-tekniikoita käytetään ja mitä konkreettisesti on valmiina, kun projekti päättyy.
+Projektin asiakas on lipunmyyntitoimisto, jolle tehtävänämme on luoda lipunmyyntijärjestelmä nimeltään TicketGuru, jonka kautta toimisto voi myydä lippuja myyntipisteessään ja määritellä lipunmyyntiin sisältyvät tapahtumat. Lipunmyyntipisteen tehtävänä on myydä ja tulostaa asiakkaan liput sekä ennakkomyynnin päätyttyä tulostaa loput vapaat liput ovella myytäviksi. Kaikki liput sisältävät selkeän koodin, jonka avulla lippu merkitään käytetyksi. 
 
--   Järjestelmän tarkoitus ja tiivis kuvaus siitä, mistä on kyse ja kenelle järjestelmä on tarkoitettu.
--   Toteutus- ja toimintaympäristö lyhyesti:  
-    -   Palvelinpuolen ratkaisut ja teknologiat (esim. palvelinteknologia, mikä tietokantajärjestelmä on käytössä)
-    -   Käyttöliittymäratkaisut ja teknologiat (esim. päätelaitteet: puhelin,
-    täppäri, desktop)
+Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen saldot (myydyt/jäljellä olevat) ovat helposti seurattavissa olevia. Back end -ohjelmiston toteutamme Spring Boot -projektina, jonne lisäämme toiminnallisuutta (CRUD) muun muassa tukeutuen asiakkaan toimittamiin rautalankamalleihin. Tietokantajärjestelmänä toimii SQL. Tarkoituksena on kehittää kokonaisuus, joka toimii kaikilla päätelaitteilla myyntipisteessä. Verkkokaupan laajentaminen asiakaskäyttöön on mainittu vain jatkokehityksenä, joten käyttöliittymään liittyvä ohjelmistokehitys eli front end osuus ei meidän projektiimme kuulu.
 
 ## Järjestelmän määrittely
 
