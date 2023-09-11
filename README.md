@@ -41,7 +41,16 @@ Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen 
 
 ## Käyttöliittymä
 
-Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona. 
+### Järjestelmän alustava käyttöliittymä
 
-Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
+1. Lipunmyynti
 
+<img width="700" alt="käyttöliittymäkuva 1" src="https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/118982668/15093015-fa57-42ad-bc65-3be1a7af2529">
+
+2. Tapahtumat
+
+<img width="700" alt="käyttöliittymäkuva 2" src="https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/118982668/e39756c3-3db8-48db-9338-dad57058e7e6">
+
+3. Myyntihistoria 
+
+<img width="700" alt="käyttöliittymäkuva 3" src="https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/118982668/5cacb71b-3225-4c26-9cd5-de11c4933cfc">
