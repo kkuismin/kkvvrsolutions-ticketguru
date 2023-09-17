@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import kkvvsolutions.TicketGuru.domain.TicketType;
-import repository.TicketTypeRepository;
+import kkvvsolutions.TicketGuru.repository.TicketTypeRepository;
 
 import java.util.List;
 import java.util.Optional;
