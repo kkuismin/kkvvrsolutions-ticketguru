@@ -1,64 +1,57 @@
 package kkvvsolutions.TicketGuru.web;
 
+import kkvvsolutions.TicketGuru.domain.TicketType;
+import kkvvsolutions.TicketGuru.domain.TicketTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import kkvvsolutions.TicketGuru.domain.TicketType;
-import kkvvsolutions.TicketGuru.repository.TicketTypeRepository;
-
-import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/ticketTypes")
+@Controller
 public class TicketTypeController {
 
     @Autowired
     private TicketTypeRepository ticketTypeRepository;
 
-    @GetMapping
-    public List<TicketType> getAllTicketTypes() {
-        return ticketTypeRepository.findAll();
+    @GetMapping("/tickettypes")
+    public String listTicketTypes(Model model) {
+        model.addAttribute("ticketTypes", ticketTypeRepository.findAll());
+        return "tickettypelist";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TicketType> getTicketTypeById(@PathVariable Long id) {
-        Optional<TicketType> ticketType = ticketTypeRepository.findById(id);
+    @GetMapping("/addtickettype")
+    public String addTicketType(Model model) {
+        model.addAttribute("ticketType", new TicketType());
+        return "addtickettype";
+    }
+
+    @PostMapping("/savetickettype")
+    public String saveTicketType(@ModelAttribute TicketType ticketType) {
+        ticketTypeRepository.save(ticketType);
+        return "redirect:/tickettypes";
+    }
+
+    @GetMapping("/deletetickettype/{id}")
+    public String deleteTicketType(@PathVariable("id") Long typeId) {
+        ticketTypeRepository.deleteById(typeId);
+        return "redirect:/tickettypes";
+    }
+
+    @GetMapping("/edittickettype/{id}")
+    public String editTicketType(@PathVariable("id") Long typeId, Model model) {
+        Optional<TicketType> ticketType = ticketTypeRepository.findById(typeId);
         if (ticketType.isPresent()) {
-            return ResponseEntity.ok(ticketType.get());
-        } else {
-            return ResponseEntity.notFound().build();
+            model.addAttribute("ticketType", ticketType.get());
+            return "edittickettype";
         }
+        return "redirect:/tickettypes";
     }
 
-    @PostMapping
-    public TicketType createTicketType(@RequestBody TicketType ticketType) {
-        return ticketTypeRepository.save(ticketType);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<TicketType> updateTicketType(@PathVariable Long id, @RequestBody TicketType newTicketType) {
-        Optional<TicketType> existingTicketType = ticketTypeRepository.findById(id);
-        if (existingTicketType.isPresent()) {
-            TicketType ticketType = existingTicketType.get();
-            ticketType.setPrice(newTicketType.getPrice());
-            ticketType.setCustomerType(newTicketType.getCustomerType());
-            ticketType.setDescription(newTicketType.getDescription());
-            ticketTypeRepository.save(ticketType);
-            return ResponseEntity.ok(ticketType);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTicketType(@PathVariable Long id) {
-        if (ticketTypeRepository.existsById(id)) {
-            ticketTypeRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/edittickettype")
+    public String editTicketType(@ModelAttribute TicketType ticketType) {
+        ticketTypeRepository.save(ticketType);
+        return "redirect:/tickettypes";
     }
 }
