@@ -56,16 +56,71 @@ Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen 
 <img width="700" alt="käyttöliittymäkuva 3" src="https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/118982668/5cacb71b-3225-4c26-9cd5-de11c4933cfc">
 
 ## Tietokanta
-Järjestelmään säilöttävä ja siinä käsiteltävät tiedot ja niiden väliset suhteet kuvataan käsitekaaviolla. Käsitemalliin sisältyy myös taulujen välisten viiteyhteyksien ja avainten määritykset. Tietokanta kuvataan käyttäen jotain kuvausmenetelmää, joko ER-kaaviota ja UML-luokkakaaviota.
 
-Lisäksi kukin järjestelmän tietoelementti ja sen attribuutit kuvataan tietohakemistossa. Tietohakemisto tarkoittaa yksinkertaisesti vain jokaisen elementin (taulun) ja niiden attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän tyyliin:
+Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa on myös selitteet taulujen tietokenttien tyypeistä.
 
-> ## *Tilit*
-> Tilit-taulu sisältää käyttäjätilit. Käyttäjällä voi olla monta tiliä. Tili kuuluu aina vain yhdelle käyttäjälle.
->
-> | Kenttä      | Tyyppi      | Kuvaus                                |
-> | ----------- | ----------- | ------------------------------------- |
-> | id          | int PK      | Tilin id                              |
-> | nimimerkki  | varchar(30) | Tilin nimimerkki                      |
-> | avatar      | int FK	    | Tilin avatar, viittaus avatar-tauluun |
-> | kayttaja    | int FK      | Viittaus käyttäjään käyttäjä-taulussa |
+![Tietokanta](image-1.png)
+
+**Alla on jokaisen taulun tarkemmat kuvaukset.**
+
+ #### Event
+ Event-taulun sisältönä on tapahtuman tiedot.
+
+ | Kenttä      | Tyyppi       | Kuvaus                                                       |
+ | ----------- | -----------  | ------------------------------------------------------------ |
+ | event_id    | int PK       | Tapahtuman id, not null                                      |
+ | ticket_id   | int FK       | Tapahtuman lippu, viittaus Ticket-tauluun, not null          |
+ | venue_id    | int FK	      | Tapahtuman tapahtumapaikka, viittaus Venue-tauluun, not null |
+ | name        | varchar(100) | Tapahtuman nimi, not null                                    |
+ | date        | dateTime     | Tapahtuman nimi, not null                                    |
+ | time        | dateTime     | Tapahtuman nimi, not null                                    |
+
+ ---
+
+ #### Ticket
+ Ticket-taulun sisältönä on tapahtumaan myydyn lipun tiedot. Yksi lippu käy vain yhteen tapahtumaan. Tapahtumalle voi olla monta lippua.
+
+ | Kenttä       | Tyyppi      | Kuvaus                                                             |
+ | ------------ | ----------- | ------------------------------------------------------------------ |
+ | ticket_id    | int PK      | Lipun id, not null                                                 |
+ | event_id     | int FK      | Id tapahtumalle, johon lippu on, viittaus Ticket-tauluun, not null |
+ | type_id      | int FK	  | Lipputyypin id, viittaus TicketType-tauluun, not null              |
+ | saleEvent_id | int FK	  | Myyntitapahtuman id, viittaus SaleEvent-tauluun, not null          |
+ | barcode      | varchar(15) | Lipun yksilöllinen viivakoodi, not null                            |
+
+ ---
+
+ #### TicketType
+ TicketType-taulun sisältönä on lipputyyppien tiedot. Lipulle voidaan valita vain yksi lipputyyppi.
+
+ | Kenttä       | Tyyppi       | Kuvaus                      |
+ | ------------ | ------------ | --------------------------- |
+ | type_id      | int PK       | Lipputyypin id, not nul     |
+ | price        | int          | Lipputyypin hinta, not null |
+ | customerType | varchar(100) | Asiakastyyppi, not null     |
+ | description  | varchar(100) | Lipputyypin kuvaus          |
+
+ ---
+
+ #### Venue
+ Venue-taulun sisältönä on tapahtumapaikan tiedot. Tapahtuma voi olla vain yhdessä tapahtumapaikassa. Yhdessä tapahtumapaikassa voi olla monta tapahtumaa.
+
+ | Kenttä   | Tyyppi       | Kuvaus                               |
+ | -------- | ------------ | ------------------------------------ |
+ | venue_id | int PK       | Tapahtumapaikan id, not null         |
+ | name     | varchar(100) | Tapahtumapaikan nimi, not null       |
+ | address  | varchar(100) | Tapahtumapaikan katuosoite, not null |
+ | city     | varchar(100) | Tapahtumapaikan kaupunki, not null   |
+ | capacity | int          | Tapahtumapaikan katsojakapasiteetti  |
+
+ ---
+
+ #### SaleEvent
+ SaleEvent-taulun sisältönä on myyntitapahtuman tiedot. Myyntitapahtumaan voi liittyä useampi lippu. Yksi lippu voi olla vain yhdessä myyntitapahtumassa.
+
+ | Kenttä       | Tyyppi      | Kuvaus                                              |
+ | ------------ | ----------- | --------------------------------------------------- |
+ | SaleEvent_id | int PK      | Myyntitapahtuman id, not null                       |
+ | ticket_id    | int FK      | Tapahtuman lippu, viittaus Ticket-tauluun, not null |
+ | saleDate     | dateTime	  | Myyntitapahtuman päiväys, not null                  |
+ | saleTime     | dateTime    | Myyntitapahtuman kellonaika, not null               |
