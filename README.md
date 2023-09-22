@@ -69,8 +69,8 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  | Kenttä      | Tyyppi       | Kuvaus                                                       |
  | ----------- | -----------  | ------------------------------------------------------------ |
  | event_id    | Long PK      | Tapahtuman id, not null                                      |
- | ticket_id   | int FK       | Tapahtuman lippu, viittaus Ticket-tauluun, not null          |
- | venue_id    | int FK	      | Tapahtuman tapahtumapaikka, viittaus Venue-tauluun, not null |
+ | ticket_id   | Long FK      | Tapahtuman lippu, viittaus Ticket-tauluun, not null          |
+ | venue_id    | Long FK	    | Tapahtuman tapahtumapaikka, viittaus Venue-tauluun, not null |
  | name        | varchar(100) | Tapahtuman nimi, not null                                    |
  | date        | dateTime     | Tapahtuman nimi, not null                                    |
  | time        | dateTime     | Tapahtuman nimi, not null                                    |
@@ -80,25 +80,26 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  #### Ticket
  Ticket-taulun sisältönä on tapahtumaan myydyn lipun tiedot. Yksi lippu käy vain yhteen tapahtumaan. Tapahtumalle voi olla monta lippua.
 
- | Kenttä       | Tyyppi      | Kuvaus                                                             |
- | ------------ | ----------- | ------------------------------------------------------------------ |
- | ticket_id    | Long PK     | Lipun id, not null                                                 |
- | event_id     | int FK      | Id tapahtumalle, johon lippu on, viittaus Ticket-tauluun, not null |
- | type_id      | int FK	  | Lipputyypin id, viittaus TicketType-tauluun, not null              |
- | saleEvent_id | int FK	  | Myyntitapahtuman id, viittaus SaleEvent-tauluun, not null          |
- | barcode      | varchar(15) | Lipun yksilöllinen viivakoodi, not null                            |
+ | Kenttä       | Tyyppi      | Kuvaus                                                            |
+ | ------------ | ----------- | ----------------------------------------------------------------- |
+ | ticket_id    | Long PK     | Lipun id, not null                                                |
+ | event_id     | Long FK     | Id tapahtumalle, johon lippu on, viittaus Event-tauluun, not null |
+ | type_id      | Long FK	    | Lipputyypin id, viittaus TicketType-tauluun, not null             |
+ | saleEvent_id | Long FK	    | Myyntitapahtuman id, viittaus SaleEvent-tauluun, not null         |
+ | barcode      | varchar(15) | Lipun yksilöllinen viivakoodi, not null                           |
 
  ---
 
  #### TicketType
  TicketType-taulun sisältönä on lipputyyppien tiedot. Lipulle voidaan valita vain yksi lipputyyppi.
 
- | Kenttä       | Tyyppi       | Kuvaus                      |
- | ------------ | ------------ | --------------------------- |
- | type_id      | Long PK      | Lipputyypin id, not nul     |
- | price        | int          | Lipputyypin hinta, not null |
- | customerType | varchar(100) | Asiakastyyppi, not null     |
- | description  | varchar(100) | Lipputyypin kuvaus          |
+ | Kenttä       | Tyyppi       | Kuvaus                                                                  |
+ | ------------ | ------------ | ----------------------------------------------------------------------- |
+ | type_id      | Long PK      | Lipputyypin id, not null                                                |
+ | event_id     | Long FK      | Id tapahtumalle, johon lipputyyppi on, viittaus Event-tauluun, not null |
+ | price        | int          | Lipputyypin hinta, not null                                             |
+ | customerType | varchar(100) | Asiakastyyppi, not null                                                 |
+ | description  | varchar(100) | Lipputyypin kuvaus                                                      |
 
  ---
 
@@ -121,6 +122,6 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  | Kenttä       | Tyyppi   | Kuvaus                                              |
  | ------------ | -------- | --------------------------------------------------- |
  | SaleEvent_id | Long PK  | Myyntitapahtuman id, not null                       |
- | ticket_id    | int FK   | Tapahtuman lippu, viittaus Ticket-tauluun, not null |
+ | ticket_id    | Long FK  | Tapahtuman lippu, viittaus Ticket-tauluun, not null |
  | saleDate     | dateTime | Myyntitapahtuman päiväys, not null                  |
  | saleTime     | dateTime | Myyntitapahtuman kellonaika, not null               |
