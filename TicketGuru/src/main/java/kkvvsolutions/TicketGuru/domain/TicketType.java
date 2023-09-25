@@ -17,9 +17,8 @@ public class TicketType {
     private String customerType; 
     private String description; 
 
-    @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket ticket;
+    @OneToMany(mappedBy = "ticketType")
+    private List<Event> tickets;
     
     @ManyToOne
     @JoinColumn(name = "event_id")
@@ -65,22 +64,19 @@ public class TicketType {
     public void setDescription(String description) {
         this.description = description;
     }
-
-	public Ticket getTicket() {
-		return ticket;
-	}
-
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
-	}
-
-	public Event getEvent() {
+  
+  	public Event getEvent() {
 		return event;
 	}
 
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-    
+  
+	@Override
+	public String toString() {
+		return "TicketType [typeId=" + typeId + ", price=" + price + ", customerType=" + customerType + ", description="
+				+ description + "]";
+	}
     
 }

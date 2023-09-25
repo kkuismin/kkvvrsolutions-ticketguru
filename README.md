@@ -59,7 +59,7 @@ Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen 
 
 Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa on myös selitteet taulujen tietokenttien tyypeistä.
 
-![Tietokanta](image-1.png)
+![Tietokanta](tietokanta.png)
 
 **Alla on jokaisen taulun tarkemmat kuvaukset.**
 
@@ -125,3 +125,6 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  | ticket_id    | Long FK  | Tapahtuman lippu, viittaus Ticket-tauluun, not null |
  | saleDate     | dateTime | Myyntitapahtuman päiväys, not null                  |
  | saleTime     | dateTime | Myyntitapahtuman kellonaika, not null               |
+
+ ## API-dokumentaatio
+[Linkki API-dokumentaatioon](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/develop/TicketGuru/src/main/resources/API%20Doc)
