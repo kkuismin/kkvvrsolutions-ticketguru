@@ -59,7 +59,7 @@ Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen 
 
 Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa on myös selitteet taulujen tietokenttien tyypeistä.
 
-![Tietokanta](image-1.png)
+![Tietokanta](tietokanta.png)
 
 **Alla on jokaisen taulun tarkemmat kuvaukset.**
 
