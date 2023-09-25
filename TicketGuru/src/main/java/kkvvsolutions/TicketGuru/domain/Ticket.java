@@ -22,7 +22,7 @@ public class Ticket {
 	@JoinColumn(name = "event_id")
 	private Event event;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "ticketType")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "ticket")
 	private List <TicketType> ticketTypeList;
 	
 	@ManyToOne

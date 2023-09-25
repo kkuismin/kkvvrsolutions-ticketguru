@@ -2,7 +2,9 @@ package kkvvsolutions.TicketGuru.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +19,8 @@ public class SaleEvent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long SaleEvent_id;
 	
-	@OneToMany
-	@JoinColumn(name = "ticket_id")
-	private Ticket ticket;
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "saleEvent")
+	private List <Ticket> ticketList;
 	
 	private LocalDate SaleDate;
 	private LocalTime SaleTime;
@@ -37,12 +38,12 @@ public class SaleEvent {
 		SaleEvent_id = saleEvent_id;
 	}
 
-	public Ticket getTicket() {
-		return ticket;
+	public List<Ticket> getTicketList() {
+		return ticketList;
 	}
 
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
+	public void setTicketList(List<Ticket> ticketList) {
+		this.ticketList = ticketList;
 	}
 
 	public LocalDate getSaleDate() {
