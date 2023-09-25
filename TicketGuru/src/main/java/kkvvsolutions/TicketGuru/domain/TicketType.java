@@ -18,7 +18,7 @@ public class TicketType {
     private String description; 
 
     @OneToMany(mappedBy = "ticketType")
-    private List<Ticket> tickets;
+    private List<Event> tickets;
     
     public TicketType() {}
 
@@ -60,4 +60,11 @@ public class TicketType {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	@Override
+	public String toString() {
+		return "TicketType [typeId=" + typeId + ", price=" + price + ", customerType=" + customerType + ", description="
+				+ description + "]";
+	}
+
 }

@@ -56,7 +56,7 @@ public class Event {
 		this.event_id = event_id;
 	}
 
-	public Event getTicket() {
+	public Ticket getTicket() {
 		return ticket;
 	}
 
