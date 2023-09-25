@@ -1,15 +1,15 @@
 package kkvvsolutions.TicketGuru.domain;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class TicketType {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long typeId; 
@@ -19,6 +19,10 @@ public class TicketType {
 
     @OneToMany(mappedBy = "ticketType")
     private List<Event> tickets;
+    
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
     
     public TicketType() {}
 
@@ -60,11 +64,19 @@ public class TicketType {
     public void setDescription(String description) {
         this.description = description;
     }
+  
+  	public Event getEvent() {
+		return event;
+	}
 
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+  
 	@Override
 	public String toString() {
 		return "TicketType [typeId=" + typeId + ", price=" + price + ", customerType=" + customerType + ", description="
 				+ description + "]";
 	}
-
+    
 }
