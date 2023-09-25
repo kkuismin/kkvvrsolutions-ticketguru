@@ -1,6 +1,9 @@
 package kkvvsolutions.TicketGuru.domain;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,7 @@ public class Event {
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
 	private List <TicketType> ticketTypeList;
 
