@@ -32,6 +32,11 @@ public class SaleEvent {
 		
 	}
 
+	public SaleEvent(LocalDate SaleDate, LocalTime SaleTime) {
+		this.SaleDate = SaleDate;
+		this.SaleTime = SaleTime;
+	}
+
 	public Long getSaleEvent_id() {
 		return SaleEvent_id;
 	}
