@@ -80,13 +80,13 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  #### Ticket
  Ticket-taulun sisältönä on tapahtumaan myydyn lipun tiedot. Yksi lippu käy vain yhteen tapahtumaan. Tapahtumalle voi olla monta lippua.
 
- | Kenttä       | Tyyppi      | Kuvaus                                                            |
- | ------------ | ----------- | ----------------------------------------------------------------- |
- | ticket_id    | Long PK     | Lipun id, not null                                                |
- | event_id     | Long FK     | Id tapahtumalle, johon lippu on, viittaus Event-tauluun, not null |
- | type_id      | Long FK	    | Lipputyypin id, viittaus TicketType-tauluun, not null             |
- | saleEvent_id | Long FK	    | Myyntitapahtuman id, viittaus SaleEvent-tauluun, not null         |
- | barcode      | varchar(15) | Lipun yksilöllinen viivakoodi, not null                           |
+ | Kenttä       | Tyyppi       | Kuvaus                                                            |
+ | ------------ | -----------  | ----------------------------------------------------------------- |
+ | ticket_id    | Long PK      | Lipun id, not null                                                |
+ | event_id     | Long FK      | Id tapahtumalle, johon lippu on, viittaus Event-tauluun, not null |
+ | saleEvent_id | Long FK	     | Myyntitapahtuman id, viittaus SaleEvent-tauluun, not null         |
+ | barcode      | varchar(15)  | Lipun yksilöllinen viivakoodi, not null                           |
+ | type         | varchar(100) | Lipputyypin nimi, not null                                        |
 
  ---
 
