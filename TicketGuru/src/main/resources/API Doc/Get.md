@@ -1,18 +1,31 @@
-# Event REST API Doc example
-
-## Get all events
+# Get events
 
 List every single event in the database.
 
-**URL** : /api/events
+**URL** : `/api/events`
 
 **Method** : `GET`
 
-**Auth** : *NO*
+**Authorization** : *NO*
 
 **Permissions** : `NONE`
 
 **Data** : `{}`
+
+OR
+
+List a singular event.
+
+**URL** : `/api/events/{id}`
+
+**Method** : `GET`
+
+**Authorization** : *NO*
+
+**Permissions** : `NONE`
+
+**Data** : `{}`
+
 
 ## Success
 

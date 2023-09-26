@@ -1,17 +1,13 @@
 package kkvvsolutions.TicketGuru.domain;
 
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Ticket {
@@ -23,10 +19,6 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Event event;
-	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "ticket")
-	private List <TicketType> ticketTypeList;
 	
 	@ManyToOne
 	@JoinColumn(name = "saleEvent_id")
@@ -56,14 +48,6 @@ public class Ticket {
 
 	public void setEvent(Event event) {
 		this.event = event;
-	}
-
-	public List<TicketType> getTicketTypeList() {
-		return ticketTypeList;
-	}
-
-	public void setTicketTypeList(List<TicketType> ticketTypeList) {
-		this.ticketTypeList = ticketTypeList;
 	}
 
 	public SaleEvent getSaleEvent() {
