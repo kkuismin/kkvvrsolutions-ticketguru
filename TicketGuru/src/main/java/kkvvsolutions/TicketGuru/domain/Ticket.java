@@ -26,6 +26,8 @@ public class Ticket {
 	
 	private String barcode;
 	
+	private String type;
+	
 	public Ticket() {
 		super();
 	}
@@ -66,9 +68,18 @@ public class Ticket {
 		this.barcode = barcode;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "Ticket [ticket_id=" + ticket_id + ", barcode=" + barcode + "]";
+		return "Ticket [ticket_id=" + ticket_id + ", event=" + event + ", saleEvent=" + saleEvent + ", barcode="
+				+ barcode + ", type=" + type + "]";
 	}
 	
 }
