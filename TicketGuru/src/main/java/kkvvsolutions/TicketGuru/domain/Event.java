@@ -27,6 +27,7 @@ public class Event {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
 	private List <TicketType> ticketTypeList;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "venue_id")
 	private Venue venue;

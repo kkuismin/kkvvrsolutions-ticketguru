@@ -22,7 +22,7 @@ import kkvvsolutions.TicketGuru.domain.SaleEvent;
 
 @RestController
 @RequestMapping("/api")
-public class SaleEventController {
+public class RestSaleEventController {
 	
 	@Autowired
 	private SaleEventRepository repository;

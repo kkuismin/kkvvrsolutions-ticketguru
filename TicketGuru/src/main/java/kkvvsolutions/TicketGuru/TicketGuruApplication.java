@@ -36,22 +36,7 @@ public class TicketGuruApplication {
 				log.info(event.toString());
 			}
 			
-			log.info("list a couple of tickets");
-			trepository.save(new Ticket("123", "adult"));
-			trepository.save(new Ticket("124", "student"));
-			
-			for (Ticket ticket : trepository.findAll()) {
-				log.info(ticket.toString());
-			}
-			
-			log.info("list a couple of sales");
-			srepository.save(new SaleEvent());
-			srepository.save(new SaleEvent());
-			srepository.save(new SaleEvent());
-			
-			for (SaleEvent saleEvent : srepository.findAll()) {
-				log.info(saleEvent.toString());
-			}
 		};
+		
 	}
 }

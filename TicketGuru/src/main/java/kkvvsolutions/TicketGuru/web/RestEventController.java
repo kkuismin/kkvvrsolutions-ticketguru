@@ -21,7 +21,7 @@ import kkvvsolutions.TicketGuru.domain.EventRepository;
 
 @RestController
 @RequestMapping("/api")
-public class EventController {
+public class RestEventController {
 	
 	@Autowired
 	private EventRepository repository;
