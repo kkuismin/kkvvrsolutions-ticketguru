@@ -19,9 +19,9 @@ public class Event {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long event_id;
 
-	@ManyToOne
-	@JoinColumn(name = "ticket_id")
-	private Ticket ticket;
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+	private List <Ticket> ticket;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
@@ -60,11 +60,11 @@ public class Event {
 		this.event_id = event_id;
 	}
 
-	public Ticket getTicket() {
+	public List<Ticket> getTicket() {
 		return ticket;
 	}
 
-	public void setTicket(Ticket ticket) {
+	public void setTicket(List<Ticket> ticket) {
 		this.ticket = ticket;
 	}
 
