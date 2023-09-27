@@ -7,10 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.EventRepository;
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
 import kkvvsolutions.TicketGuru.domain.SaleEventRepository;
-import kkvvsolutions.TicketGuru.domain.Event;
+import kkvvsolutions.TicketGuru.domain.Ticket;
+import kkvvsolutions.TicketGuru.domain.TicketRepository;
 
 @SpringBootApplication
 public class TicketGuruApplication {
@@ -22,30 +24,32 @@ public class TicketGuruApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner eventDemo(EventRepository repository) {
+	public CommandLineRunner eventDemo(EventRepository erepository, TicketRepository trepository, SaleEventRepository srepository) {
 		return (args) -> {
 			
 			log.info("list a couple of events");
-			repository.save(new Event("Konsertti", "20-10-2023", "19:30"));
-			repository.save(new Event("Lätkämatsi", "11-11-2023", "18:30"));
-			repository.save(new Event("Baletti", "12-12-2023", "20:00"));
+			erepository.save(new Event("Konsertti", "20-10-2023", "19:30"));
+			erepository.save(new Event("Lätkämatsi", "11-11-2023", "18:30"));
+			erepository.save(new Event("Baletti", "12-12-2023", "20:00"));
 			
-			for (Event event : repository.findAll()) {
+			for (Event event : erepository.findAll()) {
 				log.info(event.toString());
 			}
-		};
-	}
-	
-	@Bean
-	public CommandLineRunner saleEventDemo(SaleEventRepository repository) {
-		return (args) -> {
+			
+			log.info("list a couple of tickets");
+			trepository.save(new Ticket("123", "adult"));
+			trepository.save(new Ticket("124", "student"));
+			
+			for (Ticket ticket : trepository.findAll()) {
+				log.info(ticket.toString());
+			}
 			
 			log.info("list a couple of sales");
-			repository.save(new SaleEvent());
-			repository.save(new SaleEvent());
-			repository.save(new SaleEvent());
+			srepository.save(new SaleEvent());
+			srepository.save(new SaleEvent());
+			srepository.save(new SaleEvent());
 			
-			for (SaleEvent saleEvent : repository.findAll()) {
+			for (SaleEvent saleEvent : srepository.findAll()) {
 				log.info(saleEvent.toString());
 			}
 		};

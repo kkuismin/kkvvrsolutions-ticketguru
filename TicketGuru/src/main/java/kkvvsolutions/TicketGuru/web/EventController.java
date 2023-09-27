@@ -1,4 +1,4 @@
-package kkvvsolutions.TicketGuru;
+package kkvvsolutions.TicketGuru.web;
 
 import java.util.ArrayList;
 import java.util.List;
