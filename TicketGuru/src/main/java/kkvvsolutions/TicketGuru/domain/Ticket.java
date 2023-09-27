@@ -24,16 +24,23 @@ public class Ticket {
 	@JoinColumn(name = "saleEvent_id")
 	private SaleEvent saleEvent;
 	
-	private String barcode;
-	
-	private String type;
+	private String barcode, type;
 	
 	public Ticket() {
 		super();
 	}
 	
-	public Ticket(String barcode) {
+	public Ticket(Long ticket_id, String barcode, String type) {
+		super();
+		this.ticket_id = ticket_id;
 		this.barcode = barcode;
+		this.type = type;
+	}
+	
+	public Ticket(String barcode, String type) {
+		super();
+		this.barcode = barcode;
+		this.type = type;
 	}
 
 	public Long getTicket_id() {
