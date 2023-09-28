@@ -17,7 +17,7 @@ import jakarta.persistence.OneToMany;
 public class Event {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long event_id;
+	private long eventId;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
@@ -28,7 +28,7 @@ public class Event {
 	private List <TicketType> ticketTypeList;
 
 	@ManyToOne
-	@JoinColumn(name = "venue_id")
+	@JoinColumn(name = "venueId")
 	private Venue venue;
 	
 	private String name, date, time;
@@ -37,9 +37,9 @@ public class Event {
 		super();
 	}
 
-	public Event(long event_id, String name, String date, String time) {
+	public Event(long eventId, String name, String date, String time) {
 		super();
-		this.event_id = event_id;
+		this.eventId = eventId;
 		this.name = name;
 		this.date = date;
 		this.time = time;
@@ -52,12 +52,12 @@ public class Event {
 		this.time = time;
 	}
 
-	public long getEvent_id() {
-		return event_id;
+	public long geteventId() {
+		return eventId;
 	}
 
-	public void setEvent_id(long event_id) {
-		this.event_id = event_id;
+	public void seteventId(long eventId) {
+		this.eventId = eventId;
 	}
 
 	public List<Ticket> getTicket() {
@@ -111,7 +111,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [event_id=" + event_id + ", name=" + name + ", date=" + date + ", time=" + time + "]";
+		return "Event [eventId=" + eventId + ", name=" + name + ", date=" + date + ", time=" + time + "]";
 	}
 	
 }

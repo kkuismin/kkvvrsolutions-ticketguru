@@ -13,6 +13,8 @@ import kkvvsolutions.TicketGuru.domain.SaleEvent;
 import kkvvsolutions.TicketGuru.domain.SaleEventRepository;
 import kkvvsolutions.TicketGuru.domain.Ticket;
 import kkvvsolutions.TicketGuru.domain.TicketRepository;
+import kkvvsolutions.TicketGuru.domain.TicketType;
+import kkvvsolutions.TicketGuru.domain.TicketTypeRepository;
 
 @SpringBootApplication
 public class TicketGuruApplication {
@@ -24,7 +26,7 @@ public class TicketGuruApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner eventDemo(EventRepository erepository, TicketRepository trepository, SaleEventRepository srepository) {
+    public CommandLineRunner eventDemo(EventRepository erepository, TicketRepository trepository, SaleEventRepository srepository, TicketTypeRepository ttrepository) {
 		return (args) -> {
 			
 			log.info("list a couple of events");
@@ -53,6 +55,31 @@ public class TicketGuruApplication {
 			for (Ticket ticket : trepository.findAll()) {
 				log.info(ticket.toString());
 			}
+			
+            log.info("list a couple of ticket types");
+            ttrepository.save(new TicketType(15.00, "Aikuinen", "Aikuisen lippu"));
+            ttrepository.save(new TicketType(7.50, "Lapsi", "Lapsen lippu alle 12v"));
+            ttrepository.save(new TicketType(10.00, "Opiskelija", "Opiskelijan lippu voimassaolevalla opiskelijakortilla"));
+
+            for (TicketType ticketType : ttrepository.findAll()) {
+                log.info(ticketType.toString());
+            }
+            
+            // Fetch an existing event
+            Event concertEvent = erepository.findByName("Konsertti").orElse(null);
+            if (concertEvent != null) {
+                TicketType adultTicketType = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
+                adultTicketType.setEvent(concertEvent);  // Link the ticket type to the event
+                ttrepository.save(adultTicketType);
+
+                TicketType childTicketType = new TicketType(7.50, "Lapsi", "Lapsen lippu alle 12v");
+                childTicketType.setEvent(concertEvent);  // Link the ticket type to the event
+                ttrepository.save(childTicketType);
+            }
+
+            for (TicketType ticketType : ttrepository.findAll()) {
+                log.info(ticketType.toString());
+            }
 		};
 		
 	}
