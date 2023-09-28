@@ -1,32 +1,49 @@
 package kkvvsolutions.TicketGuru.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Venue {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long venue_id;
+	private Long venueId;
 	
 	private String name;
 	private String address;
 	private String city;
 	private int capacity;
 	
+	@OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
+	private List<Event> events = new ArrayList<>();
+	
 	public Venue() {
 		super();
 	}
-
-	public Long getVenue_id() {
-		return venue_id;
+	
+	public Venue(String name, String address, String city, int capacity) {
+	    super();
+	    this.name = name;
+	    this.address = address;
+	    this.city = city;
+	    this.capacity = capacity;
 	}
 
-	public void setVenue_id(Long venue_id) {
-		this.venue_id = venue_id;
+
+	public Long getVenueId() {
+		return venueId;
+	}
+
+	public void setVenueId(Long venueId) {
+		this.venueId = venueId;
 	}
 
 	public String getName() {
@@ -60,10 +77,18 @@ public class Venue {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+	
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 
 	@Override
 	public String toString() {
-		return "Venue [venue_id=" + venue_id + ", name=" + name + ", address=" + address + ", city=" + city
+		return "Venue [venueId=" + venueId + ", name=" + name + ", address=" + address + ", city=" + city
 				+ ", capacity=" + capacity + "]";
 	}
 }

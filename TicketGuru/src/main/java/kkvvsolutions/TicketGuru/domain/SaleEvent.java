@@ -2,6 +2,7 @@ package kkvvsolutions.TicketGuru.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,31 +19,29 @@ public class SaleEvent {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long SaleEvent_id;
+	private Long saleEventId;
 	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "saleEvent")
-	private List <Ticket> ticketList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "saleEvent")
+	private List<Ticket> ticketList = new ArrayList<>();
 	
-	private LocalDate SaleDate;
-	private LocalTime SaleTime;
+	private LocalDate saleDate;
+	private LocalTime saleTime;
 	
 	public SaleEvent() {
-		super();
-		
+		super();	
 	}
 
-	public SaleEvent(LocalDate SaleDate, LocalTime SaleTime) {
-		this.SaleDate = SaleDate;
-		this.SaleTime = SaleTime;
+	public SaleEvent(LocalDate saleDate, LocalTime saleTime) {
+		this.saleDate = saleDate;
+		this.saleTime = saleTime;
 	}
 
-	public Long getSaleEvent_id() {
-		return SaleEvent_id;
+	public Long getSaleEventId() {
+		return saleEventId;
 	}
 
-	public void setSaleEvent_id(Long saleEvent_id) {
-		SaleEvent_id = saleEvent_id;
+	public void setSaleEventId(Long saleEventId) {
+		this.saleEventId = saleEventId;
 	}
 
 	public List<Ticket> getTicketList() {
@@ -54,18 +53,18 @@ public class SaleEvent {
 	}
 
 	public LocalDate getSaleDate() {
-		return SaleDate;
+		return saleDate;
 	}
 
 	public void setSaleDate(LocalDate saleDate) {
-		SaleDate = saleDate;
+		this.saleDate = saleDate;
 	}
 
 	public LocalTime getSaleTime() {
-		return SaleTime;
+		return saleTime;
 	}
 
 	public void setSaleTime(LocalTime saleTime) {
-		SaleTime = saleTime;
+		this.saleTime = saleTime;
 	}
 }

@@ -14,14 +14,14 @@ public class Ticket {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ticket_id;
+	private Long ticketId;
 	
 	@ManyToOne
-	@JoinColumn(name = "event_id")
-	private Event event;
+    @JoinColumn(name = "eventId")
+    private Event event;
 	
 	@ManyToOne
-	@JoinColumn(name = "saleEvent_id")
+	@JoinColumn(name = "saleEventId")
 	private SaleEvent saleEvent;
 	
 	private String barcode, type;
@@ -30,9 +30,9 @@ public class Ticket {
 		super();
 	}
 	
-	public Ticket(Long ticket_id, String barcode, String type) {
+	public Ticket(Long ticketId, String barcode, String type) {
 		super();
-		this.ticket_id = ticket_id;
+		this.ticketId = ticketId;
 		this.barcode = barcode;
 		this.type = type;
 	}
@@ -43,12 +43,12 @@ public class Ticket {
 		this.type = type;
 	}
 
-	public Long getTicket_id() {
-		return ticket_id;
+	public Long getTicketId() {
+		return ticketId;
 	}
 
-	public void setTicket_id(Long ticket_id) {
-		this.ticket_id = ticket_id;
+	public void setTicketId(Long ticketId) {
+		this.ticketId = ticketId;
 	}
 
 	public Event getEvent() {
@@ -85,7 +85,7 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [ticket_id=" + ticket_id + ", event=" + event + ", saleEvent=" + saleEvent + ", barcode="
+		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", saleEvent=" + saleEvent + ", barcode="
 				+ barcode + ", type=" + type + "]";
 	}
 	

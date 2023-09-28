@@ -21,7 +21,9 @@ public class TicketType {
     @JoinColumn(name = "eventId")
     private Event event;
     
-    public TicketType() {}
+    public TicketType() {
+    	super();
+    }
 
     public TicketType(Double price, String customerType, String description) {
         super();
