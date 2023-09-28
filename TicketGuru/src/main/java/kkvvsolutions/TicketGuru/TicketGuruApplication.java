@@ -39,38 +39,32 @@ public class TicketGuruApplication {
 	        // Create a Venue
 	        Venue venue = new Venue("Stadium", "123 Street", "City", 5000);
 	        vrepository.save(venue);
-	        
+	       
+
 	        // Create an Event and link it to the Venue
 	        Event event = new Event("Konsertti", "20-10-2023", "19:30");
 	        event.setVenue(venue);
 	        erepository.save(event);
-	        
+
 	        // Create a TicketType and link it to the Event
 	        TicketType ticketType = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
-	        //event.addTicketType(ticketType);
-	        ttrepository.save(ticketType); // Save after associating with Event
-	        
-	        
-	        // Create a Ticket and link it to the SaleEvent and TicketType
-	        Ticket ticket = new Ticket("121", "Aikuinen");
-	        Ticket ticket2 = new Ticket("121", "Lapsi");
-	        trepository.save(ticket);
-	        trepository.save(ticket2);
-	        
+	        TicketType ticketType2 = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
 
-
-	        // Create a SaleEvent
-	        SaleEvent saleEvent = new SaleEvent(LocalDate.now(), LocalTime.now());
-	        srepository.save(saleEvent);
+	        List<TicketType> tickets = new ArrayList<>();
+	        tickets.add(ticketType);
+	        tickets.add(ticketType2);
 
 	        
+	        log.info("adada" + tickets);
 	        
-	        // Log the created entities
-	        log.info(venue.toString());
-	        log.info(event.toString());
-	        log.info(saleEvent.toString());
-	        log.info(ticketType.toString());
-	        log.info(ticket.toString());
+	        ttrepository.save(ticketType); // Save TicketType
+	        event.setTicketTypes(tickets); // Link TicketType to Event
+	        
+	        erepository.save(event);
+
+	        log.info("event tickettypes " + event.toString());
 	    };
 	}
+
+
 }

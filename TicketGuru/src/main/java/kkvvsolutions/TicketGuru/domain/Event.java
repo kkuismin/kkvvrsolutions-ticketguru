@@ -27,10 +27,10 @@ public class Event {
     @JsonIgnore
     private Venue venue;
     
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<TicketType> ticketTypes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Ticket> tickets = new ArrayList<>();
 
     
@@ -42,20 +42,13 @@ public class Event {
 		super();
 	}
 
-	public Event(long eventId, String name, String date, String time) {
-		super();
-		this.eventId = eventId;
-		this.name = name;
-		this.date = date;
-		this.time = time;
-	}
-
 	public Event(String name, String date, String time) {
 		super();
 		this.name = name;
 		this.date = date;
 		this.time = time;
 	}
+
 
 	public long getEventId() {
 		return eventId;
@@ -70,28 +63,17 @@ public class Event {
 		return ticketTypes;
 	}
 
-	public void addTicketType(TicketType ticketType) {
-	    if (this.ticketTypes == null) {
-	        this.ticketTypes = new ArrayList<>();
-	    }
-	    this.ticketTypes.add(ticketType);
-	    ticketType.setEvent(this); 
+	public void setTicketTypes(List<TicketType> ticketTypes) {
+		this.ticketTypes = ticketTypes;
 	}
 
-
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
-
-	public void addTickets(Ticket ticket) {
-	    if (this.tickets == null) {
-	        this.tickets = new ArrayList<>();
-	    }
-	    this.tickets.add(ticket);
-	    ticket.setEvent(this); 
-	}
-
 
 	public Venue getVenue() {
 		return venue;
