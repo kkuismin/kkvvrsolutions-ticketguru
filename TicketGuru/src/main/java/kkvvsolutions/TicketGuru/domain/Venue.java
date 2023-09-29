@@ -3,6 +3,8 @@ package kkvvsolutions.TicketGuru.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class Venue {
 	private int capacity;
 	
 	@OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
+    @JsonIgnore
 	private List<Event> events = new ArrayList<>();
 	
 	public Venue() {

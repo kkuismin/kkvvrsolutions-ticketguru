@@ -24,7 +24,6 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "venueId")
-    @JsonIgnore
     private Venue venue;
     
 	@JsonIgnore
