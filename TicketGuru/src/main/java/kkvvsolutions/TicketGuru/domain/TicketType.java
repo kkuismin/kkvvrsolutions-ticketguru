@@ -18,10 +18,12 @@ public class TicketType {
     private String description; 
     
     @ManyToOne
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "eventId")
     private Event event;
     
-    public TicketType() {}
+    public TicketType() {
+    	super();
+    }
 
     public TicketType(Double price, String customerType, String description) {
         super();

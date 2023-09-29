@@ -45,9 +45,9 @@ public class RestEventController {
 	}
 	
 	@GetMapping("/events/{id}")
-	public ResponseEntity<Event> getEventById(@PathVariable("id") Long event_id) {
+	public ResponseEntity<Event> getEventById(@PathVariable("id") Long eventId) {
 		
-		Optional<Event> eventData = repository.findById(event_id);
+		Optional<Event> eventData = repository.findById(eventId);
 		
 		if (eventData.isPresent()) {
 			return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
@@ -69,9 +69,9 @@ public class RestEventController {
 	}
 	
 	@PutMapping("/events/{id}")
-	public ResponseEntity<Event> updateEvent(@PathVariable("id") Long event_id, @RequestBody Event event) {
+	public ResponseEntity<Event> updateEvent(@PathVariable("id") Long eventId, @RequestBody Event event) {
 		
-		Optional<Event> eventData = repository.findById(event_id);
+		Optional<Event> eventData = repository.findById(eventId);
 		
 		if (eventData.isPresent()) {
 			Event _event = eventData.get();
@@ -97,10 +97,10 @@ public class RestEventController {
 	}
 	
 	@DeleteMapping("/events/{id}")
-	public ResponseEntity<HttpStatus> deleteEvent(@PathVariable("id") Long event_id) {
+	public ResponseEntity<HttpStatus> deleteEvent(@PathVariable("id") Long eventId) {
 		
 		try {
-			repository.deleteById(event_id);
+			repository.deleteById(eventId);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
