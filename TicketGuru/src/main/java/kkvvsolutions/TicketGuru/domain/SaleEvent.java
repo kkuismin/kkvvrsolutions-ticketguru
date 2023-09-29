@@ -67,4 +67,12 @@ public class SaleEvent {
 	public void setSaleTime(LocalTime saleTime) {
 		this.saleTime = saleTime;
 	}
+
+	@Override
+	public String toString() {
+		return "SaleEvent [saleEventId=" + saleEventId + ", ticketList=" + ticketList + ", saleDate=" + saleDate
+				+ ", saleTime=" + saleTime + "]";
+	}
+	
+	
 }

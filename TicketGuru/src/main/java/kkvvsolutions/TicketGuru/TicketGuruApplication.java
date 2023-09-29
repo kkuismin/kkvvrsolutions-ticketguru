@@ -50,19 +50,60 @@ public class TicketGuruApplication {
 	        TicketType ticketType = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
 	        TicketType ticketType2 = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
 
-	        List<TicketType> tickets = new ArrayList<>();
-	        tickets.add(ticketType);
-	        tickets.add(ticketType2);
+	        List<TicketType> ticketTypes = new ArrayList<>();
+	        ticketTypes.add(ticketType);
+	        ticketTypes.add(ticketType2);
 
 	        
-	        log.info("adada" + tickets);
 	        
-	        ttrepository.save(ticketType); // Save TicketType
-	        event.setTicketTypes(tickets); // Link TicketType to Event
-	        
-	        erepository.save(event);
+	        // Link TicketType to Event
+	        for (TicketType tt : ticketTypes) {
+	            tt.setEvent(event); 
+	            ttrepository.save(tt); 
+	        }
 
-	        log.info("event tickettypes " + event.toString());
+	        event.setTicketTypes(ticketTypes); 
+	        erepository.save(event); 
+	        
+	        // Create Tickets
+	        Ticket ticket1 = new Ticket("123456", "Aikuinen");
+	        Ticket ticket2 = new Ticket("654321", "Lapsi");
+
+	        // Link Tickets to Event
+	        ticket1.setEvent(event);
+	        ticket2.setEvent(event);
+
+	        List<Ticket> tickets = new ArrayList<>();
+	        tickets.add(ticket1);
+	        tickets.add(ticket2);
+	        
+	        for (Ticket t : tickets) {
+	            t.setEvent(event); 
+	            trepository.save(t); 
+	        }
+	        
+	        event.setTickets(tickets); 
+	        erepository.save(event); 
+
+	        
+	        
+	        SaleEvent saleEvent = new SaleEvent(LocalDate.now(), LocalTime.now());    
+	        for (Ticket t : tickets) {
+	            trepository.save(t);
+	        }
+
+	       
+	        for (Ticket t : tickets) {
+	            t.setSaleEvent(saleEvent);
+	        }
+
+	    
+	        log.info("error" + saleEvent.toString());
+	        
+	        srepository.save(saleEvent);
+	        saleEvent.setTicketList(tickets);
+
+
 	    };
 	}
 

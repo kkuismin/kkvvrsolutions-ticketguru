@@ -27,9 +27,11 @@ public class Event {
     @JsonIgnore
     private Venue venue;
     
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<TicketType> ticketTypes = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Ticket> tickets = new ArrayList<>();
 
