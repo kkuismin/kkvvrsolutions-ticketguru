@@ -22,43 +22,43 @@ import kkvvsolutions.TicketGuru.domain.EventRepository;
 @RestController
 @RequestMapping("/api")
 public class RestEventController {
-	
+
 	@Autowired
 	private EventRepository repository;
-	
+
 	@GetMapping("/events")
 	public ResponseEntity<List<Event>> getAllEvents() {
-		
+
 		try {
 			List<Event> events = new ArrayList<Event>();
 			repository.findAll().forEach(events::add);
-			
+
 			if (events.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			
+
 			return new ResponseEntity<>(events, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
-	
+
 	@GetMapping("/events/{id}")
 	public ResponseEntity<Event> getEventById(@PathVariable("id") Long eventId) {
-		
+
 		Optional<Event> eventData = repository.findById(eventId);
-		
+
 		if (eventData.isPresent()) {
 			return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping("/events")
 	public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-		
+
 		try {
 			Event _event = repository
 					.save(new Event(event.getName(), event.getDate(), event.getTime()));
@@ -67,27 +67,27 @@ public class RestEventController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PutMapping("/events/{id}")
 	public ResponseEntity<Event> updateEvent(@PathVariable("id") Long eventId, @RequestBody Event event) {
-		
+
 		Optional<Event> eventData = repository.findById(eventId);
-		
+
 		if (eventData.isPresent()) {
 			Event _event = eventData.get();
 			_event.setName(event.getName());
 			_event.setDate(event.getDate());
 			_event.setTime(event.getTime());
-			
+
 			return new ResponseEntity<>(repository.save(_event), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@DeleteMapping("/events")
 	public ResponseEntity<HttpStatus> deleteAllEvents() {
-		
+
 		try {
 			repository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -95,10 +95,10 @@ public class RestEventController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@DeleteMapping("/events/{id}")
 	public ResponseEntity<HttpStatus> deleteEvent(@PathVariable("id") Long eventId) {
-		
+
 		try {
 			repository.deleteById(eventId);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -106,5 +106,5 @@ public class RestEventController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }

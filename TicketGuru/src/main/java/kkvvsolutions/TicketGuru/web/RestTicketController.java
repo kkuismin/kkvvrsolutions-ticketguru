@@ -22,42 +22,42 @@ import kkvvsolutions.TicketGuru.domain.TicketRepository;
 @RestController
 @RequestMapping("/api")
 public class RestTicketController {
-	
+
 	@Autowired
 	private TicketRepository repository;
-	
+
 	@GetMapping("/tickets")
 	public ResponseEntity<List<Ticket>> getAllTickets() {
-		
+
 		try {
 			List<Ticket> tickets = new ArrayList<Ticket>();
 			repository.findAll().forEach(tickets::add);
-			
+
 			if (tickets.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			
+
 			return new ResponseEntity<>(tickets, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
-	
+
 	@GetMapping("/tickets/{id}")
 	public ResponseEntity<Ticket> getTicketById(@PathVariable("id") Long ticket_id) {
 		Optional<Ticket> ticketData = repository.findById(ticket_id);
-		
+
 		if (ticketData.isPresent()) {
 			return new ResponseEntity<>(ticketData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping("/tickets")
 	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-		
+
 		try {
 			Ticket _ticket = repository.save(new Ticket(ticket.getBarcode(), ticket.getType()));
 			return new ResponseEntity<>(_ticket, HttpStatus.CREATED);
@@ -65,26 +65,26 @@ public class RestTicketController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PutMapping("/tickets/{id}")
 	public ResponseEntity<Ticket> updateTicket(@PathVariable("id") Long ticket_id, @RequestBody Ticket ticket) {
-		
+
 		Optional<Ticket> ticketData = repository.findById(ticket_id);
-		
+
 		if (ticketData.isPresent()) {
 			Ticket _ticket = ticketData.get();
 			_ticket.setBarcode(ticket.getBarcode());
 			_ticket.setType(ticket.getType());
-			
+
 			return new ResponseEntity<>(repository.save(_ticket), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@DeleteMapping("/tickets/{id}")
 	public ResponseEntity<HttpStatus> deleteTicket(@PathVariable("id") Long ticket_id) {
-		
+
 		try {
 			repository.deleteById(ticket_id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
