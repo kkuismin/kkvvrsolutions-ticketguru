@@ -7,8 +7,11 @@
 - **Method:**
 
   `GET` /tickettypes for all | /tickettypes/{ticketTypeId} for single ticket type
+
   `POST` /tickettypes
+
   `DELETE` /tickettypes/{ticketTypeId}
+
   `PUT` /tickettypes/{ticketTypeId}
 
 - **URL Params**
