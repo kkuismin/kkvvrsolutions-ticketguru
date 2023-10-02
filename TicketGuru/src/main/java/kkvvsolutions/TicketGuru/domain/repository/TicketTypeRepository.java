@@ -1,11 +1,9 @@
-package kkvvsolutions.TicketGuru.domain;
-
-import java.util.List;
+package kkvvsolutions.TicketGuru.domain.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface TicketTypeRepository extends CrudRepository<TicketType, Long> {
-	List<TicketType> findAll();
+import kkvvsolutions.TicketGuru.domain.TicketType;
 
-	List<TicketType> findByEvent_EventId(Long eventId);
+public interface TicketTypeRepository extends CrudRepository<TicketType, Long> {
+
 }

@@ -13,15 +13,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import kkvvsolutions.TicketGuru.domain.Event;
-import kkvvsolutions.TicketGuru.domain.EventRepository;
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
-import kkvvsolutions.TicketGuru.domain.SaleEventRepository;
 import kkvvsolutions.TicketGuru.domain.Ticket;
-import kkvvsolutions.TicketGuru.domain.TicketRepository;
 import kkvvsolutions.TicketGuru.domain.TicketType;
-import kkvvsolutions.TicketGuru.domain.TicketTypeRepository;
 import kkvvsolutions.TicketGuru.domain.Venue;
-import kkvvsolutions.TicketGuru.domain.VenueRepository;
+import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
+import kkvvsolutions.TicketGuru.domain.repository.SaleEventRepository;
+import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
+import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
+import kkvvsolutions.TicketGuru.domain.repository.VenueRepository;
 
 @SpringBootApplication
 public class TicketGuruApplication {
@@ -47,8 +47,8 @@ public class TicketGuruApplication {
 			erepository.save(event);
 
 			// Create a TicketType and link it to the Event
-			TicketType ticketType = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
-			TicketType ticketType2 = new TicketType(15.00, "Aikuinen", "Aikuisen lippu");
+			TicketType ticketType = new TicketType(15.00, "Opiskelija", "Alennus opiskelijoille");
+			TicketType ticketType2 = new TicketType(10.00, "Työtön", "Alennus työttömille");
 
 			List<TicketType> ticketTypes = new ArrayList<>();
 			ticketTypes.add(ticketType);
@@ -64,8 +64,8 @@ public class TicketGuruApplication {
 			erepository.save(event);
 
 			// Create Tickets
-			Ticket ticket1 = new Ticket("123456", "Aikuinen");
-			Ticket ticket2 = new Ticket("654321", "Lapsi");
+			Ticket ticket1 = new Ticket("123456", "Opiskelija");
+			Ticket ticket2 = new Ticket("654321", "Työtön");
 
 			// Link Tickets to Event
 			ticket1.setEvent(event);

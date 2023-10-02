@@ -1,8 +1,8 @@
 package kkvvsolutions.TicketGuru.web;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import kkvvsolutions.TicketGuru.domain.TicketType;
-import kkvvsolutions.TicketGuru.domain.TicketTypeRepository;
+import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
+import kkvvsolutions.TicketGuru.dto.TicketTypeCreationDTO;
+import kkvvsolutions.TicketGuru.dto.TicketTypeDTO;
+import kkvvsolutions.TicketGuru.mapper.TicketTypeMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -19,61 +22,59 @@ public class RestTicketTypeController {
 	@Autowired
 	private TicketTypeRepository repository;
 
+	@Autowired
+	private TicketTypeMapper mapper;
+
 	@GetMapping("/tickettypes")
-	public ResponseEntity<List<TicketType>> getAllTicketTypes() {
-
+	public ResponseEntity<List<TicketTypeDTO>> getAllTicketTypes() {
 		try {
-			List<TicketType> ticketTypes = new ArrayList<TicketType>();
-			repository.findAll().forEach(ticketTypes::add);
-
+			List<TicketType> ticketTypes = (List<TicketType>) repository.findAll();
 			if (ticketTypes.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-
-			return new ResponseEntity<>(ticketTypes, HttpStatus.OK);
+			List<TicketTypeDTO> ticketTypeDTOs = ticketTypes.stream()
+					.map(mapper::toDto)
+					.collect(Collectors.toList());
+			return new ResponseEntity<>(ticketTypeDTOs, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@GetMapping("/tickettypes/{id}")
-	public ResponseEntity<TicketType> getTicketTypeById(@PathVariable("id") Long typeId) {
-
+	public ResponseEntity<TicketTypeDTO> getTicketTypeById(@PathVariable("id") Long typeId) {
 		Optional<TicketType> ticketTypeData = repository.findById(typeId);
-
 		if (ticketTypeData.isPresent()) {
-			return new ResponseEntity<>(ticketTypeData.get(), HttpStatus.OK);
+			TicketTypeDTO responseDTO = mapper.toDto(ticketTypeData.get());
+			return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("/tickettypes")
-	public ResponseEntity<TicketType> createTicketType(@RequestBody TicketType ticketType) {
-
-		try {
-			TicketType _ticketType = repository
-					.save(new TicketType(ticketType.getPrice(), ticketType.getCustomerType(),
-							ticketType.getDescription()));
-			return new ResponseEntity<>(_ticketType, HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<TicketTypeDTO> createTicketType(@RequestBody TicketTypeCreationDTO ticketTypeDTO) {
+		TicketType ticketType = mapper.toEntity(ticketTypeDTO);
+		TicketType savedTicketType = repository.save(ticketType);
+		TicketTypeDTO responseDTO = mapper.toDto(savedTicketType);
+		return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/tickettypes/{id}")
-	public ResponseEntity<TicketType> updateTicketType(@PathVariable("id") Long typeId,
-			@RequestBody TicketType ticketType) {
-
+	public ResponseEntity<TicketTypeDTO> updateTicketType(@PathVariable("id") Long typeId,
+			@RequestBody TicketTypeCreationDTO ticketTypeDTO) {
 		Optional<TicketType> ticketTypeData = repository.findById(typeId);
-
 		if (ticketTypeData.isPresent()) {
-			TicketType _ticketType = ticketTypeData.get();
-			_ticketType.setPrice(ticketType.getPrice());
-			_ticketType.setCustomerType(ticketType.getCustomerType());
-			_ticketType.setDescription(ticketType.getDescription());
+			TicketType ticketTypeToUpdate = ticketTypeData.get();
 
-			return new ResponseEntity<>(repository.save(_ticketType), HttpStatus.OK);
+			ticketTypeToUpdate.setPrice(ticketTypeDTO.getPrice());
+			ticketTypeToUpdate.setCustomerType(ticketTypeDTO.getCustomerType());
+			ticketTypeToUpdate.setDescription(ticketTypeDTO.getDescription());
+
+			TicketType updatedTicketType = repository.save(ticketTypeToUpdate);
+			TicketTypeDTO responseDTO = mapper.toDto(updatedTicketType);
+
+			return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

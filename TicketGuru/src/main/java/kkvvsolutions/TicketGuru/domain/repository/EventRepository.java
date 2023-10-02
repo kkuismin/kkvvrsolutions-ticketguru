@@ -1,10 +1,9 @@
-package kkvvsolutions.TicketGuru.domain;
-
-import java.util.Optional;
+package kkvvsolutions.TicketGuru.domain.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
+import kkvvsolutions.TicketGuru.domain.Event;
+
 public interface EventRepository extends CrudRepository<Event, Long> {
-    Optional<Event> findByName(String name);
 
 }

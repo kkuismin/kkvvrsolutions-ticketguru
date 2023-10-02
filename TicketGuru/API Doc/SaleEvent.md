@@ -1,46 +1,44 @@
-**SaleEvent**
-----
+## **SaleEvent**
 
-* **URL**
+- **URL**
 
   /api/sales | /api/sales/{saleEventId}
 
-* **Method:**
-  
+- **Method:**
+
   `GET` /sales for all | /sales/{saleEventId} for single sale
   `POSt` /sales
   `DELETE` /sales/{saleEventId}
   `PUT` /sales/{saleEventId}
-  
-*  **URL Params**
 
-   `saleEventId`: id for SaleEvent entity, a primary key
+- **URL Params**
 
-* **Data Params**
+  `saleEventId`: id for SaleEvent entity, a primary key
+
+- **Data Params**
 
   All colums in table are nullable, none are required
-    "date": LocalDate
-    "time": LocalTime
-    "amount": double 
+  "date": LocalDate
+  "time": LocalTime
+  "amount": double
 
+- **Success Response:**
 
-
-* **Success Response:**
-  
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `All SaleEvents or SaleEvent`
 
-    * **Code:** 201 <br />
-    **Content:** `Created SaleEvent`
- 
-* **Error Response:**
+    - **Code:** 201 <br />
+      **Content:** `Created SaleEvent`
 
-  * **Code:** 404 NOT_FOUND <br />
+- **Error Response:**
+
+  - **Code:** 404 NOT_FOUND <br />
     **Content:** `None`
 
-* **Sample Body:**
+- **Sample Body:**
 
-* **GET**
+- **GET**
+
 ```
 {
     "saleDateId": 1,
@@ -50,7 +48,8 @@
 }
 ```
 
-* **POST**
+- **POST**
+
 ```
 {
     "saleEventId": 1,

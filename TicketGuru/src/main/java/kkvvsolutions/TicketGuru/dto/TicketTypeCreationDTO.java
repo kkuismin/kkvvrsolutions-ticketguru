@@ -1,13 +1,11 @@
 package kkvvsolutions.TicketGuru.dto;
 
-import java.util.List;
-
 public class TicketTypeCreationDTO {
 
     private Double price;
     private String customerType;
     private String description;
-    private Long eventId; // Assuming you want to set the associated event's ID when creating a TicketType
+    private Long eventId;
 
     public Double getPrice() {
         return price;

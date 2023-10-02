@@ -1,7 +1,5 @@
 package kkvvsolutions.TicketGuru.dto;
 
-import java.util.List;
-
 public class TicketTypeDTO {
 
     private Double price;
