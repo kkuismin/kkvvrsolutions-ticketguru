@@ -1,0 +1,62 @@
+**SaleEvent**
+----
+
+* **URL**
+
+  /api/sales | /api/sales/{saleEventId}
+
+* **Method:**
+  
+  `GET` /sales for all | /sales/{saleEventId} for single sale
+  `POSt` /sales
+  `DELETE` /sales/{saleEventId}
+  `PUT` /sales/{saleEventId}
+  
+*  **URL Params**
+
+   `saleEventId`: id for SaleEvent entity, a primary key
+
+* **Data Params**
+
+  All colums in table are nullable, none are required
+    "date": LocalDate
+    "time": LocalTime
+    "amount": double 
+
+
+
+* **Success Response:**
+  
+  * **Code:** 200 <br />
+    **Content:** `All SaleEvents or SaleEvent`
+
+    * **Code:** 201 <br />
+    **Content:** `Created SaleEvent`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT_FOUND <br />
+    **Content:** `None`
+
+* **Sample Body:**
+
+* **GET**
+```
+{
+    "saleDateId": 1,
+    "SaleDate": "2023-10-02",
+    "SaleTime": "16:34:00",
+    "amount": 30.0
+}
+```
+
+* **POST**
+```
+{
+    "saleEventId": 1,
+    "ticketList": [],
+    "saleDate": "2023-10-02",
+    "saleTime": "16:34:00",
+    "amount": 30.0
+}
+```
