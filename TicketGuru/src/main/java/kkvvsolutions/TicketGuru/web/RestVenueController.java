@@ -50,7 +50,8 @@ public class RestVenueController {
     @PostMapping("/venues")
     public ResponseEntity<Venue> createVenue(@RequestBody Venue venue) {
         try {
-            Venue _venue = venueRepository.save(new Venue(venue.getName(), venue.getAddress(), venue.getCity(), venue.getCapacity()));
+            Venue _venue = venueRepository
+                    .save(new Venue(venue.getName(), venue.getAddress(), venue.getCity(), venue.getCapacity()));
             return new ResponseEntity<>(_venue, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

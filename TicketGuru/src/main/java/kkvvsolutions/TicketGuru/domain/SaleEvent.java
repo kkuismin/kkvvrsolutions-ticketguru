@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,19 +14,19 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class SaleEvent {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long saleEventId;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "saleEvent")
 	private List<Ticket> ticketList = new ArrayList<>();
-	
+
 	private LocalDate saleDate;
 	private LocalTime saleTime;
-	
+
 	public SaleEvent() {
-		super();	
+		super();
 	}
 
 	public SaleEvent(LocalDate saleDate, LocalTime saleTime) {
@@ -73,6 +71,5 @@ public class SaleEvent {
 		return "SaleEvent [saleEventId=" + saleEventId + ", ticketList=" + ticketList + ", saleDate=" + saleDate
 				+ ", saleTime=" + saleTime + "]";
 	}
-	
-	
+
 }

@@ -1,5 +1,6 @@
 package kkvvsolutions.TicketGuru.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,35 +9,35 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
 @Entity
 public class Ticket {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ticketId;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "eventId")
-    private Event event;
-	
+	@JoinColumn(name = "eventId")
+	private Event event;
+
 	@ManyToOne
 	@JoinColumn(name = "saleEventId")
+	@JsonIgnore
 	private SaleEvent saleEvent;
-	
+
 	private String barcode, type;
-	
+
 	public Ticket() {
 		super();
 	}
-	
+
 	public Ticket(Long ticketId, String barcode, String type) {
 		super();
 		this.ticketId = ticketId;
 		this.barcode = barcode;
 		this.type = type;
 	}
-	
+
 	public Ticket(String barcode, String type) {
 		super();
 		this.barcode = barcode;
@@ -88,5 +89,5 @@ public class Ticket {
 		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", saleEvent=" + saleEvent + ", barcode="
 				+ barcode + ", type=" + type + "]";
 	}
-	
+
 }

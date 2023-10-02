@@ -1,7 +1,5 @@
 package kkvvsolutions.TicketGuru.domain;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,27 +16,26 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Event {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long eventId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long eventId;
 
-    @ManyToOne
-    @JoinColumn(name = "venueId")
-    private Venue venue;
-    
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<TicketType> ticketTypes = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "venueId")
+	private Venue venue;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<Ticket> tickets = new ArrayList<>();
+	private List<TicketType> ticketTypes = new ArrayList<>();
 
-    
-    private String name;
-    private String date;
-    private String time;
-	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+	private List<Ticket> tickets = new ArrayList<>();
+
+	private String name;
+	private String date;
+	private String time;
+
 	public Event() {
 		super();
 	}
@@ -50,7 +47,6 @@ public class Event {
 		this.time = time;
 	}
 
-
 	public long getEventId() {
 		return eventId;
 	}
@@ -58,7 +54,6 @@ public class Event {
 	public void setEventId(long eventId) {
 		this.eventId = eventId;
 	}
-
 
 	public List<TicketType> getTicketTypes() {
 		return ticketTypes;
@@ -83,7 +78,6 @@ public class Event {
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
-
 
 	public String getName() {
 		return name;
@@ -113,5 +107,5 @@ public class Event {
 	public String toString() {
 		return "Event [eventId=" + eventId + ", name=" + name + ", date=" + date + ", time=" + time + "]";
 	}
-	
+
 }
