@@ -8,7 +8,7 @@
 * **Method:**
   
   `GET` /sales for all | /sales/{saleEventId} for single sale
-  `POSt` /sales
+  `POST` /sales
   `DELETE` /sales/{saleEventId}
   `PUT` /sales/{saleEventId}
   
@@ -18,7 +18,7 @@
 
 * **Data Params**
 
-  All colums in table are nullable, none are required
+  All columns in table are nullable, none are required
     "date": LocalDate
     "time": LocalTime
     "amount": double 

@@ -56,7 +56,6 @@ List a singular event.
 
 Not final. Proof of concept and the first iteration.
 
-```
 
 # Post an event
 
@@ -111,7 +110,6 @@ Provide the name, date, and time of the event.
 
 Deletion currently has no real error outside of a faulty body composition. Fields can be null at the moment.
 
-```
 
 # Update an event.
 
@@ -166,7 +164,7 @@ Provide the name, date, and time of the event.
 
 Same notes as deletion. PUT has no real error codes outside of a bad request at the moment. Fields can be null if left omitted.
 
-```
+
 
 # Delete an event
 
