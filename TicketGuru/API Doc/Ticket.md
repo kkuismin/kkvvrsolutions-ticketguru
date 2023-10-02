@@ -6,20 +6,25 @@
 
 * **Method:**
 
-  * `GET` /tickets for all | /tickets/{ticketId} for single ticket
-  * `POST` /tickets
-  * `DELETE` /tickets/{ticketId}
-  * `PUT` /tickets/{ticketId}
+  `GET` /tickets for all | /tickets/{ticketId} for single ticket
+
+  `POST` /tickets
+
+  `DELETE` /tickets/{ticketId}
+
+  `PUT` /tickets/{ticketId}
 
 * **URL Params**
 
-  * `ticketId`: id for Ticket entity, a primary key
+  `ticketId`: id for Ticket entity, a primary key
 
 * **Data Params**
 
   All columns in table are nullable, none are required
-    * "barcode": String
-    * "type": String
+  
+     "barcode": String
+
+     "type": String
 
 * **Success Response:**
 
