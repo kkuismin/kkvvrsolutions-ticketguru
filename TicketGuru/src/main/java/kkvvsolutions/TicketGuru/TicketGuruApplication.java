@@ -84,7 +84,7 @@ public class TicketGuruApplication {
 			erepository.save(event);
 
 			// Create SaleEvent
-			SaleEvent saleEvent = new SaleEvent(LocalDate.now(), LocalTime.now());
+			SaleEvent saleEvent = new SaleEvent(LocalDate.now(), LocalTime.now(), 30.0);
 
 			// Link Tickets to SaleEvent
 			for (Ticket t : tickets) {
