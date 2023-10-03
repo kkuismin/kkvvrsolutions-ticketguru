@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kkvvsolutions.TicketGuru.domain.Ticket;
-import kkvvsolutions.TicketGuru.domain.TicketRepository;
+import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
 
 @RestController
 @RequestMapping("/api")

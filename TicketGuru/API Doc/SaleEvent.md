@@ -8,8 +8,11 @@
 * **Method:**
   
   `GET` /sales for all | /sales/{saleEventId} for single sale
+  
   `POST` /sales
+  
   `DELETE` /sales/{saleEventId}
+  
   `PUT` /sales/{saleEventId}
   
 *  **URL Params**
@@ -30,7 +33,7 @@
   * **Code:** 200 <br />
     **Content:** `All SaleEvents or SaleEvent`
 
-    * **Code:** 201 <br />
+    **Code:** 201 <br />
     **Content:** `Created SaleEvent`
  
 * **Error Response:**
