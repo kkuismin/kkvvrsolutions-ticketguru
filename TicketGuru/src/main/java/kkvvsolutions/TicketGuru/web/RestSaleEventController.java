@@ -61,7 +61,7 @@ public class RestSaleEventController {
 
 		try {
 			SaleEvent _saleEvent = repository
-					.save(new SaleEvent(saleEvent.getSaleDate(), saleEvent.getSaleTime()));
+					.save(new SaleEvent(saleEvent.getSaleDate(), saleEvent.getSaleTime(), saleEvent.getAmount()));
 			return new ResponseEntity<>(_saleEvent, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,6 +78,7 @@ public class RestSaleEventController {
 			SaleEvent _saleEvent = saleEventData.get();
 			_saleEvent.setSaleDate(saleEvent.getSaleDate());
 			_saleEvent.setSaleTime(saleEvent.getSaleTime());
+			_saleEvent.setAmount(saleEvent.getAmount());
 
 			return new ResponseEntity<>(repository.save(_saleEvent), HttpStatus.OK);
 		} else {

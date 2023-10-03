@@ -24,14 +24,16 @@ public class SaleEvent {
 
 	private LocalDate saleDate;
 	private LocalTime saleTime;
-
+	private double amount;
+	
 	public SaleEvent() {
 		super();
 	}
 
-	public SaleEvent(LocalDate saleDate, LocalTime saleTime) {
+	public SaleEvent(LocalDate saleDate, LocalTime saleTime, double amount) {
 		this.saleDate = saleDate;
 		this.saleTime = saleTime;
+		this.amount = amount;
 	}
 
 	public Long getSaleEventId() {
@@ -65,11 +67,20 @@ public class SaleEvent {
 	public void setSaleTime(LocalTime saleTime) {
 		this.saleTime = saleTime;
 	}
+	
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 
 	@Override
 	public String toString() {
 		return "SaleEvent [saleEventId=" + saleEventId + ", ticketList=" + ticketList + ", saleDate=" + saleDate
-				+ ", saleTime=" + saleTime + "]";
+				+ ", saleTime=" + saleTime + ", amount=" + amount + "]";
 	}
 
 }
