@@ -25,7 +25,7 @@ public class SaleEvent {
 	private LocalDate saleDate;
 	private LocalTime saleTime;
 	private double amount;
-	
+
 	public SaleEvent() {
 		super();
 	}
@@ -67,7 +67,6 @@ public class SaleEvent {
 	public void setSaleTime(LocalTime saleTime) {
 		this.saleTime = saleTime;
 	}
-	
 
 	public double getAmount() {
 		return amount;

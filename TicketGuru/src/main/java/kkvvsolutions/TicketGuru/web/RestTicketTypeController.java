@@ -68,7 +68,7 @@ public class RestTicketTypeController {
 			TicketType ticketTypeToUpdate = ticketTypeData.get();
 
 			ticketTypeToUpdate.setPrice(ticketTypeDTO.getPrice());
-			ticketTypeToUpdate.setCustomerType(ticketTypeDTO.getCustomerType());
+			ticketTypeToUpdate.setTicketType(ticketTypeDTO.getCustomerType());
 			ticketTypeToUpdate.setDescription(ticketTypeDTO.getDescription());
 
 			TicketType updatedTicketType = repository.save(ticketTypeToUpdate);

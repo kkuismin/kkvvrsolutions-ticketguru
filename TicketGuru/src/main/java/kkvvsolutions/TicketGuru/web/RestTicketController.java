@@ -59,7 +59,7 @@ public class RestTicketController {
 	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
 
 		try {
-			Ticket _ticket = repository.save(new Ticket(ticket.getBarcode(), ticket.getType()));
+			Ticket _ticket = repository.save(ticket);
 			return new ResponseEntity<>(_ticket, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,7 +74,7 @@ public class RestTicketController {
 		if (ticketData.isPresent()) {
 			Ticket _ticket = ticketData.get();
 			_ticket.setBarcode(ticket.getBarcode());
-			_ticket.setType(ticket.getType());
+			_ticket.setTicketType(ticket.getTicketType());
 
 			return new ResponseEntity<>(repository.save(_ticket), HttpStatus.OK);
 		} else {

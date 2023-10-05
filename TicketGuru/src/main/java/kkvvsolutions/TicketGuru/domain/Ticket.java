@@ -21,27 +21,25 @@ public class Ticket {
 	private Event event;
 
 	@ManyToOne
+	@JoinColumn(name = "ticketTypeId")
+	private TicketType ticketType;
+
+	@ManyToOne
 	@JoinColumn(name = "saleEventId")
 	@JsonIgnore
 	private SaleEvent saleEvent;
 
-	private String barcode, type;
+	private String barcode;
 
 	public Ticket() {
-		super();
 	}
 
-	public Ticket(Long ticketId, String barcode, String type) {
+	public Ticket(Event event, TicketType ticketType, String barcode, SaleEvent saleEvent) {
 		super();
-		this.ticketId = ticketId;
+		this.event = event;
+		this.ticketType = ticketType;
 		this.barcode = barcode;
-		this.type = type;
-	}
-
-	public Ticket(String barcode, String type) {
-		super();
-		this.barcode = barcode;
-		this.type = type;
+		this.saleEvent = saleEvent;
 	}
 
 	public Long getTicketId() {
@@ -76,18 +74,18 @@ public class Ticket {
 		this.barcode = barcode;
 	}
 
-	public String getType() {
-		return type;
+	public TicketType getTicketType() {
+		return ticketType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTicketType(TicketType ticketType) {
+		this.ticketType = ticketType;
 	}
 
 	@Override
 	public String toString() {
-		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", saleEvent=" + saleEvent + ", barcode="
-				+ barcode + ", type=" + type + "]";
+		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", ticketType=" + ticketType + ", saleEvent="
+				+ saleEvent + ", barcode=" + barcode + "]";
 	}
 
 }

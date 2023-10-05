@@ -1,11 +1,16 @@
 package kkvvsolutions.TicketGuru.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class TicketType {
@@ -14,21 +19,26 @@ public class TicketType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long typeId;
     private Double price;
-    private String customerType;
+    private String ticketType;
+
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "eventId")
     private Event event;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "ticketType")
+    private List<Ticket> tickets;
+
     public TicketType() {
         super();
     }
 
-    public TicketType(Double price, String customerType, String description) {
+    public TicketType(Double price, String ticketType, String description) {
         super();
         this.price = price;
-        this.customerType = customerType;
+        this.ticketType = ticketType;
         this.description = description;
     }
 
@@ -48,12 +58,12 @@ public class TicketType {
         this.price = price;
     }
 
-    public String getCustomerType() {
-        return customerType;
+    public String getTicketType() {
+        return ticketType;
     }
 
-    public void setCustomerType(String customerType) {
-        this.customerType = customerType;
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
     }
 
     public String getDescription() {
@@ -74,8 +84,8 @@ public class TicketType {
 
     @Override
     public String toString() {
-        return "TicketType [typeId=" + typeId + ", price=" + price + ", customerType=" + customerType + ", description="
-                + description + "]";
+        return "TicketType [typeId=" + typeId + ", price=" + price + ", ticketType=" + ticketType + ", description="
+                + description + ", event=" + event + ", tickets=" + tickets + "]";
     }
 
 }

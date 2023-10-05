@@ -50,55 +50,25 @@ public class TicketGuruApplication {
 			TicketType ticketType = new TicketType(15.00, "Opiskelija", "Alennus opiskelijoille");
 			TicketType ticketType2 = new TicketType(10.00, "Työtön", "Alennus työttömille");
 
-			List<TicketType> ticketTypes = new ArrayList<>();
-			ticketTypes.add(ticketType);
-			ticketTypes.add(ticketType2);
+			ticketType.setEvent(event);
+			ticketType2.setEvent(event);
 
-			// Link TicketType to Event
-			for (TicketType tt : ticketTypes) {
-				tt.setEvent(event);
-				ttrepository.save(tt);
-			}
-
-			event.setTicketTypes(ticketTypes);
-			erepository.save(event);
-
-			// Create Tickets
-			Ticket ticket1 = new Ticket("123456", "Opiskelija");
-			Ticket ticket2 = new Ticket("654321", "Työtön");
-
-			// Link Tickets to Event
-			ticket1.setEvent(event);
-			ticket2.setEvent(event);
-
-			List<Ticket> tickets = new ArrayList<>();
-			tickets.add(ticket1);
-			tickets.add(ticket2);
-
-			for (Ticket t : tickets) {
-				t.setEvent(event);
-				trepository.save(t);
-			}
-
-			event.setTickets(tickets);
-			erepository.save(event);
+			ttrepository.save(ticketType);
+			ttrepository.save(ticketType2);
 
 			// Create SaleEvent
 			SaleEvent saleEvent = new SaleEvent(LocalDate.now(), LocalTime.now(), 30.00);
+			srepository.save(saleEvent); // Save SaleEvent first to generate an ID
 
-			// Link Tickets to SaleEvent
-			for (Ticket t : tickets) {
-				t.setSaleEvent(saleEvent);
-			}
+			// Create Tickets
+			Ticket ticket1 = new Ticket(event, ticketType, "123456", saleEvent);
+			Ticket ticket2 = new Ticket(event, ticketType2, "654321", saleEvent);
 
-			// Save SaleEvent with the associated tickets
-			srepository.save(saleEvent);
+			// Save Tickets
+			trepository.save(ticket1);
+			trepository.save(ticket2);
 
-			// Save each ticket with the associated SaleEvent
-			for (Ticket t : tickets) {
-				trepository.save(t);
-			}
-
+			// Log information
 			log.info("SaleEvent: " + saleEvent.toString());
 
 		};
