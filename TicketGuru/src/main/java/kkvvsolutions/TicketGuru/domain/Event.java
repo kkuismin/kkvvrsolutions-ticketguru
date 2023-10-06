@@ -1,11 +1,15 @@
 package kkvvsolutions.TicketGuru.domain;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,10 +18,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
-
 @Entity
 public class Event {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "eventId", nullable = false, updatable = false)
@@ -28,74 +31,61 @@ public class Event {
 	private Venue venue;
 
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-	private List<TicketType> ticketTypes;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event", fetch = FetchType.LAZY)
+	private List<TicketType> ticketTypes = new ArrayList<>();
 
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-	private List<Ticket> tickets;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event", fetch = FetchType.LAZY)
+	private List<Ticket> tickets = new ArrayList<>();
 
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
 	@Column(name = "date", nullable = false)
-	private String date;
-	
+	private LocalDate date;
+
 	@Column(name = "time", nullable = false)
-	private String time;
-	
+	private LocalTime time;
 
 	public Event() {
 		super();
 	}
-	
 
-	public Event(long eventId, Venue venue, List<TicketType> ticketTypes, List<Ticket> tickets, String name,
-			String date, String time) {
+	public Event(Venue venue, String name, LocalDate date, LocalTime time) {
 		super();
-		this.eventId = eventId;
 		this.venue = venue;
-		this.ticketTypes = ticketTypes;
-		this.tickets = tickets;
 		this.name = name;
 		this.date = date;
 		this.time = time;
 	}
 
-
 	public long getEventId() {
 		return eventId;
 	}
-
 
 	public void setEventId(long eventId) {
 		this.eventId = eventId;
 	}
 
-
 	public Venue getVenue() {
 		return venue;
 	}
 
-
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
-	
+
 	public List<TicketType> getTicketTypes() {
 		return ticketTypes;
 	}
-
 
 	public void setTicketTypes(List<TicketType> ticketTypes) {
 		this.ticketTypes = ticketTypes;
 	}
 
-
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
-
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
@@ -105,37 +95,29 @@ public class Event {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-
-	public String getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-
-	public void setTime(String time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Event [eventId=" + eventId + ", venue=" + venue + ", ticketTypes=" + ticketTypes + ", tickets="
-				+ tickets + ", name=" + name + ", date=" + date + ", time=" + time + "]";
+		return "Event [eventId=" + eventId + ", name=" + name + ", date=" + date + ", time=" + time + "]";
 	}
-	
 
 }

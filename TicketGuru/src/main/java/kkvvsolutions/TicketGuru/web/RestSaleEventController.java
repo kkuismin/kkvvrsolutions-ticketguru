@@ -18,20 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
 import kkvvsolutions.TicketGuru.domain.repository.SaleEventRepository;
+import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
 
 @RestController
 @RequestMapping("/api")
 public class RestSaleEventController {
 
 	@Autowired
-	private SaleEventRepository repository;
+	SaleEventRepository saleEventRepository;
+
+	@Autowired
+	TicketRepository ticketRepository;
 
 	@GetMapping("/sales")
 	public ResponseEntity<List<SaleEvent>> getAllSaleEvents() {
 
 		try {
 			List<SaleEvent> sales = new ArrayList<SaleEvent>();
-			repository.findAll().forEach(sales::add);
+			saleEventRepository.findAll().forEach(sales::add);
 
 			if (sales.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -47,7 +51,7 @@ public class RestSaleEventController {
 	@GetMapping("/sales/{id}")
 	public ResponseEntity<SaleEvent> getSaleEventById(@PathVariable("id") Long saleEvent_id) {
 
-		Optional<SaleEvent> salesData = repository.findById(saleEvent_id);
+		Optional<SaleEvent> salesData = saleEventRepository.findById(saleEvent_id);
 
 		if (salesData.isPresent()) {
 			return new ResponseEntity<>(salesData.get(), HttpStatus.OK);
@@ -58,10 +62,13 @@ public class RestSaleEventController {
 
 	@PostMapping("/sales")
 	public ResponseEntity<SaleEvent> createSaleEvent(@RequestBody SaleEvent saleEvent) {
-
 		try {
-			SaleEvent _saleEvent = repository
-					.save(new SaleEvent(saleEvent.getSaleDate(), saleEvent.getSaleTime(), saleEvent.getAmount()));
+			// Save tickets first to generate their IDs
+			ticketRepository.saveAll(saleEvent.getTicketList());
+
+			// Save the sale event, which now references the saved tickets
+			SaleEvent _saleEvent = saleEventRepository.save(saleEvent);
+
 			return new ResponseEntity<>(_saleEvent, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,7 +79,7 @@ public class RestSaleEventController {
 	public ResponseEntity<SaleEvent> updateSaleEvent(@PathVariable("id") Long saleEvent_id,
 			@RequestBody SaleEvent saleEvent) {
 
-		Optional<SaleEvent> saleEventData = repository.findById(saleEvent_id);
+		Optional<SaleEvent> saleEventData = saleEventRepository.findById(saleEvent_id);
 
 		if (saleEventData.isPresent()) {
 			SaleEvent _saleEvent = saleEventData.get();
@@ -80,7 +87,7 @@ public class RestSaleEventController {
 			_saleEvent.setSaleTime(saleEvent.getSaleTime());
 			_saleEvent.setAmount(saleEvent.getAmount());
 
-			return new ResponseEntity<>(repository.save(_saleEvent), HttpStatus.OK);
+			return new ResponseEntity<>(saleEventRepository.save(_saleEvent), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -90,7 +97,7 @@ public class RestSaleEventController {
 	public ResponseEntity<HttpStatus> deleteAllSaleEvents() {
 
 		try {
-			repository.deleteAll();
+			saleEventRepository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -101,7 +108,7 @@ public class RestSaleEventController {
 	public ResponseEntity<HttpStatus> deleteSaleEvent(@PathVariable("id") Long saleEvent_id) {
 
 		try {
-			repository.deleteById(saleEvent_id);
+			saleEventRepository.deleteById(saleEvent_id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

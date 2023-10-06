@@ -28,12 +28,18 @@ public class SaleEvent {
 
 	public SaleEvent() {
 		super();
+		// Automatically set saleDate and saleTime when a SaleEvent is created
+		this.saleDate = LocalDate.now();
+		this.saleTime = LocalTime.now();
 	}
 
-	public SaleEvent(LocalDate saleDate, LocalTime saleTime, double amount) {
-		this.saleDate = saleDate;
-		this.saleTime = saleTime;
+	public SaleEvent(double amount, List<Ticket> tickets) {
+		this();
 		this.amount = amount;
+		this.ticketList = tickets;
+		for (Ticket ticket : tickets) {
+			ticket.setSaleEvent(this);
+		}
 	}
 
 	public Long getSaleEventId() {

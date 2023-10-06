@@ -29,6 +29,7 @@ public class RestTicketTypeController {
 	public ResponseEntity<List<TicketTypeDTO>> getAllTicketTypes() {
 		try {
 			List<TicketType> ticketTypes = (List<TicketType>) repository.findAll();
+
 			if (ticketTypes.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -68,7 +69,7 @@ public class RestTicketTypeController {
 			TicketType ticketTypeToUpdate = ticketTypeData.get();
 
 			ticketTypeToUpdate.setPrice(ticketTypeDTO.getPrice());
-			ticketTypeToUpdate.setTicketType(ticketTypeDTO.getCustomerType());
+			ticketTypeToUpdate.setTicketType(ticketTypeDTO.getTicketType());
 			ticketTypeToUpdate.setDescription(ticketTypeDTO.getDescription());
 
 			TicketType updatedTicketType = repository.save(ticketTypeToUpdate);
