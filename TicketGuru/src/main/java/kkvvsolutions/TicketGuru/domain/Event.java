@@ -62,6 +62,13 @@ public class Event {
 		this.time = time;
 	}
 
+	public Event (String name, String date, String time) {
+		super();
+		this.name = name;
+		this.date = date;
+		this.time = time;
+
+	}
 
 	public long getEventId() {
 		return eventId;
