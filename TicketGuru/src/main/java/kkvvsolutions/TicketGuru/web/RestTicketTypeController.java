@@ -2,80 +2,98 @@ package kkvvsolutions.TicketGuru.web;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.TicketType;
+import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
 import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
-import kkvvsolutions.TicketGuru.dto.TicketTypeCreationDTO;
-import kkvvsolutions.TicketGuru.dto.TicketTypeDTO;
-import kkvvsolutions.TicketGuru.mapper.TicketTypeMapper;
 
 @RestController
 @RequestMapping("/api")
 public class RestTicketTypeController {
 
 	@Autowired
-	private TicketTypeRepository repository;
+	private TicketTypeRepository ticketTypeRepository;
 
 	@Autowired
-	private TicketTypeMapper mapper;
-
+	private EventRepository eventRepository;
+	
 	@GetMapping("/tickettypes")
-	public ResponseEntity<List<TicketTypeDTO>> getAllTicketTypes() {
+	public ResponseEntity<List<TicketType>> getAllTicketTypes() {
 		try {
-			List<TicketType> ticketTypes = (List<TicketType>) repository.findAll();
+			List<TicketType> ticketTypes = new ArrayList<TicketType>();
+			ticketTypeRepository.findAll().forEach(ticketTypes::add);
 			if (ticketTypes.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			List<TicketTypeDTO> ticketTypeDTOs = ticketTypes.stream()
-					.map(mapper::toDto)
-					.collect(Collectors.toList());
-			return new ResponseEntity<>(ticketTypeDTOs, HttpStatus.OK);
+			return new ResponseEntity<>(ticketTypes, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@GetMapping("/tickettypes/{id}")
-	public ResponseEntity<TicketTypeDTO> getTicketTypeById(@PathVariable("id") Long typeId) {
-		Optional<TicketType> ticketTypeData = repository.findById(typeId);
+	public ResponseEntity<TicketType> getTicketTypeById(@PathVariable("id") Long typeId) {
+		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(typeId);
 		if (ticketTypeData.isPresent()) {
-			TicketTypeDTO responseDTO = mapper.toDto(ticketTypeData.get());
-			return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+			return new ResponseEntity<>(ticketTypeData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/tickettypes/{id}/event")
+	public ResponseEntity<Event> getEvent(@PathVariable("id") Long eventId) {
+		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(eventId);
+		if (ticketTypeData.isPresent()) {
+			TicketType ticketType = ticketTypeData.get();
+			if (ticketType.getEvent() != null) {
+				Event event = ticketType.getEvent();
+				return new ResponseEntity<>(event, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("/tickettypes")
-	public ResponseEntity<TicketTypeDTO> createTicketType(@RequestBody TicketTypeCreationDTO ticketTypeDTO) {
-		TicketType ticketType = mapper.toEntity(ticketTypeDTO);
-		TicketType savedTicketType = repository.save(ticketType);
-		TicketTypeDTO responseDTO = mapper.toDto(savedTicketType);
-		return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+	public ResponseEntity<TicketType> createTicketType(@RequestBody TicketType ticketType) {
+
+		try {
+			TicketType _ticketType = ticketTypeRepository.save(new TicketType(ticketType.getPrice(), ticketType.getTicketType(), ticketType.getDescription()));
+			return new ResponseEntity<>(_ticketType, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PutMapping("/tickettypes/{id}")
-	public ResponseEntity<TicketTypeDTO> updateTicketType(@PathVariable("id") Long typeId,
-			@RequestBody TicketTypeCreationDTO ticketTypeDTO) {
-		Optional<TicketType> ticketTypeData = repository.findById(typeId);
+	public ResponseEntity<TicketType> updateTicketType(@PathVariable("id") Long typeId,
+			@RequestBody TicketType ticketType) {
+		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(typeId);
 		if (ticketTypeData.isPresent()) {
-			TicketType ticketTypeToUpdate = ticketTypeData.get();
-
-			ticketTypeToUpdate.setPrice(ticketTypeDTO.getPrice());
-			ticketTypeToUpdate.setTicketType(ticketTypeDTO.getCustomerType());
-			ticketTypeToUpdate.setDescription(ticketTypeDTO.getDescription());
-
-			TicketType updatedTicketType = repository.save(ticketTypeToUpdate);
-			TicketTypeDTO responseDTO = mapper.toDto(updatedTicketType);
-
-			return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-		} else {
+			TicketType _ticketType = ticketTypeData.get();
+			_ticketType.setPrice(ticketType.getPrice());
+			_ticketType.setTicketType(ticketType.getTicketType());
+			_ticketType.setDescription(ticketType.getDescription());
+			
+			return new ResponseEntity<>(ticketTypeRepository.save(_ticketType), HttpStatus.OK);		
+			} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -84,7 +102,7 @@ public class RestTicketTypeController {
 	public ResponseEntity<HttpStatus> deleteAllTicketTypes() {
 
 		try {
-			repository.deleteAll();
+			ticketTypeRepository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -95,7 +113,7 @@ public class RestTicketTypeController {
 	public ResponseEntity<HttpStatus> deleteTicketType(@PathVariable("id") Long typeId) {
 
 		try {
-			repository.deleteById(typeId);
+			ticketTypeRepository.deleteById(typeId);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
