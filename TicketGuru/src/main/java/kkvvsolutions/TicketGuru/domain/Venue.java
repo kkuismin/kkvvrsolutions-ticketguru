@@ -3,25 +3,43 @@ package kkvvsolutions.TicketGuru.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 public class Venue {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "venueId", nullable = false, updatable = false)
 	private Long venueId;
 
+	@NotNull
+	@Size(min = 1, max = 100)
+	@Column(name = "name", nullable = false)
 	private String name;
+	
+	@NotNull
+	@Size(min = 1, max = 100)
+	@Column(name = "address", nullable = false)
 	private String address;
+	
+	@NotNull
+	@Size(min = 1, max = 100)
+	@Column(name = "city", nullable = false)
 	private String city;
+	
 	private int capacity;
 
 	@OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
