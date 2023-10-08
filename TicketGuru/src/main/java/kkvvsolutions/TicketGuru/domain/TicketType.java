@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,16 +12,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class TicketType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "typeId", nullable = false, updatable = false)
     private Long typeId;
+    
+    @NotNull
     private Double price;
+    
+    @NotNull
+    @Size(min = 1, max = 100)
     private String ticketType;
 
+    @Size(min = 1, max = 100)
     private String description;
 
     @ManyToOne
@@ -35,8 +45,10 @@ public class TicketType {
         super();
     }
 
-    public TicketType(Double price, String ticketType, String description) {
+    public TicketType(long typeId, Event event, Double price, String ticketType, String description) {
         super();
+        this.typeId = typeId;
+        this.event = event;
         this.price = price;
         this.ticketType = ticketType;
         this.description = description;
@@ -49,6 +61,7 @@ public class TicketType {
     public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
+    
 
     public Double getPrice() {
         return price;
@@ -87,5 +100,4 @@ public class TicketType {
         return "TicketType [typeId=" + typeId + ", price=" + price + ", ticketType=" + ticketType + ", description="
                 + description + ", event=" + event + ", tickets=" + tickets + "]";
     }
-
 }

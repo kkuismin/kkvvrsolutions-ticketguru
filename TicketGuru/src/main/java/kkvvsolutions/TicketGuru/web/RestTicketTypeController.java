@@ -75,7 +75,7 @@ public class RestTicketTypeController {
 	public ResponseEntity<TicketType> createTicketType(@RequestBody TicketType ticketType) {
 
 		try {
-			TicketType _ticketType = ticketTypeRepository.save(new TicketType(ticketType.getPrice(), ticketType.getTicketType(), ticketType.getDescription()));
+			TicketType _ticketType = ticketTypeRepository.save(ticketType);
 			return new ResponseEntity<>(_ticketType, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
