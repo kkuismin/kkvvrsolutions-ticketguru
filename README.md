@@ -59,7 +59,7 @@ Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen 
 
 Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa on myös selitteet taulujen tietokenttien tyypeistä.
 
-![Tietokanta](tietokanta.png)
+![Tietokanta](image.png)
 
 **Alla on jokaisen taulun tarkemmat kuvaukset.**
 
@@ -98,7 +98,7 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  | typeId       | Long PK      | Lipputyypin id, not null                                                |
  | eventId      | Long FK      | Id tapahtumalle, johon lipputyyppi on, viittaus Event-tauluun, not null |
  | price        | int          | Lipputyypin hinta, not null                                             |
- | customerType | varchar(100) | Asiakastyyppi, not null                                                 |
+ | ticketType   | varchar(100) | Asiakastyyppi, not null                                                 |
  | description  | varchar(100) | Lipputyypin kuvaus                                                      |
 
  ---
