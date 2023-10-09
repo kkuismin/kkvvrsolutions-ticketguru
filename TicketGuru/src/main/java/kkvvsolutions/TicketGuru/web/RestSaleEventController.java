@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
+import kkvvsolutions.TicketGuru.domain.Ticket;
 import kkvvsolutions.TicketGuru.domain.repository.SaleEventRepository;
 import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
 
@@ -60,13 +62,14 @@ public class RestSaleEventController {
 		}
 	}
 
+	@Transactional
 	@PostMapping("/sales")
 	public ResponseEntity<SaleEvent> createSaleEvent(@RequestBody SaleEvent saleEvent) {
 		try {
-			// Save tickets first to generate their IDs
-			ticketRepository.saveAll(saleEvent.getTicketList());
+			for (Ticket ticket : saleEvent.getTicketList()) {
+				ticket.setSaleEvent(saleEvent);
+			}
 
-			// Save the sale event, which now references the saved tickets
 			SaleEvent _saleEvent = saleEventRepository.save(saleEvent);
 
 			return new ResponseEntity<>(_saleEvent, HttpStatus.CREATED);
