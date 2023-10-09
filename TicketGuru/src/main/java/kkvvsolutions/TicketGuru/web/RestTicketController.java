@@ -42,7 +42,7 @@ public class RestTicketController {
 
 			return new ResponseEntity<>(tickets, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 
 	}
@@ -116,7 +116,7 @@ public class RestTicketController {
 			Ticket _ticket = trepository.save(ticket);
 			return new ResponseEntity<>(_ticket, HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -143,7 +143,7 @@ public class RestTicketController {
 			trepository.deleteById(ticketId);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
