@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +35,7 @@ public class RestVenueController {
             return new ResponseEntity<>(venues, HttpStatus.OK);
         } catch (Exception e) {
 
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -49,18 +51,18 @@ public class RestVenueController {
     }
 
     @PostMapping("/venues")
-    public ResponseEntity<Venue> createVenue(@RequestBody Venue venue) {
+    public ResponseEntity<Venue> createVenue(@Valid @RequestBody Venue venue) {
         try {
             Venue _venue = venueRepository
                     .save(new Venue(venue.getName(), venue.getAddress(), venue.getCity(), venue.getCapacity()));
             return new ResponseEntity<>(_venue, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/venues/{id}")
-    public ResponseEntity<Venue> updateVenue(@PathVariable("id") Long venue_id, @RequestBody Venue venue) {
+    public ResponseEntity<Venue> updateVenue(@PathVariable("id") Long venue_id, @Valid @RequestBody Venue venue) {
         Optional<Venue> venueData = venueRepository.findById(venue_id);
 
         if (venueData.isPresent()) {
@@ -82,7 +84,7 @@ public class RestVenueController {
             venueRepository.deleteById(venue_id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -92,7 +94,7 @@ public class RestVenueController {
             venueRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

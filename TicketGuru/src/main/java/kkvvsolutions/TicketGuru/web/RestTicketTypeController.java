@@ -41,7 +41,7 @@ public class RestTicketTypeController {
 			}
 			return new ResponseEntity<>(ticketTypes, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class RestTicketTypeController {
 			TicketType _ticketType = ticketTypeRepository.save(ticketType);
 			return new ResponseEntity<>(_ticketType, HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class RestTicketTypeController {
 			ticketTypeRepository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class RestTicketTypeController {
 			ticketTypeRepository.deleteById(typeId);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 }
