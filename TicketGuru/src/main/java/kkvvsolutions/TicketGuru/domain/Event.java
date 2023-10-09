@@ -13,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -35,6 +37,8 @@ public class Event {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 	private List<Ticket> tickets;
 
+	@NotNull
+	@Size(min = 1, max = 100)
 	@Column(name = "name", nullable = false)
 	private String name;
 	
