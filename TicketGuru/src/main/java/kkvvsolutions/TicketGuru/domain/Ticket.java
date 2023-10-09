@@ -2,8 +2,6 @@ package kkvvsolutions.TicketGuru.domain;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +26,6 @@ public class Ticket {
 
 	@ManyToOne
 	@JoinColumn(name = "saleEventId")
-	@JsonIgnore
 	private SaleEvent saleEvent;
 
 	private String barcode;
@@ -44,7 +41,6 @@ public class Ticket {
 		this.event = event;
 		this.ticketType = ticketType;
 		this.saleEvent = saleEvent;
-
 		if (saleEvent != null) {
 			saleEvent.getTicketList().add(this);
 		}
@@ -78,6 +74,9 @@ public class Ticket {
 
 	public void setSaleEvent(SaleEvent saleEvent) {
 		this.saleEvent = saleEvent;
+		if (saleEvent != null && !saleEvent.getTicketList().contains(this)) {
+			saleEvent.getTicketList().add(this);
+		}
 	}
 
 	public String getBarcode() {

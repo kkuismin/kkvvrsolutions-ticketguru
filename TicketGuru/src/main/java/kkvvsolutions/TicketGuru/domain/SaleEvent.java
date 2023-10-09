@@ -28,7 +28,6 @@ public class SaleEvent {
 
 	public SaleEvent() {
 		super();
-		// Automatically set saleDate and saleTime when a SaleEvent is created
 		this.saleDate = LocalDate.now();
 		this.saleTime = LocalTime.now();
 	}

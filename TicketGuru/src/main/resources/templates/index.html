@@ -17,16 +17,13 @@
             <h4>Ticket Types for this Event</h4>
             <ul>
               <li th:each="ticketType : ${ticketTypes}" th:if="${ticketType.event == event}">
-                <span th:text="${ticketType.customerType}"></span>
+                <span th:text="${ticketType.ticketType}"></span>
 
                 <h5>Sold Tickets of this Type</h5>
                 <ul>
-                  <li th:each="ticket : ${tickets}" th:if="${ticket.type == ticketType.customerType}">
-                    <span th:text="${ticket.barcode}"></span> -
-                    <span
-                      th:if="${ticket.saleEvent != null}"
-                      th:text="'Sold at: ' + ${ticket.saleEvent.saleDate} + ' ' + ${ticket.saleEvent.saleTime}"
-                    ></span>
+                  <li th:each="ticket : ${tickets}" th:if="${ticket.ticketType == ticketType.ticketType}">
+                    <span th:text="${ticket.barcode}"></span>
+      
                   </li>
                 </ul>
               </li>
