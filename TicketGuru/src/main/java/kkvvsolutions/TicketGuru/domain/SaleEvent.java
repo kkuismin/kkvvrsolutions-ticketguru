@@ -9,11 +9,13 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "saleEventId")
@@ -26,9 +28,17 @@ public class SaleEvent {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "saleEvent")
 	private List<Ticket> ticketList = new ArrayList<>();
 
+	@NotNull
+	@Column(name = "saleDate", nullable = false)
 	private LocalDate saleDate;
+	
+	@NotNull
+	@Column(name = "saleTime", nullable = false)
 	private LocalTime saleTime;
-	private double amount;
+	
+	@NotNull
+	@Column(name = "amount", nullable = false)
+	private int amount;
 
 	public SaleEvent() {
 		super();
@@ -36,7 +46,7 @@ public class SaleEvent {
 		this.saleTime = LocalTime.now();
 	}
 
-	public SaleEvent(double amount, List<Ticket> tickets) {
+	public SaleEvent(int amount, List<Ticket> tickets) {
 		this();
 		this.amount = amount;
 		this.ticketList = tickets;
@@ -77,11 +87,11 @@ public class SaleEvent {
 		this.saleTime = saleTime;
 	}
 
-	public double getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
