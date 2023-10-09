@@ -27,6 +27,7 @@ public class RestEventController {
 	@Autowired
 	private EventRepository erepository;
 
+	// All Events
 	@GetMapping("/events")
 	public ResponseEntity<List<Event>> getAllEvents() {
 
@@ -35,27 +36,29 @@ public class RestEventController {
 			erepository.findAll().forEach(events::add);
 
 			if (events.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT); // HTTP 204 No Content
 			}
 
-			return new ResponseEntity<>(events, HttpStatus.OK);
+			return new ResponseEntity<>(events, HttpStatus.OK); // HTTP 200 OK
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // HTTP 400 Bad Request
 		}
 
 	}
-
+	
+	// Event by ID
 	@GetMapping("/events/{id}")
 	public ResponseEntity<Event> getEventById(@PathVariable("id") Long eventId) {
 		Optional<Event> eventData = erepository.findById(eventId);
 
 		if (eventData.isPresent()) {
-			return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
+			return new ResponseEntity<>(eventData.get(), HttpStatus.OK); // HTTP 200 OK
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // HTTP 404 Not Found
 		}
 	}
 
+	// Event by Venue
 	@GetMapping("/events/{id}/venue")
 	public ResponseEntity<Venue> getVenue(@PathVariable("id") Long eventId) {
 		Optional<Event> eventData = erepository.findById(eventId);
@@ -64,26 +67,28 @@ public class RestEventController {
 			Event event = eventData.get();
 			if (event.getVenue() != null) {
 				Venue venue = event.getVenue();
-				return new ResponseEntity<>(venue, HttpStatus.OK);
+				return new ResponseEntity<>(venue, HttpStatus.OK); // HTTP 200 OK
 			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND); // HTTP 404 Not Found
 			}
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // HTTP 404 Not Found
 		}
 	}
 
+	// Create new Event
 	@PostMapping("/events")
 	public ResponseEntity<Event> createEvent(@RequestBody Event event) {
 
 		try {
 			Event _event = erepository.save(event);
-			return new ResponseEntity<>(_event, HttpStatus.CREATED);
+			return new ResponseEntity<>(_event, HttpStatus.CREATED); // HTTP 201 OK
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // HTTP 400 Bad Request
 		}
 	}
 
+	// Edit Event
 	@PutMapping("/events/{id}")
 	public ResponseEntity<Event> updateEvent(@PathVariable("id") Long eventId, @RequestBody Event event) {
 
@@ -96,20 +101,21 @@ public class RestEventController {
 			_event.setDate(event.getDate());
 			_event.setTime(event.getTime());
 
-			return new ResponseEntity<>(erepository.save(_event), HttpStatus.OK);
+			return new ResponseEntity<>(erepository.save(_event), HttpStatus.OK); // HTTP 200 OK
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // HTTP 404 Not Found
 		}
 	}
-
+	
+	// Delete Event by ID 
 	@DeleteMapping("/events/{id}")
 	public ResponseEntity<HttpStatus> deleteEvent(@PathVariable("id") Long eventId) {
 
 		try {
 			erepository.deleteById(eventId);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT); // HTTP 204 No content
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // HTTP 404 Not Found
 		}
 	}
 
