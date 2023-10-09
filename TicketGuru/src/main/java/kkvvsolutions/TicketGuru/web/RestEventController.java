@@ -18,12 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.Venue;
-import kkvvsolutions.TicketGuru.domain.Ticket;
-import kkvvsolutions.TicketGuru.domain.TicketType;
 import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
-import kkvvsolutions.TicketGuru.domain.repository.VenueRepository;
-import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
-import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -31,16 +26,6 @@ public class RestEventController {
 
 	@Autowired
 	private EventRepository erepository;
-	
-	@Autowired 
-	private VenueRepository vrepository;
-	
-	@Autowired
-	private TicketTypeRepository ttrepository;
-	
-	@Autowired
-	private TicketRepository trepository;
-	
 
 	@GetMapping("/events")
 	public ResponseEntity<List<Event>> getAllEvents() {
@@ -70,11 +55,11 @@ public class RestEventController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/events/{id}/venue")
 	public ResponseEntity<Venue> getVenue(@PathVariable("id") Long eventId) {
 		Optional<Event> eventData = erepository.findById(eventId);
-		
+
 		if (eventData.isPresent()) {
 			Event event = eventData.get();
 			if (event.getVenue() != null) {
@@ -87,7 +72,6 @@ public class RestEventController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
 
 	@PostMapping("/events")
 	public ResponseEntity<Event> createEvent(@RequestBody Event event) {

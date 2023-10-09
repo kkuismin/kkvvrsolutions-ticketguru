@@ -20,10 +20,7 @@ import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
 import kkvvsolutions.TicketGuru.domain.Ticket;
 import kkvvsolutions.TicketGuru.domain.TicketType;
-import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
-import kkvvsolutions.TicketGuru.domain.repository.SaleEventRepository;
 import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
-import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -31,15 +28,6 @@ public class RestTicketController {
 
 	@Autowired
 	private TicketRepository trepository;
-	
-	@Autowired
-	private TicketTypeRepository ttrepository;
-	
-	@Autowired
-	private EventRepository erepository;
-	
-	@Autowired 
-	private SaleEventRepository srepository;
 
 	@GetMapping("/tickets")
 	public ResponseEntity<List<Ticket>> getAllTickets() {
@@ -69,11 +57,11 @@ public class RestTicketController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/tickets/{id}/tickettype")
 	public ResponseEntity<TicketType> getTicketType(@PathVariable("id") Long ticketId) {
 		Optional<Ticket> ticketData = trepository.findById(ticketId);
-		
+
 		if (ticketData.isPresent()) {
 			Ticket ticket = ticketData.get();
 			if (ticket.getTicketType() != null) {
@@ -86,11 +74,11 @@ public class RestTicketController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/tickets/{id}/event")
 	public ResponseEntity<Event> getEvent(@PathVariable("id") Long eventId) {
 		Optional<Ticket> ticketData = trepository.findById(eventId);
-		
+
 		if (ticketData.isPresent()) {
 			Ticket ticket = ticketData.get();
 			if (ticket.getEvent() != null) {
@@ -101,13 +89,13 @@ public class RestTicketController {
 			}
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}	 
+		}
 	}
-	
+
 	@GetMapping("/tickets/{id}/sales")
 	public ResponseEntity<SaleEvent> getSaleEvent(@PathVariable("id") Long saleEventId) {
 		Optional<Ticket> ticketData = trepository.findById(saleEventId);
-		
+
 		if (ticketData.isPresent()) {
 			Ticket ticket = ticketData.get();
 			if (ticket.getSaleEvent() != null) {

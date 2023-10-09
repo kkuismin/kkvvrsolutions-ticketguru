@@ -2,10 +2,19 @@ package kkvvsolutions.TicketGuru.dto;
 
 public class TicketTypeCreationDTO {
 
+    private Long ticketTypeId;
     private Double price;
-    private String customerType;
+    private String ticketType;
     private String description;
     private Long eventId;
+
+    public Long getTicketTypeId() {
+        return ticketTypeId;
+    }
+
+    public void setTicketTypeId(Long ticketTypeId) {
+        this.ticketTypeId = ticketTypeId;
+    }
 
     public Double getPrice() {
         return price;
@@ -15,12 +24,12 @@ public class TicketTypeCreationDTO {
         this.price = price;
     }
 
-    public String getCustomerType() {
-        return customerType;
+    public String getTicketType() {
+        return ticketType;
     }
 
-    public void setCustomerType(String customerType) {
-        this.customerType = customerType;
+    public void setTicketTypeType(String ticketType) {
+        this.ticketType = ticketType;
     }
 
     public String getDescription() {
@@ -37,6 +46,12 @@ public class TicketTypeCreationDTO {
 
     public void setEventId(Long eventId) {
         this.eventId = eventId;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketTypeCreationDTO [ticketTypeId=" + ticketTypeId + ", price=" + price + ", ticketType=" + ticketType
+                + ", description=" + description + ", eventId=" + eventId + "]";
     }
 
 }

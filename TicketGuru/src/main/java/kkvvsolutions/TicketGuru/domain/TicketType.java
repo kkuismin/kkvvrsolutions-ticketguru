@@ -22,10 +22,8 @@ public class TicketType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "typeId", nullable = false, updatable = false)
     private Long typeId;
-    
     @NotNull
     private Double price;
-    
     @NotNull
     @Size(min = 1, max = 100)
     private String ticketType;
@@ -45,23 +43,22 @@ public class TicketType {
         super();
     }
 
-    public TicketType(long typeId, Event event, Double price, String ticketType, String description) {
+    public TicketType(Double price, String ticketType, String description, Event event) {
         super();
-        this.typeId = typeId;
         this.event = event;
         this.price = price;
         this.ticketType = ticketType;
         this.description = description;
+        this.event = event;
     }
 
-    public Long getTypeId() {
+    public Long getTicketTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Long typeId) {
+    public void setTicketTypeId(Long typeId) {
         this.typeId = typeId;
     }
-    
 
     public Double getPrice() {
         return price;

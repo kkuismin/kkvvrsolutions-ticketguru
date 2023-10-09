@@ -11,8 +11,9 @@ public class TicketTypeMapper {
 
     public TicketTypeDTO toDto(TicketType ticketType) {
         TicketTypeDTO dto = new TicketTypeDTO();
+        dto.setTicketTypeId(ticketType.getTicketTypeId());
         dto.setPrice(ticketType.getPrice());
-        dto.setCustomerType(ticketType.getTicketType());
+        dto.setTicketType(ticketType.getTicketType());
         dto.setDescription(ticketType.getDescription());
         dto.setEventId(ticketType.getEvent().getEventId());
         return dto;
@@ -21,7 +22,7 @@ public class TicketTypeMapper {
     public TicketType toEntity(TicketTypeCreationDTO dto) {
         TicketType ticketType = new TicketType();
         ticketType.setPrice(dto.getPrice());
-        ticketType.setTicketType(dto.getCustomerType());
+        ticketType.setTicketType(dto.getTicketType());
         ticketType.setDescription(dto.getDescription());
 
         return ticketType;

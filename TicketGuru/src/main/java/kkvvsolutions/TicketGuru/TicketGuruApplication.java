@@ -2,8 +2,7 @@ package kkvvsolutions.TicketGuru;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import kkvvsolutions.TicketGuru.domain.Event;
-import kkvvsolutions.TicketGuru.domain.SaleEvent;
-import kkvvsolutions.TicketGuru.domain.Ticket;
+
 import kkvvsolutions.TicketGuru.domain.TicketType;
 import kkvvsolutions.TicketGuru.domain.Venue;
 import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
@@ -33,45 +31,29 @@ public class TicketGuruApplication {
 	}
 
 	@Bean
-	public CommandLineRunner eventDemo(EventRepository erepository, TicketRepository trepository,
-			SaleEventRepository srepository, TicketTypeRepository ttrepository, VenueRepository vrepository) {
-		return (args) -> {
-
-			// Create a Venue
+	public CommandLineRunner initializeDatabase(VenueRepository venueRepository,
+			EventRepository eventRepository,
+			TicketTypeRepository ticketTypeRepository, SaleEventRepository saleEventRepository,
+			TicketRepository ticketRepository) {
+		return args -> {
+			// 1. Create and Save Venue
 			Venue venue = new Venue("Stadium", "123 Street", "City", 5000);
-			vrepository.save(venue);
+			venue = venueRepository.save(venue);
 
-			// Create an Event and link it to the Venue
-			Event event = new Event("Konsertti", "20-10-2023", "19:30");
-			event.setVenue(venue);
-			erepository.save(event);
+			// 2. Create, Associate with Venue, and Save Event
+			Event event = new Event(venue, "Concert", LocalDate.of(2023, 10, 20), LocalTime.of(19, 30));
+			event = eventRepository.save(event);
 
-			// Create a TicketType and link it to the Event
-			TicketType ticketType = new TicketType(15.00, "Opiskelija", "Alennus opiskelijoille");
-			TicketType ticketType2 = new TicketType(10.00, "Työtön", "Alennus työttömille");
+			// 3. Create, Associate with Event, and Save TicketTypes
+			TicketType studentTicketType = new TicketType(15.00, "Student", "Discount for students", event);
+			TicketType regularTicketType = new TicketType(25.00, "Regular", "Standard price", event);
 
-			ticketType.setEvent(event);
-			ticketType2.setEvent(event);
+			// Save TicketTypes to the database
+			event.getTicketTypes().addAll(Arrays.asList(studentTicketType, regularTicketType));
+			ticketTypeRepository.saveAll(Arrays.asList(studentTicketType, regularTicketType));
 
-			ttrepository.save(ticketType);
-			ttrepository.save(ticketType2);
-
-			// Create SaleEvent
-			SaleEvent saleEvent = new SaleEvent(LocalDate.now(), LocalTime.now(), 30.00);
-			srepository.save(saleEvent); // Save SaleEvent first to generate an ID
-
-			// Create Tickets
-			Ticket ticket1 = new Ticket(event, ticketType, "123456", saleEvent);
-			Ticket ticket2 = new Ticket(event, ticketType2, "654321", saleEvent);
-
-			// Save Tickets
-			trepository.save(ticket1);
-			trepository.save(ticket2);
-
-			// Log information
-			log.info("SaleEvent: " + saleEvent.toString());
+			eventRepository.save(event);
 
 		};
-	}
-
+	};
 }

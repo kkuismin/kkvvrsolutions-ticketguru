@@ -30,7 +30,7 @@ public class RestTicketTypeController {
 
 	@Autowired
 	private EventRepository eventRepository;
-	
+
 	@GetMapping("/tickettypes")
 	public ResponseEntity<List<TicketType>> getAllTicketTypes() {
 		try {
@@ -54,7 +54,7 @@ public class RestTicketTypeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/tickettypes/{id}/event")
 	public ResponseEntity<Event> getEvent(@PathVariable("id") Long eventId) {
 		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(eventId);
@@ -91,9 +91,9 @@ public class RestTicketTypeController {
 			_ticketType.setPrice(ticketType.getPrice());
 			_ticketType.setTicketType(ticketType.getTicketType());
 			_ticketType.setDescription(ticketType.getDescription());
-			
-			return new ResponseEntity<>(ticketTypeRepository.save(_ticketType), HttpStatus.OK);		
-			} else {
+
+			return new ResponseEntity<>(ticketTypeRepository.save(_ticketType), HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
