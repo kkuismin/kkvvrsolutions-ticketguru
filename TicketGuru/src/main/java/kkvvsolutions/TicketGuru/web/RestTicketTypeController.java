@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.TicketType;
-import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
 import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
 
 @RestController
@@ -27,9 +27,6 @@ public class RestTicketTypeController {
 
 	@Autowired
 	private TicketTypeRepository ticketTypeRepository;
-
-	@Autowired
-	private EventRepository eventRepository;
 
 	@GetMapping("/tickettypes")
 	public ResponseEntity<List<TicketType>> getAllTicketTypes() {
@@ -72,7 +69,7 @@ public class RestTicketTypeController {
 	}
 
 	@PostMapping("/tickettypes")
-	public ResponseEntity<TicketType> createTicketType(@RequestBody TicketType ticketType) {
+	public ResponseEntity<TicketType> createTicketType(@Valid @RequestBody TicketType ticketType) {
 
 		try {
 			TicketType _ticketType = ticketTypeRepository.save(ticketType);

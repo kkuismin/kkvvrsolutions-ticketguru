@@ -40,7 +40,7 @@ public class Event {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event", fetch = FetchType.LAZY)
 	private List<Ticket> tickets = new ArrayList<>();
 
-	@NotNull
+	@NotNull(message = "Event name cannot be null")
 	@Size(min = 1, max = 100)
 	@Column(name = "name", nullable = false)
 	private String name;

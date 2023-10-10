@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -22,9 +23,12 @@ public class TicketType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "typeId", nullable = false, updatable = false)
     private Long typeId;
-    @NotNull
+
+    @NotNull(message = "Price cannot be null")
+    @Positive(message = "Price must be positive")
     private Double price;
-    @NotNull
+
+    @NotNull(message = "Ticket type cannot be null")
     @Size(min = 1, max = 100)
     private String ticketType;
 

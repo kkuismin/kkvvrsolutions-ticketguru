@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.Venue;
 import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
@@ -45,7 +46,7 @@ public class RestEventController {
 		}
 
 	}
-	
+
 	// Event by ID
 	@GetMapping("/events/{id}")
 	public ResponseEntity<Event> getEventById(@PathVariable("id") Long eventId) {
@@ -78,7 +79,7 @@ public class RestEventController {
 
 	// Create new Event
 	@PostMapping("/events")
-	public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+	public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) {
 
 		try {
 			Event _event = erepository.save(event);
@@ -106,8 +107,8 @@ public class RestEventController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // HTTP 404 Not Found
 		}
 	}
-	
-	// Delete Event by ID 
+
+	// Delete Event by ID
 	@DeleteMapping("/events/{id}")
 	public ResponseEntity<HttpStatus> deleteEvent(@PathVariable("id") Long eventId) {
 
