@@ -25,17 +25,17 @@ public class Venue {
 	@Column(name = "venueId", nullable = false, updatable = false)
 	private Long venueId;
 
-	@NotNull
+	@NotNull(message = "Name cannot be null")
 	@Size(min = 1, max = 100)
 	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@NotNull
+	@NotNull(message = "Address cannot be null")
 	@Size(min = 1, max = 100)
 	@Column(name = "address", nullable = false)
 	private String address;
 	
-	@NotNull
+	@NotNull(message = "City cannot be null")
 	@Size(min = 1, max = 100)
 	@Column(name = "city", nullable = false)
 	private String city;
