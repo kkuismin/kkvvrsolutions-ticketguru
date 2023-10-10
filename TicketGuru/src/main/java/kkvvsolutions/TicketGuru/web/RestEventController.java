@@ -91,7 +91,7 @@ public class RestEventController {
 
 	// Edit Event
 	@PutMapping("/events/{id}")
-	public ResponseEntity<Event> updateEvent(@PathVariable("id") Long eventId, @RequestBody Event event) {
+	public ResponseEntity<Event> updateEvent(@PathVariable("id") Long eventId, @Valid @RequestBody Event event) {
 
 		Optional<Event> eventData = erepository.findById(eventId);
 
