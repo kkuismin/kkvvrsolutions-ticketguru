@@ -110,7 +110,7 @@ public class RestTicketController {
 	}
 
 	@PostMapping("/tickets")
-	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
+	public ResponseEntity<Ticket> createTicket(@Valid @RequestBody Ticket ticket) {
 
 		try {
 			Ticket _ticket = trepository.save(ticket);
