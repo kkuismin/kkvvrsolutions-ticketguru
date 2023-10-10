@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
 import kkvvsolutions.TicketGuru.domain.Ticket;
 import kkvvsolutions.TicketGuru.domain.repository.SaleEventRepository;
@@ -64,7 +65,7 @@ public class RestSaleEventController {
 
 	@Transactional
 	@PostMapping("/sales")
-	public ResponseEntity<SaleEvent> createSaleEvent(@RequestBody SaleEvent saleEvent) {
+	public ResponseEntity<SaleEvent> createSaleEvent(@Valid @RequestBody SaleEvent saleEvent) {
 		try {
 			for (Ticket ticket : saleEvent.getTicketList()) {
 				ticket.setSaleEvent(saleEvent);
@@ -80,7 +81,7 @@ public class RestSaleEventController {
 
 	@PutMapping("/sales/{id}")
 	public ResponseEntity<SaleEvent> updateSaleEvent(@PathVariable("id") Long saleEvent_id,
-			@RequestBody SaleEvent saleEvent) {
+			@Valid @RequestBody SaleEvent saleEvent) {
 
 		Optional<SaleEvent> saleEventData = saleEventRepository.findById(saleEvent_id);
 
