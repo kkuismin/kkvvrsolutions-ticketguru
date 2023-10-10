@@ -81,7 +81,7 @@ public class RestTicketTypeController {
 
 	@PutMapping("/tickettypes/{id}")
 	public ResponseEntity<TicketType> updateTicketType(@PathVariable("id") Long typeId,
-			@RequestBody TicketType ticketType) {
+			@Valid @RequestBody TicketType ticketType) {
 		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(typeId);
 		if (ticketTypeData.isPresent()) {
 			TicketType _ticketType = ticketTypeData.get();
