@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kkvvsolutions.TicketGuru.domain.Event;
 import kkvvsolutions.TicketGuru.domain.SaleEvent;
 import kkvvsolutions.TicketGuru.domain.Ticket;
@@ -121,7 +122,7 @@ public class RestTicketController {
 	}
 
 	@PutMapping("/tickets/{id}")
-	public ResponseEntity<Ticket> updateTicket(@PathVariable("id") Long ticketId, @RequestBody Ticket ticket) {
+	public ResponseEntity<Ticket> updateTicket(@PathVariable("id") Long ticketId, @Valid @RequestBody Ticket ticket) {
 
 		Optional<Ticket> ticketData = trepository.findById(ticketId);
 
