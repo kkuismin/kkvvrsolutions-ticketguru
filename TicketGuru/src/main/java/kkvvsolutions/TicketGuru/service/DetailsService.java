@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import kkvvsolutions.TicketGuru.domain.User;
+import kkvvsolutions.TicketGuru.domain.repository.UserRepository;
+
 @Component
 public class DetailsService implements UserDetailsService {
 
@@ -23,7 +26,7 @@ public class DetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                AuthorityUtils.createAuthorityList(user.getRoles())
+                AuthorityUtils.createAuthorityList(user.getRole())
         );
     }
 }
