@@ -31,11 +31,11 @@ public class SaleEvent {
 	@NotNull
 	@Column(name = "saleDate", nullable = false)
 	private LocalDate saleDate;
-	
+
 	@NotNull
 	@Column(name = "saleTime", nullable = false)
 	private LocalTime saleTime;
-	
+
 	@NotNull
 	@Column(name = "amount", nullable = false)
 	private int amount;
