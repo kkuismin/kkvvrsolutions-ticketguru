@@ -14,11 +14,13 @@ import org.springframework.context.annotation.Bean;
 import kkvvsolutions.TicketGuru.domain.Event;
 
 import kkvvsolutions.TicketGuru.domain.TicketType;
+import kkvvsolutions.TicketGuru.domain.User;
 import kkvvsolutions.TicketGuru.domain.Venue;
 import kkvvsolutions.TicketGuru.domain.repository.EventRepository;
 import kkvvsolutions.TicketGuru.domain.repository.SaleEventRepository;
 import kkvvsolutions.TicketGuru.domain.repository.TicketRepository;
 import kkvvsolutions.TicketGuru.domain.repository.TicketTypeRepository;
+import kkvvsolutions.TicketGuru.domain.repository.UserRepository;
 import kkvvsolutions.TicketGuru.domain.repository.VenueRepository;
 
 @SpringBootApplication
@@ -34,7 +36,7 @@ public class TicketGuruApplication {
 	public CommandLineRunner initializeDatabase(VenueRepository venueRepository,
 			EventRepository eventRepository,
 			TicketTypeRepository ticketTypeRepository, SaleEventRepository saleEventRepository,
-			TicketRepository ticketRepository) {
+			TicketRepository ticketRepository, UserRepository userRepository) {
 		return args -> {
 			// 1. Create and Save Venue
 			Venue venue = new Venue("Stadium", "123 Street", "City", 5000);
@@ -53,6 +55,9 @@ public class TicketGuruApplication {
 			ticketTypeRepository.saveAll(Arrays.asList(studentTicketType, regularTicketType));
 
 			eventRepository.save(event);
+			
+			User user = new User("asd123", "12345", "ROLE_ADMIN");
+			user = userRepository.save(user);
 
 		};
 	};
