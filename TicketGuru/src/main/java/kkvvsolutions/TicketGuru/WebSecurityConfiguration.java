@@ -1,6 +1,6 @@
 package kkvvsolutions.TicketGuru;
 
-import kkvvsolutions.TicketGuru.service.DetailService;
+import kkvvsolutions.TicketGuru.service.DetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
