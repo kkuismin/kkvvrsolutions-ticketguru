@@ -1,16 +1,11 @@
 package kkvvsolutions.TicketGuru.domain;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "\"user\"")
@@ -21,32 +16,23 @@ public class AppUser {
 	@Column(name = "userId", nullable = false, updatable = false)
 	private Long userId;
 	
-	@NotNull(message = "Username cannot be null")
-	@Size(min = 1, max = 20)
 	@Column(name = "username", nullable = false)
 	private String username;
 	
-	@NotNull(message = "Password cannot be null")
-	@Size(min = 1, max = 20)
 	@Column(name = "password", nullable = false)
-	private String password;
+	private String passwordHash;
 	
-	@NotNull(message = "Role cannot be null")
-	@Size(min = 1, max = 20)
 	@Column(name = "role", nullable = false)
 	private String role;
-
-	@Transient
-	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	public AppUser() {
 		super();
 	}
 
-	public AppUser(String username, String password, String role) {
+	public AppUser(String username, String passwordHash, String role) {
 		super();
 		this.username = username;
-		this.password = password;
+		this.passwordHash = passwordHash;
 		this.role = role;
 	}
 
@@ -66,15 +52,13 @@ public class AppUser {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword(String password) {
-		this.password = passwordEncoder.encode(password);
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
-	
-	
 
 	public String getRole() {
 		return role;
@@ -86,7 +70,7 @@ public class AppUser {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+		return "User [userId=" + userId + ", username=" + username + ", password=" + passwordHash + ", role=" + role + "]";
 	}
 }
 

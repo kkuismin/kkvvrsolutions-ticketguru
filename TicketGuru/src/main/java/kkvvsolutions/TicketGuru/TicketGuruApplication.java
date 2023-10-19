@@ -56,8 +56,8 @@ public class TicketGuruApplication {
 
 			eventRepository.save(event);
 			
-			AppUser user = new AppUser("asd123", "12345", "ROLE_ADMIN");
-			user = userRepository.save(user);
+			AppUser user1 = new AppUser("admin", "$2a$10$bRnDm/nAWqHORRh.hA9R1Oqpm6pDQFeLCVvhxgvhONe42qj8bImyi", "ADMIN");
+			userRepository.save(user1);
 
 		};
 	};
