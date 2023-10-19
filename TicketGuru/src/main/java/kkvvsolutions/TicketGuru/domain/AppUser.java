@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "\"user\"")
-public class User {
+public class AppUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +39,11 @@ public class User {
 	@Transient
 	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
-	public User() {
+	public AppUser() {
 		super();
 	}
 
-	public User(String username, String password, String role) {
+	public AppUser(String username, String password, String role) {
 		super();
 		this.username = username;
 		this.password = password;

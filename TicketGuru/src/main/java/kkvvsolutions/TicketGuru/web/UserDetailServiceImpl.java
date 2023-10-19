@@ -7,22 +7,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import kkvvsolutions.TicketGuru.domain.User;
-import kkvvsolutions.TicketGuru.domain.repository.UserRepository;
+import kkvvsolutions.TicketGuru.domain.AppUser;
+import kkvvsolutions.TicketGuru.domain.repository.AppUserRepository;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService  {
-	private final UserRepository repository;
+	private final AppUserRepository repository;
 
 	@Autowired
-	public UserDetailServiceImpl(UserRepository userRepository) {
+	public UserDetailServiceImpl(AppUserRepository userRepository) {
 		this.repository = userRepository;
 	}
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {   
-    	User curruser = repository.findByUsername(username);
+    	AppUser curruser = repository.findByUsername(username);
         UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPassword(), 
         		AuthorityUtils.createAuthorityList(curruser.getRole()));
         return user;

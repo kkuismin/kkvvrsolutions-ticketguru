@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import kkvvsolutions.TicketGuru.domain.User;
-import kkvvsolutions.TicketGuru.domain.repository.UserRepository;
+import kkvvsolutions.TicketGuru.domain.AppUser;
+import kkvvsolutions.TicketGuru.domain.repository.AppUserRepository;
 
 @RestController
 @RequestMapping("/api")
-public class RestUserController {
+public class RestAppUserController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private AppUserRepository userRepository;
 	
 	@GetMapping("/users")
-	public ResponseEntity<List<User>> getAllUsers() {
+	public ResponseEntity<List<AppUser>> getAllUsers() {
 		try {
-			List<User> users = new ArrayList<>();
+			List<AppUser> users = new ArrayList<>();
 			userRepository.findAll().forEach(users::add);
 			if(users.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -42,8 +42,8 @@ public class RestUserController {
 	}
 	
 	@GetMapping("/users/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable("id") Long user_id) {
-		Optional<User> userData = userRepository.findById(user_id);
+	public ResponseEntity<AppUser> getUserById(@PathVariable("id") Long user_id) {
+		Optional<AppUser> userData = userRepository.findById(user_id);
 		if(userData.isPresent()) {
 			return new ResponseEntity<>(userData.get(), HttpStatus.OK);
 		} else {
@@ -52,10 +52,10 @@ public class RestUserController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+	public ResponseEntity<AppUser> createUser(@Valid @RequestBody AppUser user) {
 		try {
-			User _user = userRepository
-					.save(new User(user.getUsername(), user.getPassword(), user.getRole()));
+			AppUser _user = userRepository
+					.save(new AppUser(user.getUsername(), user.getPassword(), user.getRole()));
 			return new ResponseEntity<>(_user, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -63,10 +63,10 @@ public class RestUserController {
 	}
 	
 	@PutMapping("users/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable("id") Long user_id, @Valid @RequestBody User user) {
-		Optional<User> userData = userRepository.findById(user_id);
+	public ResponseEntity<AppUser> updateUser(@PathVariable("id") Long user_id, @Valid @RequestBody AppUser user) {
+		Optional<AppUser> userData = userRepository.findById(user_id);
 		if(userData.isPresent()) {
-			User _user = userData.get();
+			AppUser _user = userData.get();
 			_user.setUsername(user.getUsername());
 			_user.setPassword(user.getPassword());
 			_user.setRole(user.getRole());
