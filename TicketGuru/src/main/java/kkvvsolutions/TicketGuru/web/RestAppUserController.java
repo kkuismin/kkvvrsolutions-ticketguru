@@ -28,7 +28,7 @@ public class RestAppUserController {
 	private AppUserRepository userRepository;
 	
 	@GetMapping("/users")
-	public ResponseEntity<List<AppUser>> getAllUsers() {
+	public ResponseEntity<List<AppUser>> getAllAppUsers() {
 		try {
 			List<AppUser> users = new ArrayList<>();
 			userRepository.findAll().forEach(users::add);
@@ -42,7 +42,7 @@ public class RestAppUserController {
 	}
 	
 	@GetMapping("/users/{id}")
-	public ResponseEntity<AppUser> getUserById(@PathVariable("id") Long user_id) {
+	public ResponseEntity<AppUser> getAppUserById(@PathVariable("id") Long user_id) {
 		Optional<AppUser> userData = userRepository.findById(user_id);
 		if(userData.isPresent()) {
 			return new ResponseEntity<>(userData.get(), HttpStatus.OK);
@@ -52,7 +52,7 @@ public class RestAppUserController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<AppUser> createUser(@Valid @RequestBody AppUser user) {
+	public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser user) {
 		try {
 			AppUser _user = userRepository
 					.save(new AppUser(user.getUsername(), user.getPassword(), user.getRole()));
@@ -63,7 +63,7 @@ public class RestAppUserController {
 	}
 	
 	@PutMapping("users/{id}")
-	public ResponseEntity<AppUser> updateUser(@PathVariable("id") Long user_id, @Valid @RequestBody AppUser user) {
+	public ResponseEntity<AppUser> updateAppUser(@PathVariable("id") Long user_id, @Valid @RequestBody AppUser user) {
 		Optional<AppUser> userData = userRepository.findById(user_id);
 		if(userData.isPresent()) {
 			AppUser _user = userData.get();
@@ -78,7 +78,7 @@ public class RestAppUserController {
 	}
 	
 	@DeleteMapping("/users/{id}")
-	public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long user_id) {
+	public ResponseEntity<HttpStatus> deleteAppUser(@PathVariable("id") Long user_id) {
 		try {
 			userRepository.deleteById(user_id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
