@@ -7,19 +7,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import kkvvsolutions.TicketGuru.domain.User;
-import kkvvsolutions.TicketGuru.domain.repository.UserRepository;
+import kkvvsolutions.TicketGuru.domain.AppUser;
+import kkvvsolutions.TicketGuru.domain.repository.AppUserRepository;
 
 @Component
 public class DetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository urepository;
+    AppUserRepository urepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = urepository.findByUsername(username);
+        AppUser user = urepository.findByUsername(username);
         if (user == null){
             throw new UsernameNotFoundException(username + " was not found");
         }
