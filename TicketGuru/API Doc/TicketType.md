@@ -49,7 +49,7 @@
     "description": "Discount for students",
     "event": {},
     "ticketTypeId": 1
-},
+}
 ```
 
 - **POST**

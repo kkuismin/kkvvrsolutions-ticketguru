@@ -44,11 +44,11 @@
 
 ```
 {
-    "saleEventId": 1,
-    "ticketList": [],
-    "SaleDate": "2023-10-02",
-    "SaleTime": "16:34:00",
-    "amount": 30.0
+  "saleEventId": 1,
+  "ticketList": [],
+  "SaleDate": "2023-10-02",
+  "SaleTime": "16:34:00",
+  "amount": 30.0
 }
 ```
 
@@ -56,16 +56,16 @@
 
 ```
 {
-    "amount": 30.0
-    "ticketList": [
-      {
-        "event": {
-          "eventId": 1
-        },
-        "ticketType": {
-          "ticketTypeId": 1
-        }
+  "amount": 30.0,
+  "ticketList": [
+    {
+      "event": {
+        "eventId": 1
+      },
+      "ticketType": {
+        "ticketTypeId": 1
       }
-    ],
+    }
+  ]
 }
 ```

@@ -49,16 +49,6 @@
     "event": {},
     "ticketType": {},
     "saleEvent": {},
-    "barcode": "16980692908420002",
-}
-```
-
-- **POST**
-
-```
-{
-    "ticketId": 1,
-    "barcode": "1234",
-    "type": "adult"
+    "barcode": "16980692908420002"
 }
 ```

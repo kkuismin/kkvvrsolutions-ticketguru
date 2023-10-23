@@ -1,16 +1,16 @@
 # Venue
 
-* **URL**
-  
+- **URL**
+
   /api/venues
-  
+
   /api/venues/{id}
 
-* **Method:**
+- **Method:**
 
   `GET` /venues
-  
-  `GET` /venues/{id} 
+
+  `GET` /venues/{id}
 
   `POST` /venues
 
@@ -18,52 +18,54 @@
 
   `PUT` /venues/{id}
 
-*  **URL Params**
+- **URL Params**
 
-   `id` : id for Venue entity, a primary key
+  `id` : id for Venue entity, a primary key
 
-*  **Data Params**
+- **Data Params**
 
-   "name" : String
+  "name" : String
 
-   "address" : String
+  "address" : String
 
-   "city" : String
+  "city" : String
 
-   "capacity" : int
+  "capacity" : int
 
-*  **Success response**
+- **Success response**
 
-   * **Code:** 200 <br />
-     **Content:** `Venues or Venue`
+  - **Code:** 200 <br />
+    **Content:** `Venues or Venue`
 
-   * **Code** 201 <br />
-     **Content:** `Created Venue`
-  
-*  **Error Response:**
+  - **Code** 201 <br />
+    **Content:** `Created Venue`
 
-   * **Code:** 404 NOT_FOUND <br />
-     **Content:** `None`
+- **Error Response:**
 
-* **Sample Body:**
+  - **Code:** 404 NOT_FOUND <br />
+    **Content:** `None`
 
-* **GET**
+- **Sample Body:**
+
+- **GET**
+
 ```
 {
     "id": 1,
-    "name": "Nokia Arena"
+    "name": "Nokia Arena",
     "address": "Kansikatu 3",
-    "city": "Tampere"
+    "city": "Tampere",
     "capacity": "15000"
 }
 ```
 
-* **POST**
+- **POST**
+
 ```
 {
-    "name": "Nokia Arena"
+    "name": "Nokia Arena",
     "address": "Kansikatu 3",
-    "city": "Tampere"
+    "city": "Tampere",
     "capacity": "15000"
 }
 ```
