@@ -1,65 +1,71 @@
-**SaleEvent**
-----
+## **SaleEvent**
 
-* **URL**
+- **URL**
 
   /api/sales | /api/sales/{saleEventId}
 
-* **Method:**
-  
+- **Method:**
+
   `GET` /sales for all | /sales/{saleEventId} for single sale
-  
+
   `POST` /sales
-  
+
   `DELETE` /sales/{saleEventId}
-  
+
   `PUT` /sales/{saleEventId}
-  
-*  **URL Params**
 
-   `saleEventId`: id for SaleEvent entity, a primary key
+- **URL Params**
 
-* **Data Params**
+  `saleEventId`: id for SaleEvent entity, a primary key
+
+- **Data Params**
 
   All columns in table are nullable, none are required
-    "date": LocalDate
-    "time": LocalTime
-    "amount": double 
+  "date": LocalDate
+  "time": LocalTime
+  "amount": double
 
+- **Success Response:**
 
-
-* **Success Response:**
-  
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `All SaleEvents or SaleEvent`
 
     **Code:** 201 <br />
     **Content:** `Created SaleEvent`
- 
-* **Error Response:**
 
-  * **Code:** 404 NOT_FOUND <br />
+- **Error Response:**
+
+  - **Code:** 404 NOT_FOUND <br />
     **Content:** `None`
 
-* **Sample Body:**
+- **Sample Body:**
 
-* **GET**
+- **GET**
+
 ```
 {
-    "saleDateId": 1,
+    "saleEventId": 1,
+    "ticketList": [],
     "SaleDate": "2023-10-02",
     "SaleTime": "16:34:00",
     "amount": 30.0
 }
 ```
 
-* **POST**
+- **POST**
+
 ```
 {
-    "saleEventId": 1,
-    "ticketList": [],
-    "saleDate": "2023-10-02",
-    "saleTime": "16:34:00",
     "amount": 30.0
+    "ticketList": [
+      {
+        "event": {
+          "eventId": 1
+        },
+        "ticketType": {
+          "ticketTypeId": 1
+        }
+      }
+    ],
 }
 ```

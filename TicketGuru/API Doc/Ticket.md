@@ -1,10 +1,10 @@
 # Ticket
 
-* **URL**
+- **URL**
 
   /api/tickets | /api/tickets/{ticketId}
 
-* **Method:**
+- **Method:**
 
   `GET` /tickets for all | /tickets/{ticketId} for single ticket
 
@@ -14,44 +14,47 @@
 
   `PUT` /tickets/{ticketId}
 
-* **URL Params**
+- **URL Params**
 
   `ticketId`: id for Ticket entity, a primary key
 
-* **Data Params**
+- **Data Params**
 
   All columns in table are nullable, none are required
-  
-     "barcode": String
 
-     "type": String
+  "barcode": String
 
-* **Success Response:**
+  "type": String
 
-  * **Code:** 200 <br />
+- **Success Response:**
+
+  - **Code:** 200 <br />
     **Content:** `All Tickets or Ticket`
 
-  * **Code** 201 <br />
+  - **Code** 201 <br />
     **Content:** `Created Ticket`
-  
-* **Error Response:**
 
-  * **Code:** 404 NOT_FOUND <br />
+- **Error Response:**
+
+  - **Code:** 404 NOT_FOUND <br />
     **Content:** `None`
-  
-* **Sample Body:**
 
-* **GET**
+- **Sample Body:**
+
+- **GET**
+
 ```
 {
     "ticketId": 1,
-    "event": {}
-    "barcode": "1234",
-    "type": "adult"
+    "event": {},
+    "ticketType": {},
+    "saleEvent": {},
+    "barcode": "16980692908420002",
 }
 ```
 
-* **POST**
+- **POST**
+
 ```
 {
     "ticketId": 1,

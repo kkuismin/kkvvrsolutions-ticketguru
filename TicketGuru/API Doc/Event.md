@@ -6,7 +6,7 @@ List every single event in the database.
 
 **Method** : `GET`
 
-**Authorization** : *NO*
+**Authorization** : _NO_
 
 **Permissions** : `NONE`
 
@@ -20,12 +20,11 @@ List a singular event.
 
 **Method** : `GET`
 
-**Authorization** : *NO*
+**Authorization** : _NO_
 
 **Permissions** : `NONE`
 
 **Data** : `{}`
-
 
 ## Success
 
@@ -37,10 +36,10 @@ List a singular event.
 
 ```json
 {
-	"event_id": 1,
-	"name": "Funny things!",
-	"date": "September 6th",
-	"time": "19:15"
+  "event_id": 1,
+  "name": "Funny things!",
+  "date": "2023-12-20",
+  "time": "19:15"
 }
 ```
 
@@ -56,7 +55,6 @@ List a singular event.
 
 Not final. Proof of concept and the first iteration.
 
-
 # Post an event
 
 Post a singular event with its contents.
@@ -65,7 +63,7 @@ Post a singular event with its contents.
 
 **Method** : `POST`
 
-**Authorization** : *NO*
+**Authorization** : _NO_
 
 **Permissions** : `NONE`
 
@@ -75,9 +73,9 @@ Provide the name, date, and time of the event.
 
 ```json
 {
-	"name": "Hooplah!",
-	"date": "July 3rd",
-	"time": "19:15"
+  "name": "Hooplah!",
+  "date": "2023-12-20",
+  "time": "19:15"
 }
 ```
 
@@ -91,10 +89,10 @@ Provide the name, date, and time of the event.
 
 ```json
 {
-	"event_id": 5,
-	"name": "Hooplah!",
-	"date": "July 3rd",
-	"time": "19:15"
+  "event_id": 5,
+  "name": "Hooplah!",
+  "date": "2023-12-20",
+  "time": "19:15"
 }
 ```
 
@@ -110,7 +108,6 @@ Provide the name, date, and time of the event.
 
 Deletion currently has no real error outside of a faulty body composition. Fields can be null at the moment.
 
-
 # Update an event.
 
 Update the fields within an event.
@@ -119,7 +116,7 @@ Update the fields within an event.
 
 **Method** : `POST`
 
-**Authorization** : *NO*
+**Authorization** : _NO_
 
 **Permissions** : `NONE`
 
@@ -129,9 +126,9 @@ Provide the name, date, and time of the event.
 
 ```json
 {
-	"name": "Hooplah!",
-	"date": "July 3rd",
-	"time": "19:15"
+  "name": "Hooplah!",
+  "date": "2023-12-20",
+  "time": "19:15"
 }
 ```
 
@@ -145,10 +142,10 @@ Provide the name, date, and time of the event.
 
 ```json
 {
-	"event_id": 5,
-	"name": "Hooplah!",
-	"date": "July 3rd",
-	"time": "19:15"
+  "event_id": 5,
+  "name": "Hooplah!",
+  "date": "2023-12-20",
+  "time": "19:15"
 }
 ```
 
@@ -164,8 +161,6 @@ Provide the name, date, and time of the event.
 
 Same notes as deletion. PUT has no real error codes outside of a bad request at the moment. Fields can be null if left omitted.
 
-
-
 # Delete an event
 
 Delete a specific event or delete all events within the database.
@@ -174,7 +169,7 @@ Delete a specific event or delete all events within the database.
 
 **Method** : `DELETE`
 
-**Authorization** : *NO*
+**Authorization** : _NO_
 
 **Permissions** : `NONE`
 

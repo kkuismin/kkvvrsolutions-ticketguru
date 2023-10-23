@@ -44,19 +44,23 @@
 
 ```
 {
-    "typeId": 1,
-    "price": 50,
-    "customerType": "Opiskelija",
-    "description": "Alennus opiskelijoille"
-}
+    "price": 15.0,
+    "ticketType": "Student",
+    "description": "Discount for students",
+    "event": {},
+    "ticketTypeId": 1
+},
 ```
 
 - **POST**
 
 ```
 {
-    "price": 10,
-    "customerType": "Työtön",
-    "description": "Alennus työttömille"
+  "price": 5,
+  "ticketType": "Children",
+  "description": "Childen under 15",
+  "event": {
+     "eventId": 1
+  }
 }
 ```
