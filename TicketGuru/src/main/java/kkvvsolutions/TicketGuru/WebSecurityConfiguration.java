@@ -1,30 +1,40 @@
 package kkvvsolutions.TicketGuru;
 
-import kkvvsolutions.TicketGuru.service.DetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import 
-org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import kkvvsolutions.TicketGuru.web.UserDetailServiceImpl;
 
 @Configuration
-public class WebSecurityConfiguration  {
+@EnableMethodSecurity(securedEnabled = true)
+public class WebSecurityConfiguration {
 	
 	@Autowired
-	DetailsService detailsService;
+	private UserDetailServiceImpl userDetailsService;
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests(authorize -> {
+			authorize.anyRequest().authenticated();
+		}).formLogin(Customizer.withDefaults()) 
+				.csrf(AbstractHttpConfigurer::disable) 
+				.httpBasic(Customizer.withDefaults()) 
+				.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())); 
+
+		return http.build();
+	}
 	
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-}
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception 
-{
-        http.authorizeHttpRequests((authz)->authz.anyRequest().permitAll());
-        return http.build();
-}
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+	}
+	
 }

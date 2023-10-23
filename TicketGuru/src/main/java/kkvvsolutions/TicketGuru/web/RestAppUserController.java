@@ -55,7 +55,7 @@ public class RestAppUserController {
 	public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser user) {
 		try {
 			AppUser _user = userRepository
-					.save(new AppUser(user.getUsername(), user.getPassword(), user.getRole()));
+					.save(new AppUser(user.getUsername(), user.getPasswordHash(), user.getRole()));
 			return new ResponseEntity<>(_user, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -68,7 +68,7 @@ public class RestAppUserController {
 		if(userData.isPresent()) {
 			AppUser _user = userData.get();
 			_user.setUsername(user.getUsername());
-			_user.setPassword(user.getPassword());
+			_user.setPasswordHash(user.getPasswordHash());
 			_user.setRole(user.getRole());
 			
 			return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
