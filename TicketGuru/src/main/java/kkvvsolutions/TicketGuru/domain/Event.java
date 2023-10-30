@@ -25,11 +25,11 @@ public class Event {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "eventId", nullable = false, updatable = false)
+	@Column(name = "eventid", nullable = false, updatable = false)
 	private long eventId;
 
 	@ManyToOne
-	@JoinColumn(name = "venueId")
+	@JoinColumn(name = "venueid")
 	private Venue venue;
 
 	@JsonIgnore

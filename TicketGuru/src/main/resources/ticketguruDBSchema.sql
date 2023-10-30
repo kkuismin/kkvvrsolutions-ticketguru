@@ -9,55 +9,55 @@ DROP TABLE IF EXISTS saleEvent;
 SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE appuser
-(userId BIGINT NOT NULL AUTO_INCREMENT
+(userid BIGINT NOT NULL AUTO_INCREMENT
 , username VARCHAR(100)
 , password VARCHAR(100)
 , role VARCHAR(100)
-, PRIMARY KEY(userId)
+, PRIMARY KEY(userid)
 );
 
 CREATE TABLE venue
-(venueId BIGINT NOT NULL AUTO_INCREMENT
+(venueid BIGINT NOT NULL AUTO_INCREMENT
 , name VARCHAR(100) NOT NULL
 , address VARCHAR(100) NOT NULL
 , city VARCHAR(100) NOT NULL
 , capacity INTEGER
-, PRIMARY KEY(venueId)
+, PRIMARY KEY(venueid)
 );
 
 CREATE TABLE event
-(eventId BIGINT NOT NULL AUTO_INCREMENT
+(eventid BIGINT NOT NULL AUTO_INCREMENT
 , name VARCHAR(100) NOT NULL
 , date DATE
 , time TIME
-, FOREIGN KEY (venueId) REFERENCES venue(venueId)
-, PRIMARY KEY(eventId)
+, FOREIGN KEY (venueid) REFERENCES venue(venueid)
+, PRIMARY KEY(eventid)
 );
 
-CREATE TABLE ticketType
-(typeId BIGINT NOT NULL AUTO_INCREMENT
+CREATE TABLE tickettype
+(typeid BIGINT NOT NULL AUTO_INCREMENT
 , price DOUBLE NOT NULL
-, ticketType VARCHAR(100) NOT NULL
+, tickettype VARCHAR(100) NOT NULL
 , description VARCHAR(100)
-, FOREIGN KEY (eventId) REFERENCES event(eventId)
-, PRIMARY KEY(typeId)
+, FOREIGN KEY (eventid) REFERENCES event(eventid)
+, PRIMARY KEY(typeid)
 );
 
-CREATE TABLE saleEvent
-(saleEventId BIGINT NOT NULL AUTO_INCREMENT
-, saleDate date NOT NULL
-, saleTime time NOT NULL
+CREATE TABLE saleevent
+(saleeventid BIGINT NOT NULL AUTO_INCREMENT
+, saledate date NOT NULL
+, saletime time NOT NULL
 , amount INT NOT NULL
-, PRIMARY KEY(saleEventId)
+, PRIMARY KEY(saleeventid)
 );
 
 CREATE TABLE ticket
-(ticketId BIGINT NOT NULL AUTO_INCREMENT
+(ticketid BIGINT NOT NULL AUTO_INCREMENT
 , barcode VARCHAR(100)
-, FOREIGN KEY (eventId) REFERENCES event(eventId)
-, FOREIGN KEY (typeId) REFERENCES ticketType(typeId)
-, FOREIGN KEY (saleEventId) REFERENCES saleEvent(saleEventId)
-, PRIMARY KEY(ticketId)
+, FOREIGN KEY (eventid) REFERENCES event(eventid)
+, FOREIGN KEY (typeid) REFERENCES tickettype(typeid)
+, FOREIGN KEY (saleeventid) REFERENCES saleevent(saleeventid)
+, PRIMARY KEY(ticketid)
 );
 
 INSERT INTO appuser (username, password, role)
@@ -66,16 +66,16 @@ VALUES ('admin', '$2a$10$bRnDm/nAWqHORRh.hA9R1Oqpm6pDQFeLCVvhxgvhONe42qj8bImyi',
 INSERT INTO venue (name, address, city, capacity)
 VALUES ('Stadium', '123 Street', 'City', 5000);
 
-INSERT INTO event (venueId, name, date, time)
+INSERT INTO event (venueid, name, date, time)
 VALUES (1, 'Concert', 2023-10-20, 19:30);
 
-INSERT INTO ticketType (price, ticketType, description, eventId)
+INSERT INTO ticketType (price, tickettype, description, eventid)
 VALUES (15.00, 'Student', 'Discount for students', 1), 
 (25.00, 'Regular', 'Standard price', 1);
 
 SELECT * FROM appuser;
 SELECT * FROM venue;
 SELECT * FROM event;
-SELECT * FROM ticketType;
+SELECT * FROM tickettype;
 SELECT * FROM ticket;
 SELECT * FROM saleEvent;

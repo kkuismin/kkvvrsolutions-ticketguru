@@ -22,7 +22,7 @@ public class Venue {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "venueId", nullable = false, updatable = false)
+	@Column(name = "venueid", nullable = false, updatable = false)
 	private Long venueId;
 
 	@NotNull(message = "Name cannot be null")

@@ -13,7 +13,7 @@ public class AppUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userId", nullable = false, updatable = false)
+	@Column(name = "userid", nullable = false, updatable = false)
 	private Long userId;
 	
 	@Column(name = "username", nullable = false)

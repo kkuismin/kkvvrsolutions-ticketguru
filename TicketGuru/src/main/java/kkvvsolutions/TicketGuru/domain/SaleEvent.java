@@ -15,26 +15,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "saleevent")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "saleEventId")
 public class SaleEvent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "saleeventid", nullable = false, updatable = false)
 	private Long saleEventId;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "saleEvent")
 	private List<Ticket> ticketList = new ArrayList<>();
 
 	@NotNull
-	@Column(name = "saleDate", nullable = false)
+	@Column(name = "saledate", nullable = false)
 	private LocalDate saleDate;
 
 	@NotNull
-	@Column(name = "saleTime", nullable = false)
+	@Column(name = "saletime", nullable = false)
 	private LocalTime saleTime;
 
 	@NotNull
