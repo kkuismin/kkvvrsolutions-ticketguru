@@ -8,56 +8,61 @@ DROP TABLE IF EXISTS saleevent;
 
 SET FOREIGN_KEY_CHECKS=1;
 
-CREATE TABLE appuser
-(userid BIGINT NOT NULL AUTO_INCREMENT
-, username VARCHAR(100)
-, password VARCHAR(100)
-, role VARCHAR(100)
-, PRIMARY KEY(userid)
+CREATE TABLE appuser(
+userid BIGINT NOT NULL AUTO_INCREMENT, 
+username VARCHAR(100), 
+password VARCHAR(100), 
+role VARCHAR(100), 
+PRIMARY KEY(userid)
 );
 
-CREATE TABLE venue
-(venueid BIGINT NOT NULL AUTO_INCREMENT
-, name VARCHAR(100) NOT NULL
-, address VARCHAR(100) NOT NULL
-, city VARCHAR(100) NOT NULL
-, capacity INTEGER
-, PRIMARY KEY(venueid)
+CREATE TABLE venue(
+venueid BIGINT NOT NULL AUTO_INCREMENT, 
+name VARCHAR(100) NOT NULL, 
+address VARCHAR(100) NOT NULL, 
+city VARCHAR(100) NOT NULL, 
+capacity INTEGER, 
+PRIMARY KEY(venueid)
 );
 
-CREATE TABLE event
-(eventid BIGINT NOT NULL AUTO_INCREMENT
-, name VARCHAR(100) NOT NULL
-, date DATE
-, time TIME
-, FOREIGN KEY (venueid) REFERENCES venue(venueid)
-, PRIMARY KEY(eventid)
+CREATE TABLE event(
+eventid BIGINT NOT NULL AUTO_INCREMENT, 
+name VARCHAR(100) NOT NULL, 
+date DATE, 
+time TIME, 
+venueid BIGINT NOT NULL, 
+FOREIGN KEY (venueid) REFERENCES venue(venueid), 
+PRIMARY KEY(eventid)
 );
 
-CREATE TABLE tickettype
-(typeid BIGINT NOT NULL AUTO_INCREMENT
-, price DOUBLE NOT NULL
-, tickettype VARCHAR(100) NOT NULL
-, description VARCHAR(100)
-, FOREIGN KEY (eventid) REFERENCES event(eventid)
-, PRIMARY KEY(typeid)
+CREATE TABLE tickettype(
+typeid BIGINT NOT NULL AUTO_INCREMENT, 
+price DOUBLE NOT NULL, 
+tickettype VARCHAR(100) NOT NULL, 
+description VARCHAR(100), 
+eventid BIGINT NOT NULL, 
+FOREIGN KEY (eventid) REFERENCES event(eventid), 
+PRIMARY KEY(typeid)
 );
 
-CREATE TABLE saleevent
-(saleeventid BIGINT NOT NULL AUTO_INCREMENT
-, saledate date NOT NULL
-, saletime time NOT NULL
-, amount INT NOT NULL
-, PRIMARY KEY(saleeventid)
+CREATE TABLE saleevent(
+saleeventid BIGINT NOT NULL AUTO_INCREMENT, 
+saledate date NOT NULL, 
+saletime time NOT NULL, 
+amount INT NOT NULL, 
+PRIMARY KEY(saleeventid)
 );
 
-CREATE TABLE ticket
-(ticketid BIGINT NOT NULL AUTO_INCREMENT
-, barcode VARCHAR(100)
-, FOREIGN KEY (eventid) REFERENCES event(eventid)
-, FOREIGN KEY (typeid) REFERENCES tickettype(typeid)
-, FOREIGN KEY (saleeventid) REFERENCES saleevent(saleeventid)
-, PRIMARY KEY(ticketid)
+CREATE TABLE ticket(
+ticketid BIGINT NOT NULL AUTO_INCREMENT, 
+barcode VARCHAR(100), 
+eventid BIGINT NOT NULL, 
+typeid BIGINT NOT NULL, 
+saleeventid BIGINT NOT NULL, 
+FOREIGN KEY (eventid) REFERENCES event(eventid), 
+FOREIGN KEY (typeid) REFERENCES tickettype(typeid), 
+FOREIGN KEY (saleeventid) REFERENCES saleevent(saleeventid), 
+PRIMARY KEY(ticketid)
 );
 
 INSERT INTO appuser (username, password, role)
