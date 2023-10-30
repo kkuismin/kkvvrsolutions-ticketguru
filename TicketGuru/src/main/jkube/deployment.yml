@@ -7,16 +7,16 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: database-user
-                  name: mysql-secret
+                  name: mysql
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: database-password
-                  name: mysql-secret
+                  name: mysql
             - name: MYSQL_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database-name
-                  name: mysql-secret
+                  name: mysql
             - name: SPRING_PROFILES_ACTIVE
               value: rahti

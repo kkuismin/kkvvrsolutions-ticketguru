@@ -61,6 +61,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jkube</groupId>
+			<artifactId>openshift-maven-plugin</artifactId>
+			<version>1.14.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -72,6 +81,7 @@
 			<plugin>
 				<groupId>org.eclipse.jkube</groupId>
 				<artifactId>openshift-maven-plugin</artifactId>
+				<version>1.14.0</version>
 			</plugin>
 		</plugins>
 	</build>
