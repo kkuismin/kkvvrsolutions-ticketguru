@@ -51,10 +51,10 @@ public class TicketGuruApplication {
 			// TicketType regularTicketType = new TicketType(25.00, "Regular", "Standard price", event);
 
 			// Save TicketTypes to the database
-			event.getTicketTypes().addAll(Arrays.asList(studentTicketType, regularTicketType));
-			ticketTypeRepository.saveAll(Arrays.asList(studentTicketType, regularTicketType));
+			// event.getTicketTypes().addAll(Arrays.asList(studentTicketType, regularTicketType));
+			// ticketTypeRepository.saveAll(Arrays.asList(studentTicketType, regularTicketType));
 
-			eventRepository.save(event);
+			// eventRepository.save(event);
 			
 			// AppUser user1 = new AppUser("admin", "$2a$10$bRnDm/nAWqHORRh.hA9R1Oqpm6pDQFeLCVvhxgvhONe42qj8bImyi", "ADMIN");
 			// userRepository.save(user1);
