@@ -38,11 +38,11 @@ public class TicketType {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "eventid")
+    @JoinColumn(name = "eventId")
     private Event event;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tickettype")
+    @OneToMany(mappedBy = "ticketType")
     private List<Ticket> tickets;
 
     public TicketType() {
