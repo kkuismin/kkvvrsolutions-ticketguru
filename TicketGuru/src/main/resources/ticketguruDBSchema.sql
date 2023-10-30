@@ -2,9 +2,9 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS appuser;
 DROP TABLE IF EXISTS venue;
 DROP TABLE IF EXISTS event;
-DROP TABLE IF EXISTS ticketType;
+DROP TABLE IF EXISTS tickettype;
 DROP TABLE IF EXISTS ticket;
-DROP TABLE IF EXISTS saleEvent;
+DROP TABLE IF EXISTS saleevent;
 
 SET FOREIGN_KEY_CHECKS=1;
 
@@ -69,7 +69,7 @@ VALUES ('Stadium', '123 Street', 'City', 5000);
 INSERT INTO event (venueid, name, date, time)
 VALUES (1, 'Concert', 2023-10-20, 19:30);
 
-INSERT INTO ticketType (price, tickettype, description, eventid)
+INSERT INTO tickettype (price, tickettype, description, eventid)
 VALUES (15.00, 'Student', 'Discount for students', 1), 
 (25.00, 'Regular', 'Standard price', 1);
 
@@ -78,4 +78,4 @@ SELECT * FROM venue;
 SELECT * FROM event;
 SELECT * FROM tickettype;
 SELECT * FROM ticket;
-SELECT * FROM saleEvent;
+SELECT * FROM saleevent;
