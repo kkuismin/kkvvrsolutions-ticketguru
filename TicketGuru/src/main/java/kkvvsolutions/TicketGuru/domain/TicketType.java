@@ -42,7 +42,7 @@ public class TicketType {
     private Event event;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tickettype")
+    @OneToMany(mappedBy = "ticketType")
     private List<Ticket> tickets;
 
     public TicketType() {

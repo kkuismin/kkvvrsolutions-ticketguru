@@ -36,5 +36,4 @@ public class WebSecurityConfiguration {
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
                 auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
         }
-
 }

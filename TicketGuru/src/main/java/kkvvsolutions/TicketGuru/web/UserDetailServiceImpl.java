@@ -11,7 +11,7 @@ import kkvvsolutions.TicketGuru.domain.AppUser;
 import kkvvsolutions.TicketGuru.domain.repository.AppUserRepository;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService  {
+public class UserDetailServiceImpl implements UserDetailsService {
 	private final AppUserRepository repository;
 
 	@Autowired
@@ -19,13 +19,11 @@ public class UserDetailServiceImpl implements UserDetailsService  {
 		this.repository = userRepository;
 	}
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
-    {   
-    	AppUser curruser = repository.findByUsername(username);
-        UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPasswordHash(), 
-        		AuthorityUtils.createAuthorityList(curruser.getRole()));
-        return user;
-    }   
-} 
-
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		AppUser curruser = repository.findByUsername(username);
+		UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPasswordHash(),
+				AuthorityUtils.createAuthorityList(curruser.getRole().toString()));
+		return user;
+	}
+}
