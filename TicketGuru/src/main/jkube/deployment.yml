@@ -1,0 +1,22 @@
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: database-user
+                  name: mysql-secret
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: database-password
+                  name: mysql-secret
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: database-name
+                  name: mysql-secret
+            - name: SPRING_PROFILES_ACTIVE
+              value: rahti
