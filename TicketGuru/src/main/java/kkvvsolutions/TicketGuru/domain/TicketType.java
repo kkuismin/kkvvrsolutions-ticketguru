@@ -12,16 +12,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "tickettype")
 public class TicketType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "typeId", nullable = false, updatable = false)
+    @Column(name = "typeid", nullable = false, updatable = false)
     private Long typeId;
 
     @NotNull(message = "Price cannot be null")
@@ -36,7 +38,7 @@ public class TicketType {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "eventId")
+    @JoinColumn(name = "eventid")
     private Event event;
 
     @JsonIgnore

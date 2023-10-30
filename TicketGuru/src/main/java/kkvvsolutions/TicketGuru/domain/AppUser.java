@@ -1,35 +1,31 @@
 package kkvvsolutions.TicketGuru.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "appuser")
 public class AppUser {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userId", nullable = false, updatable = false)
+	@Column(name = "userid", nullable = false, updatable = false)
 	private Long userId;
-	
+
 	@Column(name = "username", nullable = false)
 	private String username;
-	
+
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
-	
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
-	private String role;
-	
+	private UserRole role;
+
 	public AppUser() {
 		super();
 	}
 
-	public AppUser(String username, String passwordHash, String role) {
+	public AppUser(String username, String passwordHash, UserRole role) {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
@@ -60,18 +56,17 @@ public class AppUser {
 		this.passwordHash = passwordHash;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + passwordHash + ", role=" + role + "]";
+		return "User [userId=" + userId + ", username=" + username + ", password=" + passwordHash + ", role=" + role
+				+ "]";
 	}
 }
-
-	

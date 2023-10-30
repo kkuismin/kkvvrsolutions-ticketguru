@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,18 +19,19 @@ public class Ticket {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ticketid", nullable = false, updatable = false)
 	private Long ticketId;
 
 	@ManyToOne
-	@JoinColumn(name = "eventId")
+	@JoinColumn(name = "eventid")
 	private Event event;
 
 	@ManyToOne
-	@JoinColumn(name = "ticketTypeId")
+	@JoinColumn(name = "tickettypeid")
 	private TicketType ticketType;
 
 	@ManyToOne
-	@JoinColumn(name = "saleEventId")
+	@JoinColumn(name = "saleeventid")
 	private SaleEvent saleEvent;
 
 	private String barcode;
