@@ -17,15 +17,14 @@ public class AppUser {
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
 
-	@Enumerated(EnumType.STRING)
 	@Column(name = "role", nullable = false)
-	private UserRole role;
+	private String role;
 
 	public AppUser() {
 		super();
 	}
 
-	public AppUser(String username, String passwordHash, UserRole role) {
+	public AppUser(String username, String passwordHash, String role) {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
@@ -56,11 +55,11 @@ public class AppUser {
 		this.passwordHash = passwordHash;
 	}
 
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

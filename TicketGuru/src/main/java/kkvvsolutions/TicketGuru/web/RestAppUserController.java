@@ -23,16 +23,16 @@ import kkvvsolutions.TicketGuru.domain.repository.AppUserRepository;
 @RestController
 @RequestMapping("/api")
 public class RestAppUserController {
-	
+
 	@Autowired
 	private AppUserRepository userRepository;
-	
+
 	@GetMapping("/users")
 	public ResponseEntity<List<AppUser>> getAllAppUsers() {
 		try {
 			List<AppUser> users = new ArrayList<>();
 			userRepository.findAll().forEach(users::add);
-			if(users.isEmpty()) {
+			if (users.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 			return new ResponseEntity<>(users, HttpStatus.OK);
@@ -40,19 +40,22 @@ public class RestAppUserController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping("/users/{id}")
 	public ResponseEntity<AppUser> getAppUserById(@PathVariable("id") Long user_id) {
 		Optional<AppUser> userData = userRepository.findById(user_id);
-		if(userData.isPresent()) {
+		if (userData.isPresent()) {
 			return new ResponseEntity<>(userData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping("/users")
 	public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser user) {
+		if (!isValidRole(user.getRole())) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		try {
 			AppUser _user = userRepository
 					.save(new AppUser(user.getUsername(), user.getPasswordHash(), user.getRole()));
@@ -61,22 +64,25 @@ public class RestAppUserController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PutMapping("users/{id}")
 	public ResponseEntity<AppUser> updateAppUser(@PathVariable("id") Long user_id, @Valid @RequestBody AppUser user) {
+		if (!isValidRole(user.getRole())) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		Optional<AppUser> userData = userRepository.findById(user_id);
-		if(userData.isPresent()) {
+		if (userData.isPresent()) {
 			AppUser _user = userData.get();
 			_user.setUsername(user.getUsername());
 			_user.setPasswordHash(user.getPasswordHash());
 			_user.setRole(user.getRole());
-			
+
 			return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@DeleteMapping("/users/{id}")
 	public ResponseEntity<HttpStatus> deleteAppUser(@PathVariable("id") Long user_id) {
 		try {
@@ -85,5 +91,9 @@ public class RestAppUserController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	private boolean isValidRole(String role) {
+		return "ADMIN".equals(role) || "TICKETSELLER".equals(role);
 	}
 }
