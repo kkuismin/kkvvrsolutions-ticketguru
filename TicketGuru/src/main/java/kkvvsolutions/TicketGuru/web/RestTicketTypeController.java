@@ -86,7 +86,7 @@ public class RestTicketTypeController {
 		if (ticketTypeData.isPresent()) {
 			TicketType _ticketType = ticketTypeData.get();
 			_ticketType.setPrice(ticketType.getPrice());
-			_ticketType.setTicketType(ticketType.getTicketType());
+			_ticketType.setTicketName(ticketType.getTicketName());
 			_ticketType.setDescription(ticketType.getDescription());
 
 			return new ResponseEntity<>(ticketTypeRepository.save(_ticketType), HttpStatus.OK);

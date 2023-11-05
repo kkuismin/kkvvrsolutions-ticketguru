@@ -23,16 +23,17 @@ public class TicketType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "typeid", nullable = false, updatable = false)
-    private Long typeId;
+    @Column(name = "tickettypeid", nullable = false, updatable = false)
+    private Long ticketTypeId;
 
     @NotNull(message = "Price cannot be null")
     @Positive(message = "Price must be positive")
     private Double price;
 
-    @NotNull(message = "Ticket type cannot be null")
+    @NotNull(message = "Ticket name cannot be null")
     @Size(min = 1, max = 100)
-    private String ticketType;
+    @Column(name = "ticketname")
+    private String ticketName;
 
     @Size(min = 1, max = 100)
     private String description;
@@ -49,21 +50,20 @@ public class TicketType {
         super();
     }
 
-    public TicketType(Double price, String ticketType, String description, Event event) {
+    public TicketType(Double price, String ticketName, String description, Event event) {
         super();
         this.event = event;
         this.price = price;
-        this.ticketType = ticketType;
+        this.ticketName = ticketName;
         this.description = description;
-        this.event = event;
     }
 
     public Long getTicketTypeId() {
-        return typeId;
+        return ticketTypeId;
     }
 
-    public void setTicketTypeId(Long typeId) {
-        this.typeId = typeId;
+    public void setTicketTypeId(Long ticketTypeId) {
+        this.ticketTypeId = ticketTypeId;
     }
 
     public Double getPrice() {
@@ -74,12 +74,12 @@ public class TicketType {
         this.price = price;
     }
 
-    public String getTicketType() {
-        return ticketType;
+    public String getTicketName() {
+        return ticketName;
     }
 
-    public void setTicketType(String ticketType) {
-        this.ticketType = ticketType;
+    public void setTicketName(String ticketName) {
+        this.ticketName = ticketName;
     }
 
     public String getDescription() {
@@ -100,7 +100,8 @@ public class TicketType {
 
     @Override
     public String toString() {
-        return "TicketType [typeId=" + typeId + ", price=" + price + ", ticketType=" + ticketType + ", description="
+        return "TicketType [ticketTypeId=" + ticketTypeId + ", price=" + price + ", ticketName=" + ticketName
+                + ", description="
                 + description + ", event=" + event + ", tickets=" + tickets + "]";
     }
 }

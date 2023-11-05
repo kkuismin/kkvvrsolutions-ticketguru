@@ -33,10 +33,10 @@ public class WebSecurityConfiguration {
                                                         .hasAnyAuthority("ADMIN", "TICKETSELLER")
                                                         .requestMatchers(new AntPathRequestMatcher("/api/sales/**",
                                                                         HttpMethod.POST.name()))
-                                                        .hasAuthority("TICKETSELLER")
+                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
                                                         .requestMatchers(new AntPathRequestMatcher("/api/sales/**",
                                                                         HttpMethod.DELETE.name()))
-                                                        .hasAuthority("TICKETSELLER")
+                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
                                                         .anyRequest().authenticated();
                                 })
                                 .formLogin(Customizer.withDefaults())

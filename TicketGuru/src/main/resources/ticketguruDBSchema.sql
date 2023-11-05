@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS ticketgurudb;
+USE ticketgurudb;
+
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS appuser;
 DROP TABLE IF EXISTS venue;
@@ -36,13 +39,13 @@ PRIMARY KEY(eventid)
 );
 
 CREATE TABLE tickettype(
-typeid BIGINT NOT NULL AUTO_INCREMENT, 
+tickettypeid BIGINT NOT NULL AUTO_INCREMENT, 
 price DOUBLE NOT NULL, 
-tickettype VARCHAR(100) NOT NULL, 
+ticketname VARCHAR(100) NOT NULL, 
 description VARCHAR(100), 
 eventid BIGINT NOT NULL, 
 FOREIGN KEY (eventid) REFERENCES event(eventid), 
-PRIMARY KEY(typeid)
+PRIMARY KEY(tickettypeid)
 );
 
 CREATE TABLE saleevent(
@@ -57,10 +60,10 @@ CREATE TABLE ticket(
 ticketid BIGINT NOT NULL AUTO_INCREMENT, 
 barcode VARCHAR(100), 
 eventid BIGINT NOT NULL, 
-typeid BIGINT NOT NULL, 
+tickettypeid BIGINT NOT NULL, 
 saleeventid BIGINT NOT NULL, 
 FOREIGN KEY (eventid) REFERENCES event(eventid), 
-FOREIGN KEY (typeid) REFERENCES tickettype(typeid), 
+FOREIGN KEY (tickettypeid) REFERENCES tickettype(tickettypeid), 
 FOREIGN KEY (saleeventid) REFERENCES saleevent(saleeventid), 
 PRIMARY KEY(ticketid)
 );
@@ -72,9 +75,9 @@ INSERT INTO venue (name, address, city, capacity)
 VALUES ('Stadium', '123 Street', 'City', 5000);
 
 INSERT INTO event (venueid, name, date, time)
-VALUES (1, 'Concert', 2023-10-20, 19:30);
+VALUES (1, 'Concert', '2023-10-20', '19:30');
 
-INSERT INTO tickettype (price, tickettype, description, eventid)
+INSERT INTO tickettype (price, ticketname, description, eventid)
 VALUES (15.00, 'Student', 'Discount for students', 1), 
 (25.00, 'Regular', 'Standard price', 1);
 
