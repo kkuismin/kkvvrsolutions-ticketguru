@@ -69,7 +69,8 @@ PRIMARY KEY(ticketid)
 );
 
 INSERT INTO appuser (username, password, role)
-VALUES ('admin', '$2a$10$bRnDm/nAWqHORRh.hA9R1Oqpm6pDQFeLCVvhxgvhONe42qj8bImyi', 'ADMIN');
+VALUES ('admin', '$2a$10$bRnDm/nAWqHORRh.hA9R1Oqpm6pDQFeLCVvhxgvhONe42qj8bImyi', 'ADMIN'),
+('ticketseller', '$2a$10$SvEWddkbGQttIFRZ3By4Gej1RHvlLiorZT4FVRw3qAVtlPyCFtCGu', 'TICKETSELLER');
 
 INSERT INTO venue (name, address, city, capacity)
 VALUES ('Stadium', '123 Street', 'City', 5000);
