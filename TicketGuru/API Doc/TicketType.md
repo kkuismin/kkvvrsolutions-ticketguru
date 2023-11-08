@@ -28,9 +28,9 @@
 
 - **Data Params**
 
-  Price and ticketName are required
-  "price": double
-  "ticketName": String
+  Price and ticketName are required<br />
+  "price": double<br />
+  "ticketName": String<br />
   "description": String
 
 - **Success Response:**

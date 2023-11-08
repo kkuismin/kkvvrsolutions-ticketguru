@@ -28,9 +28,9 @@
   
 - **Data Params**
 
-  All columns are required
-  "name": String 
-  "date": LocalDate
+  All columns are required<br />
+  "name": String <br />
+  "date": LocalDate<br />
   "time": LocalTime
   
   **Success Response:**
@@ -52,11 +52,11 @@
 
 ```
 {
-  "eventId": 1,
-  "name": "Concert",
-  "date": "2023-12-20",
-  "time": "19:15",
-  "venueList": {}
+	"eventId": 1,
+	"name": "Concert",
+	"date": "2023-12-20",
+	"time": "19:15",
+	"venueList": {}
 }
 ```
 
@@ -64,12 +64,12 @@
 
 ```
 {
-  "name": "Concert",
-  "date": "2023-12-20",
-  "time": "19:15",
-  "venueList": {
-  		"venueId": 1
-  }
+	"name": "Concert",
+	"date": "2023-12-20",
+	"time": "19:15",
+	"venueList": {
+		"venueId": 1
+	}
 }
 ```
 

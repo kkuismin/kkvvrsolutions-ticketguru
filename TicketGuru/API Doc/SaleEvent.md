@@ -28,9 +28,9 @@
 
 - **Data Params**
 
-  All columns are required
-  "date": LocalDate
-  "time": LocalTime
+  All columns are required<br />
+  "date": LocalDate<br />
+  "time": LocalTime<br />
   "amount": int
 
 - **Success Response:**

@@ -30,10 +30,10 @@
 
 - **Data Params**
 
-  Name, address and city are required
-  "name" : String
-  "address" : String
-  "city" : String
+  Name, address and city are required<br />
+  "name" : String<br />
+  "address" : String<br />
+  "city" : String<br />
   "capacity" : int
 
 - **Success response**

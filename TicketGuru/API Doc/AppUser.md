@@ -30,9 +30,9 @@
 
 - **Data Params**
 
-  All columns are required
-  "username" : String
-  "passwordHash" : String
+  All columns are required<br />
+  "username" : String<br />
+  "passwordHash" : String<br />
   "role" : String
 
 - **Success response**
