@@ -1,4 +1,4 @@
-# Ticket
+# **Ticket**
 
 - **URL**
 
@@ -6,14 +6,22 @@
 
 - **Method:**
 
-  `GET` /tickets for all | /tickets/{ticketId} for single ticket
-
-  `POST` /tickets
-
-  `DELETE` /tickets/{ticketId}
-
-  `PUT` /tickets/{ticketId}
-
+  `GET` /tickets for all | /tickets/{ticketId} for single ticket<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
+  
+  `POST` /tickets<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
+  
+  `DELETE` /tickets/{ticketId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
+  
+  `PUT` /tickets/{ticketId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
+  
 - **URL Params**
 
   `ticketId`: id for Ticket entity, a primary key
@@ -21,10 +29,7 @@
 - **Data Params**
 
   All columns in table are nullable, none are required
-
   "barcode": String
-
-  "type": String
 
 - **Success Response:**
 
@@ -45,10 +50,27 @@
 
 ```
 {
-    "ticketId": 1,
-    "event": {},
-    "ticketType": {},
-    "saleEvent": {},
-    "barcode": "16980692908420002"
+   "ticketId": 1,
+   "event": {},
+   "ticketType": {},
+   "saleEvent": {},
+   "barcode": "16980692908420002"
+}
+```
+
+- **POST**
+
+```
+{
+   "event": {
+    	"eventId": 1
+  	},
+   "ticketType": {
+   		"ticketTypeId": 1
+   },
+   "saleEvent": {
+  		"saleEventId": 1
+  	},
+   "barcode": "16980692908420002"
 }
 ```

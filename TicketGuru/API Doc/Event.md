@@ -1,196 +1,75 @@
-# Get events
+# **Event**
 
-List every single event in the database.
+- **URL**
 
-**URL** : `/api/events`
+  /api/events | /api/events/{eventId}
+  
+  **Method:**
 
-**Method** : `GET`
+  `GET` /events for all | /events/{eventId} for single event<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-**Authorization** : _NO_
+  `POST` /events<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-**Permissions** : `NONE`
+  `DELETE` /events/{eventId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-**Data** : `{}`
+  `PUT` /events/{eventId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-OR
+- **URL Params**
 
-List a singular event.
+  `eventId`: id for Event entity, a primary key
+  
+- **Data Params**
 
-**URL** : `/api/events/{id}`
+  All columns are required
+  "name": String 
+  "date": LocalDate
+  "time": LocalTime
+  
+  **Success Response:**
 
-**Method** : `GET`
+  - **Code:** 200 <br />
+    **Content:** `All Events or Event`
 
-**Authorization** : _NO_
+    **Code:** 201 <br />
+    **Content:** `Created Event`
 
-**Permissions** : `NONE`
+- **Error Response:**
 
-**Data** : `{}`
+  - **Code:** 404 NOT_FOUND <br />
+    **Content:** `None`
 
-## Success
+- **Sample Body:**
 
-**Condition** : Events are not empty.
+- **GET**
 
-**Code** : `200 OK`
-
-**Content example**
-
-```json
+```
 {
-  "event_id": 1,
-  "name": "Funny things!",
+  "eventId": 1,
+  "name": "Concert",
   "date": "2023-12-20",
-  "time": "19:15"
+  "time": "19:15",
+  "venueList": {}
 }
 ```
 
-## Error
+- **POST**
 
-**Condition** : No event entity exists within the database.
-
-**Code** : `404 NOT FOUND`
-
-**Content** : `{}`
-
-## Notes
-
-Not final. Proof of concept and the first iteration.
-
-# Post an event
-
-Post a singular event with its contents.
-
-**URL** : `/api/events`
-
-**Method** : `POST`
-
-**Authorization** : _NO_
-
-**Permissions** : `NONE`
-
-**Data constraints**
-
-Provide the name, date, and time of the event.
-
-```json
+```
 {
-  "name": "Hooplah!",
+  "name": "Concert",
   "date": "2023-12-20",
-  "time": "19:15"
+  "time": "19:15",
+  "venueList": {
+  		"venueId": 1
+  }
 }
 ```
 
-## Success
-
-**Condition** : Correct json body sent. Empty or unmentioned fields will become null.
-
-**Code** : `201 CREATED`
-
-**Content example**
-
-```json
-{
-  "event_id": 5,
-  "name": "Hooplah!",
-  "date": "2023-12-20",
-  "time": "19:15"
-}
-```
-
-## Error
-
-**Condition** : Faulty JSON body.
-
-**Code** : `400 BAD REQUEST`
-
-**Content** : `{}`
-
-## Notes
-
-Deletion currently has no real error outside of a faulty body composition. Fields can be null at the moment.
-
-# Update an event.
-
-Update the fields within an event.
-
-**URL** : `/api/events/{id}`
-
-**Method** : `POST`
-
-**Authorization** : _NO_
-
-**Permissions** : `NONE`
-
-**Data constraints**
-
-Provide the name, date, and time of the event.
-
-```json
-{
-  "name": "Hooplah!",
-  "date": "2023-12-20",
-  "time": "19:15"
-}
-```
-
-## Success
-
-**Condition** : Correct json body sent. Empty or unmentioned fields will become null.
-
-**Code** : `201 CREATED`
-
-**Content example**
-
-```json
-{
-  "event_id": 5,
-  "name": "Hooplah!",
-  "date": "2023-12-20",
-  "time": "19:15"
-}
-```
-
-## Error
-
-**Condition** : Faulty JSON body.
-
-**Code** : `400 BAD REQUEST`
-
-**Content** : `{}`
-
-## Notes
-
-Same notes as deletion. PUT has no real error codes outside of a bad request at the moment. Fields can be null if left omitted.
-
-# Delete an event
-
-Delete a specific event or delete all events within the database.
-
-**URL** : `/api/events`
-
-**Method** : `DELETE`
-
-**Authorization** : _NO_
-
-**Permissions** : `NONE`
-
-**Data** : `{}`
-
-## Success
-
-**Condition** : If the event exists for singular deletion, otherwise if any event exists for complete deletion.
-
-**Code** : `204 NO CONTENT`
-
-**Content** : `{}`
-
-## Error
-
-**Condition** : Event not found
-
-**Code** : `404 NOT FOUND`
-
-**Content** : `{}`
-
-## Notes
-
-No authorization or permissions implemented yet.

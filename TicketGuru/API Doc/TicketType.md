@@ -1,4 +1,4 @@
-## **TicketType**
+# **TicketType**
 
 - **URL**
 
@@ -6,13 +6,21 @@
 
 - **Method:**
 
-  `GET` /tickettypes for all | /tickettypes/{ticketTypeId} for single ticket type
+  `GET` /tickettypes for all | /tickettypes/{ticketTypeId} for single ticket type<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `POST` /tickettypes
+  `POST` /tickettypes<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `DELETE` /tickettypes/{ticketTypeId}
+  `DELETE` /tickettypes/{ticketTypeId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `PUT` /tickettypes/{ticketTypeId}
+  `PUT` /tickettypes/{ticketTypeId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
 - **URL Params**
 
@@ -20,9 +28,9 @@
 
 - **Data Params**
 
-  All columns in table are nullable, none are required
-  "price": int
-  "customerType": String
+  Price and ticketName are required
+  "price": double
+  "ticketName": String
   "description": String
 
 - **Success Response:**
@@ -44,11 +52,11 @@
 
 ```
 {
+    "ticketTypeId": 1
     "price": 15.0,
-    "ticketType": "Student",
+    "ticketName": "Student",
     "description": "Discount for students",
     "event": {},
-    "ticketTypeId": 1
 }
 ```
 
@@ -57,7 +65,7 @@
 ```
 {
   "price": 5,
-  "ticketType": "Children",
+  "ticketName": "Children",
   "description": "Childen under 15",
   "event": {
      "eventId": 1

@@ -1,4 +1,4 @@
-# Venue
+# **Venue**
 
 - **URL**
 
@@ -8,28 +8,32 @@
 
 - **Method:**
 
-  `GET` /venues
+  `GET` /venues for all | /venues/{id} for single venue<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `GET` /venues/{id}
+  `POST` /venues<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `POST` /venues
+  `DELETE` /venues/{id}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `DELETE` /venues/{id}
-
-  `PUT` /venues/{id}
+  `PUT` /venues/{id}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
 - **URL Params**
 
-  `id` : id for Venue entity, a primary key
+  `venueId` : id for Venue entity, a primary key
 
 - **Data Params**
 
+  Name, address and city are required
   "name" : String
-
   "address" : String
-
   "city" : String
-
   "capacity" : int
 
 - **Success response**
@@ -51,7 +55,7 @@
 
 ```
 {
-    "id": 1,
+    "venueId": 1,
     "name": "Nokia Arena",
     "address": "Kansikatu 3",
     "city": "Tampere",

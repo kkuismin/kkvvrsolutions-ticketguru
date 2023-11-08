@@ -1,4 +1,4 @@
-## **SaleEvent**
+# **SaleEvent**
 
 - **URL**
 
@@ -6,13 +6,21 @@
 
 - **Method:**
 
-  `GET` /sales for all | /sales/{saleEventId} for single sale
+  `GET` /sales for all | /sales/{saleEventId} for single sale<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `POST` /sales
+  `POST` /sales<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `DELETE` /sales/{saleEventId}
+  `DELETE` /sales/{saleEventId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
-  `PUT` /sales/{saleEventId}
+  `PUT` /sales/{saleEventId}<br />
+  **Auth required**: YES<br />
+  **Permissions required**: Admin or TicketSeller<br />
 
 - **URL Params**
 
@@ -20,10 +28,10 @@
 
 - **Data Params**
 
-  All columns in table are nullable, none are required
+  All columns are required
   "date": LocalDate
   "time": LocalTime
-  "amount": double
+  "amount": int
 
 - **Success Response:**
 
