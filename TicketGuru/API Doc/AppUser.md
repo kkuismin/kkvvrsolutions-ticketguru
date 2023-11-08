@@ -2,13 +2,11 @@
 
 - **URL**
 
-  /api/users
-
-  /api/users/{id}
+  /api/users | /api/users/{userId}
 
 - **Method:**
 
-  `GET` /users for all | /users/{id} for single user<br />
+  `GET` /users for all | /users/{userId} for single user<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
@@ -16,11 +14,11 @@
   **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
-  `DELETE` /users/{id}<br />
+  `DELETE` /users/{userId}<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
-  `PUT` /users/{id}<br />
+  `PUT` /users/{userId}<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
@@ -56,7 +54,7 @@
 {
     "userId": 1,
     "username": "user",
-    "password": "user",
+    "passwordHash": "user",
     "role": "ADMIN",
 }
 ```
@@ -66,7 +64,7 @@
 ```
 {
     "username": "user",
-    "password": "user",
+    "passwordHash": "user",
     "role": "ADMIN",
 }
 ```

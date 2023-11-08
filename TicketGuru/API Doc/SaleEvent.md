@@ -1,5 +1,7 @@
 # **SaleEvent**
 
+This API allows you to sell tickets.
+
 - **URL**
 
   /api/sales | /api/sales/{saleEventId}
@@ -29,8 +31,8 @@
 - **Data Params**
 
   All columns are required<br />
-  "date": LocalDate<br />
-  "time": LocalTime<br />
+  "saleDate": LocalDate<br />
+  "saleTime": LocalTime<br />
   "amount": int
 
 - **Success Response:**

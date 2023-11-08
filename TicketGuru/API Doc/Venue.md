@@ -2,13 +2,11 @@
 
 - **URL**
 
-  /api/venues
-
-  /api/venues/{id}
+  /api/venues | /api/venues/{venueId}
 
 - **Method:**
 
-  `GET` /venues for all | /venues/{id} for single venue<br />
+  `GET` /venues for all | /venues/{venueId} for single venue<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
@@ -16,11 +14,11 @@
   **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
-  `DELETE` /venues/{id}<br />
+  `DELETE` /venues/{venueId}<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
-  `PUT` /venues/{id}<br />
+  `PUT` /venues/{venueId}<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 

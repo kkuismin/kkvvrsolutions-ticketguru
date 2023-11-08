@@ -28,7 +28,7 @@
 
 - **Data Params**
 
-  All columns in table are nullable, none are required<br />
+  All columns in table are nullable, none are required
   "barcode": String
 
 - **Success Response:**
@@ -63,13 +63,13 @@
 ```
 {
    "event": {
-		"eventId": 1
+    "eventId": 1
 	},
    "ticketType": {
-		"ticketTypeId": 1
+    "ticketTypeId": 1
 	},
    "saleEvent": {
-		"saleEventId": 1
+    "saleEventId": 1
 	},
    "barcode": "16980692908420002"
 }

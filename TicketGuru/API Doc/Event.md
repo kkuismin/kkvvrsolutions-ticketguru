@@ -68,7 +68,7 @@
 	"date": "2023-12-20",
 	"time": "19:15",
 	"venueList": {
-		"venueId": 1
+    "venueId": 1
 	}
 }
 ```
