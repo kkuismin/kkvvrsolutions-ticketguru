@@ -36,17 +36,22 @@ public class Ticket {
 
 	private String barcode;
 
+	@NotNull
+	@Column(name = "is_checked")
+	private Boolean isChecked;
+
 	private static final AtomicLong counter = new AtomicLong();
 
 	public Ticket() {
 		this.barcode = generateBarcode();
 	}
 
-	public Ticket(Event event, TicketType ticketType, SaleEvent saleEvent) {
+	public Ticket(Event event, TicketType ticketType, SaleEvent saleEvent, Boolean isChecked) {
 		super();
 		this.event = event;
 		this.ticketType = ticketType;
 		this.saleEvent = saleEvent;
+		this.isChecked = isChecked;
 		if (saleEvent != null) {
 			saleEvent.getTicketList().add(this);
 		}
@@ -101,10 +106,18 @@ public class Ticket {
 		this.ticketType = ticketType;
 	}
 
+	public Boolean getIsChecked() {
+		return isChecked;
+	}
+
+	public void setIsChecked(Boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", event=" + event + ", ticketType=" + ticketType + ", saleEvent="
-				+ saleEvent + ", barcode=" + barcode + "]";
+				+ saleEvent + ", barcode=" + barcode + ", isChecked=" + isChecked + "]";
 	}
 
 }
