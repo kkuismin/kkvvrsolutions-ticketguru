@@ -64,21 +64,6 @@ public class Ticket {
 		return String.valueOf(currentTime) + String.format("%04d", count % 10000);
 	}
 
-	public Ticket() {
- 	this.barcode = generateBarcode();
- 	this.isChecked = false;
- 	}
- 
- 	public Ticket(Event event, TicketType ticketType, SaleEvent saleEvent) {
- 	super();
- 	this.event = event;
- 	this.ticketType = ticketType;
- 	this.saleEvent = saleEvent;
- 	if (saleEvent != null) {
- 	saleEvent.getTicketList().add(this);
- 	}
- 	}
-
 	public Long getTicketId() {
 		return ticketId;
 	}
