@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "ticketId")
@@ -37,21 +38,21 @@ public class Ticket {
 	private String barcode;
 
 	@NotNull
-	@Column(name = "is_checked")
+	@Column(name = "ischecked")
 	private Boolean isChecked;
 
 	private static final AtomicLong counter = new AtomicLong();
 
 	public Ticket() {
 		this.barcode = generateBarcode();
+		this.isChecked = false;
 	}
 
-	public Ticket(Event event, TicketType ticketType, SaleEvent saleEvent, Boolean isChecked) {
+	public Ticket(Event event, TicketType ticketType, SaleEvent saleEvent) {
 		super();
 		this.event = event;
 		this.ticketType = ticketType;
 		this.saleEvent = saleEvent;
-		this.isChecked = isChecked;
 		if (saleEvent != null) {
 			saleEvent.getTicketList().add(this);
 		}

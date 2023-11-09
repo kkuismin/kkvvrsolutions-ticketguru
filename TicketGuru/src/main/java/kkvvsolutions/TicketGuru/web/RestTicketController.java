@@ -2,6 +2,7 @@ package kkvvsolutions.TicketGuru.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -148,4 +150,32 @@ public class RestTicketController {
 		}
 	}
 
+	@GetMapping("/tickets/barcode/{barcode}")
+	public ResponseEntity<Ticket> getTicketByBarcode(@PathVariable String barcode) {
+		Optional<Ticket> ticket = trepository.findByBarcode(barcode);
+		if (ticket.isPresent()) {
+			return new ResponseEntity<>(ticket.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PatchMapping("/tickets/barcode/{barcode}/checked")
+	public ResponseEntity<Ticket> updateTicketCheckedStatus(@PathVariable("barcode") String barcode,
+			@RequestBody Map<String, Boolean> updates) {
+		Optional<Ticket> ticketData = trepository.findByBarcode(barcode);
+
+		if (ticketData.isPresent()) {
+			Ticket ticket = ticketData.get();
+			if (updates.containsKey("isChecked")) {
+				ticket.setIsChecked(updates.get("isChecked"));
+				trepository.save(ticket);
+				return new ResponseEntity<>(ticket, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }
