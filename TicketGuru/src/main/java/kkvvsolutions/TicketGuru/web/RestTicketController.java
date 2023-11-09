@@ -121,6 +121,16 @@ public class RestTicketController {
 		}
 	}
 
+	@GetMapping("/tickets/barcode/{barcode}")
+	 public ResponseEntity<Ticket> getTicketByBarcode(@PathVariable String barcode) {
+	 Optional<Ticket> ticket = trepository.findByBarcode(barcode);
+	 if (ticket.isPresent()) {
+	 return new ResponseEntity<>(ticket.get(), HttpStatus.OK);
+	 } else {
+	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	 }
+	 }
+
 	@PutMapping("/tickets/{id}")
 	public ResponseEntity<Ticket> updateTicket(@PathVariable("id") Long ticketId, @Valid @RequestBody Ticket ticket) {
 
@@ -144,6 +154,19 @@ public class RestTicketController {
 			trepository.deleteById(ticketId);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PatchMapping("/tickets/barcode/{barcode}")
+	public ResponseEntity<?> checkTicket(@PathVariable String barcode) {
+		Optional<Ticket> tOptional = trepository.findByBarcode(barcode);
+		if (tOptional.isPresent()) {
+			Ticket ticket = tOptional.get();
+			ticket.setIsChecked(true);
+			trepository.save(ticket);
+			return new ResponseEntity<>(ticket, HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
