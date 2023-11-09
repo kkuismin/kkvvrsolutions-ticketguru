@@ -59,7 +59,6 @@ PRIMARY KEY(saleeventid)
 CREATE TABLE ticket(
 ticketid BIGINT NOT NULL AUTO_INCREMENT, 
 barcode VARCHAR(100), 
-ischecked BOOLEAN,
 eventid BIGINT NOT NULL, 
 tickettypeid BIGINT NOT NULL, 
 saleeventid BIGINT NOT NULL, 

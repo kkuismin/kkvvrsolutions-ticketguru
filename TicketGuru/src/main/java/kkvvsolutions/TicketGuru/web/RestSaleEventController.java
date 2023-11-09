@@ -67,15 +67,28 @@ public class RestSaleEventController {
 	@PostMapping("/sales")
 	public ResponseEntity<SaleEvent> createSaleEvent(@Valid @RequestBody SaleEvent saleEvent) {
 		try {
-			for (Ticket ticket : saleEvent.getTicketList()) {
-				ticket.setSaleEvent(saleEvent);
+			if (saleEvent.getTicketList().size() != 1) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+
+			Ticket templateTicket = saleEvent.getTicketList().get(0);
+
+			saleEvent.getTicketList().clear();
+			for (int i = 0; i < saleEvent.getAmount(); i++) {
+				Ticket newTicket = new Ticket();
+				newTicket.setEvent(templateTicket.getEvent());
+				newTicket.setTicketType(templateTicket.getTicketType());
+				newTicket.setSaleEvent(saleEvent);
+				newTicket.setIsChecked(false);
+				saleEvent.getTicketList().add(newTicket);
 			}
 
 			SaleEvent _saleEvent = saleEventRepository.save(saleEvent);
 
 			return new ResponseEntity<>(_saleEvent, HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
