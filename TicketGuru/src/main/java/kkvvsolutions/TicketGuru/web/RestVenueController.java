@@ -40,8 +40,8 @@ public class RestVenueController {
     }
 
     @GetMapping("/venues/{id}")
-    public ResponseEntity<Venue> getVenueById(@PathVariable("id") Long venue_id) {
-        Optional<Venue> venueData = venueRepository.findById(venue_id);
+    public ResponseEntity<Venue> getVenueById(@PathVariable("id") Long venueId) {
+        Optional<Venue> venueData = venueRepository.findById(venueId);
 
         if (venueData.isPresent()) {
             return new ResponseEntity<>(venueData.get(), HttpStatus.OK);
@@ -62,8 +62,8 @@ public class RestVenueController {
     }
 
     @PutMapping("/venues/{id}")
-    public ResponseEntity<Venue> updateVenue(@PathVariable("id") Long venue_id, @Valid @RequestBody Venue venue) {
-        Optional<Venue> venueData = venueRepository.findById(venue_id);
+    public ResponseEntity<Venue> updateVenue(@PathVariable("id") Long venueId, @Valid @RequestBody Venue venue) {
+        Optional<Venue> venueData = venueRepository.findById(venueId);
 
         if (venueData.isPresent()) {
             Venue _venue = venueData.get();
@@ -79,9 +79,9 @@ public class RestVenueController {
     }
 
     @DeleteMapping("/venues/{id}")
-    public ResponseEntity<HttpStatus> deleteVenue(@PathVariable("id") Long venue_id) {
+    public ResponseEntity<HttpStatus> deleteVenue(@PathVariable("id") Long venueId) {
         try {
-            venueRepository.deleteById(venue_id);
+            venueRepository.deleteById(venueId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
