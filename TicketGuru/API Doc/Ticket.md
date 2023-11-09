@@ -32,8 +32,8 @@
 
 - **Data Params**
 
-  All columns in table are nullable, none are required
-  "barcode": String
+  All columns in table are nullable, none are required<br />
+  "barcode": String<br />
   "isChecked": Boolean
 
 - **Success Response:**
