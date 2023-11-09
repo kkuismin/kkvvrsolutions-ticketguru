@@ -157,18 +157,24 @@ public class RestTicketController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
 
-	@PatchMapping("/tickets/barcode/{barcode}")
-	public ResponseEntity<?> checkTicket(@PathVariable String barcode) {
-		Optional<Ticket> tOptional = trepository.findByBarcode(barcode);
-		if (tOptional.isPresent()) {
-			Ticket ticket = tOptional.get();
-			ticket.setIsChecked(true);
-			trepository.save(ticket);
-			return new ResponseEntity<>(ticket, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
+	@PatchMapping("/tickets/barcode/{barcode}/checked")
+ 	public ResponseEntity<Ticket> updateTicketCheckedStatus(@PathVariable("barcode") String barcode,
+ 	@RequestBody Map<String, Boolean> updates) {
+	Optional<Ticket> ticketData = trepository.findByBarcode(barcode);
+ 
+ 	if (ticketData.isPresent()) {
+ 	Ticket ticket = ticketData.get();
+ 	if (updates.containsKey("isChecked")) {
+ 	ticket.setIsChecked(updates.get("isChecked"));
+ 	trepository.save(ticket);
+ 	return new ResponseEntity<>(ticket, HttpStatus.OK);
+ 	} else {
+ 	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 	}
+ 	} else {
+ 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+ 	}
+ 	}
 }
