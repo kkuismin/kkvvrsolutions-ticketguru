@@ -123,6 +123,16 @@ public class RestTicketController {
 		}
 	}
 
+	@GetMapping("/tickets/barcode/{barcode}")
+	public ResponseEntity<Ticket> getTicketByBarcode(@PathVariable String barcode) {
+		Optional<Ticket> ticket = trepository.findByBarcode(barcode);
+		if (ticket.isPresent()) {
+			return new ResponseEntity<>(ticket.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@PutMapping("/tickets/{id}")
 	public ResponseEntity<Ticket> updateTicket(@PathVariable("id") Long ticketId, @Valid @RequestBody Ticket ticket) {
 
