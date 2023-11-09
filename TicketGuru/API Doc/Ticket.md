@@ -22,7 +22,7 @@
   **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
   
-  `PATCH` /tickets/barcode/{barcode}/checked"<br />
+  `PATCH` /tickets/barcode/{barcode}/checked<br />
   **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
   
