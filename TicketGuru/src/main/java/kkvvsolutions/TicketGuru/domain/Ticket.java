@@ -37,7 +37,7 @@ public class Ticket {
 	private String barcode;
 
 	@NotNull
-	@Column(name = "is_checked")
+	@Column(name = "ischecked")
 	private Boolean isChecked;
 
 	private static final AtomicLong counter = new AtomicLong();
