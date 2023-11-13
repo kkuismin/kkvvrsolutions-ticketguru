@@ -99,7 +99,8 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
  | eventId      | Long FK     | Id tapahtumalle, johon lippu on, viittaus Event-tauluun, not null |
  | saleEventId  | Long FK     | Myyntitapahtuman id, viittaus SaleEvent-tauluun, not null         |
  | ticketTypeId | Long FK     | Lipputyyppi, viittaus TicketTyp-tauluun, not null                 |
- | barcode      | varchar(15) | Lipun yksilöllinen viivakoodi, not null                           |
+ | barcode      | varchar(15) | Lipun yksilöllinen viivakoodi                                     |
+ | isChecked    | boolean     | Lipun viivakoodin skannaus                                        |
  
  ---
 

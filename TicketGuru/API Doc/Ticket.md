@@ -59,7 +59,8 @@
    "event": {},
    "ticketType": {},
    "saleEvent": {},
-   "barcode": "16980692908420002"
+   "barcode": "16980692908420002",
+   "isChecked": "false"
 }
 ```
 
@@ -76,6 +77,7 @@
    "saleEvent": {
     "saleEventId": 1
 	},
-   "barcode": "16980692908420002"
+   "barcode": "16980692908420002",
+   isChecked: "false"
 }
 ```
