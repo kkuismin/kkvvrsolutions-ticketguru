@@ -60,6 +60,7 @@ public class WebSecurityConfiguration {
         	CorsConfiguration configuration = new CorsConfiguration();
         	configuration.setAllowedOrigins(Arrays.asList("*")); // Esim. "https://localhost:8080"
         	configuration.setAllowedMethods(Arrays.asList("*")); // ("GET", "POST"), jne.
+        	configuration.setAllowedHeaders(Arrays.asList("*"));
         	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         	source.registerCorsConfiguration("/**", configuration);
         	return source;
