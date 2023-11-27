@@ -57,7 +57,7 @@ public class RestTicketController {
 		if (ticketData.isPresent()) {
 			return new ResponseEntity<>(ticketData.get(), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 
