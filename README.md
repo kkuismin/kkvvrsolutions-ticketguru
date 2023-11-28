@@ -31,8 +31,6 @@ Asiakas haluaa lippujen myynnistä vaivatonta ja järjestelmän, josta lippujen 
 
 * Myyjänä haluan nähdä kaikki myynnissä olevat tapahtumat, jotta voin myydä liput asiakkaan haluamaan tapahtumaan.
 
-* Myyjänä haluan myydä useamman lipun kerrallaan eri asiakasryhmistä, jotta asiakaspalvelu on sujuvampaa.
-
 * Myyjänä haluan nähdä myymättä jääneet ennakkoliput, jotta voin tulostaa ne ovella myytäväksi.
 
 * Myyjänä haluan, että myyntitapahtumille muodostuu oma tunnisteensa, jotta virhetilanteiden selvitys helpottuuu.
@@ -142,3 +140,6 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
 
  ## API-dokumentaatio
 [Linkki API-dokumentaatioon](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/develop/TicketGuru/API%20Doc)
+
+## Client
+[Linkki Clientin koodiin](https://github.com/Isanaiya/tg-client/tree/main)
