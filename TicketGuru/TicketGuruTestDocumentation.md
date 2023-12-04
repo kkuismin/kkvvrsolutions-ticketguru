@@ -8,8 +8,7 @@ This is an overview of the tests made for ticketguru's ticket selling platform.
 - **Configuration**:
   - Spring Boot version: (3.0.1)
   - Database configuration:
-```spring.datasource.url=jdbc:mysql://localhost:3306/ticketgurudb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-```
+```spring.datasource.url=jdbc:mysql://localhost:3306/ticketgurudb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC```
   - MockMvc for secure API testing 
     
 ## 3. Test Types
