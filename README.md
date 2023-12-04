@@ -143,3 +143,6 @@ Tietokannan taulut tietoineen on kuvattu alla olevassa kaaviossa. Kaavion ohessa
 
 ## Client
 [Linkki Clientin koodiin](https://github.com/Isanaiya/tg-client/tree/main)
+
+## Testausdokumentaatio
+[Linkki testausdokumentaatioon](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/develop/TicketGuru/TicketGuruTestDocumentation.md)
