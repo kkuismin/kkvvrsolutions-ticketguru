@@ -22,6 +22,9 @@ This is an overview of the tests made for ticketguru's ticket selling platform.
 ### End-to-End Tests (E2E)
 - Testing the complete user journey.
 - Example: Buy New Ticket test case using Robot Framework.
+
+![image](https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/131862365/08a366af-3683-45b9-87d3-42eccd45d3e6)
+
   
 ## 4. Test Case Details
 - **Test Case: Buy New Ticket Succesfully Path**
