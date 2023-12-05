@@ -1,5 +1,7 @@
 # **TicketType**
 
+### Endpoints
+
 - **URL**
 
   /api/tickettypes | /api/tickettypes/{ticketTypeId}
@@ -7,46 +9,63 @@
 - **Method:**
 
   `GET` /tickettypes for all | /tickettypes/{ticketTypeId} for single ticket type<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
   `POST` /tickettypes<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
   `DELETE` /tickettypes/{ticketTypeId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
   `PUT` /tickettypes/{ticketTypeId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
-- **URL Params**
+### Authentication and Permissions
 
-  `ticketTypeId`: id for TicketType entity, a primary key
+- **Authentication Required**: YES
 
-- **Data Params**
+### URL Params
 
-  Price and ticketName are required<br />
-  "price": double<br />
-  "ticketName": String<br />
-  "description": String
+`ticketTypeId`: id for TicketType entity, a primary key
 
-- **Success Response:**
+### Data Params
 
-  - **Code:** 200 <br />
-    **Content:** `All TicketTypes or single TicketType`
+**`price`**: double (required)<br />
+**`ticketName`**: String (required)<br />
+**`description`**: String
 
-  - **Code:** 201 <br />
-    **Content:** `Created TicketType`
+### Success Responses
 
-- **Error Response:**
+- **GET /tickettypes and /tickettypes/{ticketTypeId}**
 
-  - **Code:** 404 NOT_FOUND <br />
-    **Content:** `None`
+  - **Code**: 200 OK
+  - **Content**: List of `TicketType` or a single `TicketType` instance
 
-- **Sample Body:**
+- **POST /tickettypes**
+
+  - **Code**: 201 Created
+  - **Content**: `TicketType` instance that was created
+
+- **PUT /tickettypes/{ticketTypeId}**
+
+  - **Code**: 200 OK
+  - **Content**: Updated `TicketType` instance
+
+- **DELETE /tickettypes/{ticketTypeId} and /tickettypes**
+  - **Code**: 204 No Content
+
+### Error Responses
+
+- **General Errors**
+
+  - **Code**: 400 BAD_REQUEST
+  - **Content**: None
+
+- **Resource Not Found**
+  - **Code**: 404 NOT_FOUND
+  - **Content**: None
+
+### Sample Request Bodies
 
 - **GET**
 

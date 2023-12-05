@@ -2,6 +2,8 @@
 
 This API allows you to sell tickets.
 
+### Endpoints
+
 - **URL**
 
   /api/sales | /api/sales/{saleEventId}
@@ -9,46 +11,63 @@ This API allows you to sell tickets.
 - **Method:**
 
   `GET` /sales for all | /sales/{saleEventId} for single sale<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
   `POST` /sales<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
   `DELETE` /sales/{saleEventId}<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
   `PUT` /sales/{saleEventId}<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
-- **URL Params**
+### Authentication and Permissions
 
-  `saleEventId`: id for SaleEvent entity, a primary key
+- **Authentication Required**: YES
 
-- **Data Params**
+### URL Params
 
-  All columns are required<br />
-  "saleDate": LocalDate<br />
-  "saleTime": LocalTime<br />
-  "amount": int
+`saleEventId`: id for SaleEvent entity, a primary key
 
-- **Success Response:**
+### Data Params
 
-  - **Code:** 200 <br />
-    **Content:** `All SaleEvents or SaleEvent`
+**`saleDate`**: LocalDate (required)<br />
+**`saleTime`**: LocalTime (required)<br />
+**`amount`**: int (required)<br />
 
-    **Code:** 201 <br />
-    **Content:** `Created SaleEvent`
+### Success Responses
 
-- **Error Response:**
+- **GET /sales and /sales/{saleEventId}**
 
-  - **Code:** 404 NOT_FOUND <br />
-    **Content:** `None`
+  - **Code**: 200 OK
+  - **Content**: List of `SaleEvent` or a single `SaleEvent` instance
 
-- **Sample Body:**
+- **POST /sales**
+
+  - **Code**: 201 Created
+  - **Content**: `SaleEvent` instance that was created
+
+- **PUT /sales/{saleEventId}**
+
+  - **Code**: 200 OK
+  - **Content**: Updated `SaleEvent` instance
+
+- **DELETE /sales/{saleEventId} and /sales**
+  - **Code**: 204 No Content
+
+### Error Responses
+
+- **General Errors**
+
+  - **Code**: 400 BAD_REQUEST
+  - **Content**: None
+
+- **Resource Not Found**
+  - **Code**: 404 NOT_FOUND
+  - **Content**: None
+
+### Sample Request Bodies
 
 - **GET**
 

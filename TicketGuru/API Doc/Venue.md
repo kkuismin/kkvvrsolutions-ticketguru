@@ -1,5 +1,7 @@
 # **Venue**
 
+### Endpoints
+
 - **URL**
 
   /api/venues | /api/venues/{venueId}
@@ -11,43 +13,61 @@
   **Permissions required**: Admin or TicketSeller<br />
 
   `POST` /venues<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
   `DELETE` /venues/{venueId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
   `PUT` /venues/{venueId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
-- **URL Params**
+### Authentication and Permissions
 
-  `venueId` : id for Venue entity, a primary key
+- **Authentication Required**: YES
 
-- **Data Params**
+### URL Params
 
-  Name, address and city are required<br />
-  "name" : String<br />
-  "address" : String<br />
-  "city" : String<br />
-  "capacity" : int
+`venueId` : id for Venue entity, a primary key
 
-- **Success response**
+### Data Params
 
-  - **Code:** 200 <br />
-    **Content:** `Venues or Venue`
+**`name`**: String (required)<br />
+**`address`**: String (required)<br />
+**`city`**: String (required)<br />
+**`capacity`**: int
 
-  - **Code** 201 <br />
-    **Content:** `Created Venue`
+### Success Responses
 
-- **Error Response:**
+- **GET /venues and /venues/{venueId}**
 
-  - **Code:** 404 NOT_FOUND <br />
-    **Content:** `None`
+  - **Code**: 200 OK
+  - **Content**: List of `Venue` or a single `Venue` instance
 
-- **Sample Body:**
+- **POST /venues**
+
+  - **Code**: 201 Created
+  - **Content**: `Venue` instance that was created
+
+- **PUT /venues/{venueId}**
+
+  - **Code**: 200 OK
+  - **Content**: Updated `Venue` instance
+
+- **DELETE /venues/{venueId} and /venues**
+  - **Code**: 204 No Content
+
+### Error Responses
+
+- **General Errors**
+
+  - **Code**: 400 BAD_REQUEST
+  - **Content**: None
+
+- **Resource Not Found**
+  - **Code**: 404 NOT_FOUND
+  - **Content**: None
+
+### Sample Request Bodies
 
 - **GET**
 

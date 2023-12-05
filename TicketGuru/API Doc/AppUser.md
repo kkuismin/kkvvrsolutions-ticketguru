@@ -1,5 +1,7 @@
 # **AppUser**
 
+### Endpoints
+
 - **URL**
 
   /api/users | /api/users/{userId}
@@ -7,46 +9,64 @@
 - **Method:**
 
   `GET` /users for all | /users/{userId} for single user<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
   `POST` /users<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
   `DELETE` /users/{userId}<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
   `PUT` /users/{userId}<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin<br />
 
-- **URL Params**
+### Authentication and Permissions
 
-  `userId` : id for AppUser entity, a primary key
+- **Authentication Required**: YES
 
-- **Data Params**
+### URL Params
 
-  All columns are required<br />
-  "username" : String<br />
-  "passwordHash" : String<br />
-  "role" : String
+`userId` : id for AppUser entity, a primary key
 
-- **Success response**
+### Data Params
 
-  - **Code:** 200 <br />
-    **Content:** `AppUsers or AppUser`
+**`username`**: String (required)<br />
+**`password`**: String (required)<br />
+**`role`**: String, must be either "ADMIN" or "TICKETSELLER" (required)
 
-  - **Code** 201 <br />
-    **Content:** `Created AppUser`
+### Success Responses
 
-- **Error Response:**
+- **GET /users and /users/{userId}**
 
-  - **Code:** 404 NOT_FOUND <br />
-    **Content:** `None`
+  - **Code**: 200 OK
+  - **Content**: List of `AppUser` or a single `AppUser` instance
 
-- **Sample Body:**
+- **POST /users**
+
+  - **Code**: 201 Created
+  - **Content**: `AppUser` instance that was created
+
+- **PUT /users/{userId}**
+
+  - **Code**: 200 OK
+  - **Content**: Updated `AppUser` instance
+
+- **DELETE /users/{userId}**
+  - **Code**: 204 No Content
+
+### Error Responses
+
+- **General Errors**
+
+  - **Code**: 400 BAD_REQUEST
+  - **Content**: None (occurs when there's a bad request, such as invalid role)
+
+- **Resource Not Found**
+
+  - **Code**: 404 NOT_FOUND
+  - **Content**: None
+
+### Sample Request Bodies
 
 - **GET**
 

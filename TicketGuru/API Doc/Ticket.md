@@ -1,5 +1,7 @@
 # **Ticket**
 
+### Endpoints
+
 - **URL**
 
   /api/tickets | /api/tickets/{ticketId}
@@ -7,49 +9,70 @@
 - **Method:**
 
   `GET` /tickets for all | /tickets/{ticketId} for single ticket<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
-  
+
   `POST` /tickets<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
-  
+  **Permissions required**: Admin<br />
+
   `DELETE` /tickets/{ticketId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
-  
+  **Permissions required**: Admin<br />
+
   `PUT` /tickets/{ticketId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
-  
+  **Permissions required**: Admin<br />
+
   `PATCH` /tickets/barcode/{barcode}/checked<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
-  
-- **URL Params**
+  **Permissions required**: Admin<br />
 
-  `ticketId`: id for Ticket entity, a primary key
+### Authentication and Permissions
 
-- **Data Params**
+- **Authentication Required**: YES
 
-  All columns in table are nullable, none are required<br />
-  "barcode": String<br />
-  "isChecked": Boolean
+### URL Params
 
-- **Success Response:**
+`ticketId`: id for Ticket entity, a primary key
 
-  - **Code:** 200 <br />
-    **Content:** `All Tickets or Ticket`
+### Data Params
 
-  - **Code** 201 <br />
-    **Content:** `Created Ticket`
+**`barcode`**: String (nullable)<br />
+**`isChecked`**: Boolean (nullable)
 
-- **Error Response:**
+### Success Responses
 
-  - **Code:** 404 NOT_FOUND <br />
-    **Content:** `None`
+- **GET /tickets and /tickets/{ticketId}**
 
-- **Sample Body:**
+  - **Code**: 200 OK
+  - **Content**: List of `Ticket` or a single `Ticket` instance
+
+- **POST /tickets**
+
+  - **Code**: 201 Created
+  - **Content**: `Ticket` instance that was created
+
+- **PUT /tickets/{ticketId}**
+
+  - **Code**: 200 OK
+  - **Content**: Updated `Ticket` instance
+
+- **DELETE /tickets/{ticketId}**
+
+  - **Code**: 204 No Content
+
+- **PATCH /tickets/barcode/{barcode}/checked**
+  - **Code**: 200 OK
+  - **Content**: Updated `Ticket` instance
+
+### Error Responses
+
+- **General Errors**
+
+  - **Code**: 400 BAD_REQUEST
+  - **Content**: None
+
+- **Resource Not Found**
+  - **Code**: 404 NOT_FOUND
+  - **Content**: None
+
+### Sample Request Bodies
 
 - **GET**
 
@@ -68,16 +91,14 @@
 
 ```
 {
-   "event": {
-    "eventId": 1
+    "event": {
+        "eventId": 1
 	},
-   "ticketType": {
-    "ticketTypeId": 1
+    "ticketType": {
+        "ticketTypeId": 1
 	},
-   "saleEvent": {
-    "saleEventId": 1
-	},
-   "barcode": "16980692908420002",
-   isChecked: "false"
+    "saleEvent": {
+        "saleEventId": 1
+    },
 }
 ```

@@ -1,52 +1,73 @@
 # **Event**
 
+### Endpoints
+
 - **URL**
 
   /api/events | /api/events/{eventId}
-  
-  **Method:**
+
+- **Method:**
 
   `GET` /events for all | /events/{eventId} for single event<br />
-  **Auth required**: YES<br />
   **Permissions required**: Admin or TicketSeller<br />
 
   `POST` /events<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
   `DELETE` /events/{eventId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
   `PUT` /events/{eventId}<br />
-  **Auth required**: YES<br />
-  **Permissions required**: Admin or TicketSeller<br />
+  **Permissions required**: Admin<br />
 
-- **URL Params**
+### Authentication and Permissions
 
-  `eventId`: id for Event entity, a primary key
-  
-- **Data Params**
+- **Authentication Required**: YES
 
-  All columns are required<br />
-  "name": String <br />
-  "date": LocalDate<br />
-  "time": LocalTime
-  
-  **Success Response:**
+### URL Params
 
-  - **Code:** 200 <br />
-    **Content:** `All Events or Event`
+`eventId`: id for Event entity, a primary key
 
-    **Code:** 201 <br />
-    **Content:** `Created Event`
+### Data Params
 
-- **Error Response:**
+**`name`**: String (required)<br />
+**`date`**: LocalDate (required)<br />
+**`time`**: LocalTime (required)<br />
+**`venue`**: Object containing `venueId`
 
-  - **Code:** 404 NOT_FOUND <br />
-    **Content:** `None`
+### Success Responses
 
-- **Sample Body:**
+- **GET /events and /events/{eventId}**
+
+  - **Code**: 200 OK
+  - **Content**: List of `Event` or a single `Event` instance
+
+- **POST /events**
+
+  - **Code**: 201 Created
+  - **Content**: `Event` instance that was created
+
+- **PUT /events/{eventId}**
+
+  - **Code**: 200 OK
+  - **Content**: Updated `Event` instance
+
+- **DELETE /events/{eventId}**
+  - **Code**: 204 No Content
+
+### Error Responses
+
+- **General Errors**
+
+  - **Code**: 400 BAD_REQUEST
+  - **Content**: None
+
+- **Resource Not Found**
+
+  - **Code**: 404 NOT_FOUND
+  - **Content**: None
+
+### Sample Request Bodies
 
 - **GET**
 
@@ -56,7 +77,7 @@
 	"name": "Concert",
 	"date": "2023-12-20",
 	"time": "19:15",
-	"venueList": {}
+	"venue": {}
 }
 ```
 
@@ -67,9 +88,8 @@
 	"name": "Concert",
 	"date": "2023-12-20",
 	"time": "19:15",
-	"venueList": {
-    "venueId": 1
+	"venue": {
+        "venueId": 1
 	}
 }
 ```
-
