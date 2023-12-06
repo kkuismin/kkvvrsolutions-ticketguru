@@ -138,11 +138,28 @@ The tables of the database with their data are described in the diagram below. T
  | saleDate    | dateTime | Date of a sales transaction, not null                |
  | saleTime    | dateTime | Time of a sales transaction, not null                |
 
+
+## Technical description
+Add text here
+
 ## API-documentation
 [Link to API-documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/develop/TicketGuru/API%20Doc)
 
 ## Client
 [Link to Client's code](https://github.com/Isanaiya/tg-client/tree/main)
 
-## Test documentation
+## Testing
 [Link to test documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/develop/TicketGuru/TicketGuruTestDocumentation.md)
+
+## Installation
+Add text here
+
+## Startup and instructions
+Link to the front page: https://ticketguru-tg.rahtiapp.fi/
+
+### Login details
+
+| Username     | Password     |
+| ------------ | ------------ |
+| admin        | admin        |
+| ticketseller | ticketseller |
