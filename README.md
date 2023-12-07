@@ -140,7 +140,13 @@ The tables of the database with their data are described in the diagram below. T
 
 
 ## Technical description
-Add text here
+
+### Server implementation
+The release of the server implementation uses Maven's JKube and has been released in Rahti server. The database is MySQL with a [creation script](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/develop/TicketGuru/src/main/resources/ticketguruDBSchema.sql), which is also published on the same server.
+
+### Architecture
+![image](https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/131862365/da435618-ac63-4726-9868-6c8fb63761c1)
+
 
 ## API-documentation
 [Link to API-documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/develop/TicketGuru/API%20Doc)
