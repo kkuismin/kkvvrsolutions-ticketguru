@@ -151,6 +151,7 @@ The release of the server implementation uses Maven's JKube and has been release
 [Link to API-documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/develop/TicketGuru/API%20Doc)
 
 ## Client
+[Link to Client](https://isanaiya.github.io/tg-client/)
 [Link to Client's code](https://github.com/Isanaiya/tg-client/tree/main)
 
 ## Testing
