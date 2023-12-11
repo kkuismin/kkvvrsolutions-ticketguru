@@ -33,6 +33,7 @@ public class RestSaleEventController {
 	@Autowired
 	TicketRepository ticketRepository;
 
+	// Endpoint to get all SaleEvents
 	@GetMapping("/sales")
 	public ResponseEntity<List<SaleEvent>> getAllSaleEvents() {
 
@@ -51,6 +52,7 @@ public class RestSaleEventController {
 
 	}
 
+	// Endpoint to get a single SaleEvent by ID
 	@GetMapping("/sales/{id}")
 	public ResponseEntity<SaleEvent> getSaleEventById(@PathVariable("id") Long saleEvent_id) {
 
@@ -63,16 +65,19 @@ public class RestSaleEventController {
 		}
 	}
 
+	// Endpoint to create a new SaleEvent
 	@Transactional
 	@PostMapping("/sales")
 	public ResponseEntity<SaleEvent> createSaleEvent(@Valid @RequestBody SaleEvent saleEvent) {
 		try {
+			// Validating the ticket list size
 			if (saleEvent.getTicketList().size() != 1) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 
 			Ticket templateTicket = saleEvent.getTicketList().get(0);
 
+			// Creating tickets based on the template ticket
 			saleEvent.getTicketList().clear();
 			for (int i = 0; i < saleEvent.getAmount(); i++) {
 				Ticket newTicket = new Ticket();
@@ -92,6 +97,7 @@ public class RestSaleEventController {
 		}
 	}
 
+	// Endpoint to update an existing SaleEvent
 	@PutMapping("/sales/{id}")
 	public ResponseEntity<SaleEvent> updateSaleEvent(@PathVariable("id") Long saleEvent_id,
 			@Valid @RequestBody SaleEvent saleEvent) {
@@ -110,6 +116,7 @@ public class RestSaleEventController {
 		}
 	}
 
+	// Endpoint to delete all SaleEvents
 	@DeleteMapping("/sales")
 	public ResponseEntity<HttpStatus> deleteAllSaleEvents() {
 
@@ -121,6 +128,7 @@ public class RestSaleEventController {
 		}
 	}
 
+	// Endpoint to delete a specific SaleEvent by ID
 	@DeleteMapping("/sales/{id}")
 	public ResponseEntity<HttpStatus> deleteSaleEvent(@PathVariable("id") Long saleEvent_id) {
 

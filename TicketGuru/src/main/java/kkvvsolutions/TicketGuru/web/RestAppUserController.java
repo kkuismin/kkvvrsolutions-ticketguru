@@ -27,6 +27,7 @@ public class RestAppUserController {
 	@Autowired
 	private AppUserRepository userRepository;
 
+	// Endpoint to get all AppUsers
 	@GetMapping("/users")
 	public ResponseEntity<List<AppUser>> getAllAppUsers() {
 		try {
@@ -41,6 +42,7 @@ public class RestAppUserController {
 		}
 	}
 
+	// Endpoint to get a single AppUser by ID
 	@GetMapping("/users/{id}")
 	public ResponseEntity<AppUser> getAppUserById(@PathVariable("id") Long user_id) {
 		Optional<AppUser> userData = userRepository.findById(user_id);
@@ -51,6 +53,7 @@ public class RestAppUserController {
 		}
 	}
 
+	// Endpoint to create a new AppUser
 	@PostMapping("/users")
 	public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser user) {
 		if (!isValidRole(user.getRole())) {
@@ -65,6 +68,7 @@ public class RestAppUserController {
 		}
 	}
 
+	// Endpoint to update an existing AppUser
 	@PutMapping("users/{id}")
 	public ResponseEntity<AppUser> updateAppUser(@PathVariable("id") Long user_id, @Valid @RequestBody AppUser user) {
 		if (!isValidRole(user.getRole())) {
@@ -83,6 +87,7 @@ public class RestAppUserController {
 		}
 	}
 
+	// Endpoint to delete an AppUser by ID
 	@DeleteMapping("/users/{id}")
 	public ResponseEntity<HttpStatus> deleteAppUser(@PathVariable("id") Long user_id) {
 		try {
@@ -93,6 +98,7 @@ public class RestAppUserController {
 		}
 	}
 
+	// Helper method to validate user roles
 	private boolean isValidRole(String role) {
 		return "ADMIN".equals(role) || "TICKETSELLER".equals(role);
 	}

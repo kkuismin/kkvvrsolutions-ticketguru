@@ -19,6 +19,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		this.repository = userRepository;
 	}
 
+	// This method is used by Spring Security to authenticate users
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		AppUser curruser = repository.findByUsername(username);

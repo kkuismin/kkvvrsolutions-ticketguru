@@ -29,6 +29,7 @@ public class WebSecurityConfiguration {
         @Autowired
         private UserDetailServiceImpl userDetailsService;
 
+        // Configures the security filter chain
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 http
@@ -54,18 +55,21 @@ public class WebSecurityConfiguration {
 
                 return http.build();
         }
-        
+
+        // CORS configuration to allow requests from different origins
         @Bean
         CorsConfigurationSource corsConfigurationSource() {
-        	CorsConfiguration configuration = new CorsConfiguration();
-        	configuration.setAllowedOrigins(Arrays.asList("*")); // Esim. "https://localhost:8080"
-        	configuration.setAllowedMethods(Arrays.asList("*")); // ("GET", "POST"), jne.
-        	configuration.setAllowedHeaders(Arrays.asList("*"));
-        	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        	source.registerCorsConfiguration("/**", configuration);
-        	return source;
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.setAllowedOrigins(Arrays.asList("*")); // Esim. "https://localhost:8080"
+                configuration.setAllowedMethods(Arrays.asList("*")); // ("GET", "POST"), jne.
+                configuration.setAllowedHeaders(Arrays.asList("*"));
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**", configuration);
+                return source;
         }
 
+        // Configures the global authentication manager with a userDetailsService and
+        // password encoder
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
                 auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());

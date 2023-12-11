@@ -32,6 +32,7 @@ public class RestTicketController {
 	@Autowired
 	private TicketRepository trepository;
 
+	// Endpoint to retrieve all tickets
 	@GetMapping("/tickets")
 	public ResponseEntity<List<Ticket>> getAllTickets() {
 
@@ -50,6 +51,7 @@ public class RestTicketController {
 
 	}
 
+	// Endpoint to retrieve a ticket by its ID
 	@GetMapping("/tickets/{id}")
 	public ResponseEntity<Ticket> getTicketById(@PathVariable("id") Long ticketId) {
 		Optional<Ticket> ticketData = trepository.findById(ticketId);
@@ -61,6 +63,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to get the TicketType of a ticket
 	@GetMapping("/tickets/{id}/tickettype")
 	public ResponseEntity<TicketType> getTicketType(@PathVariable("id") Long ticketId) {
 		Optional<Ticket> ticketData = trepository.findById(ticketId);
@@ -78,6 +81,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to get the Event associated with a ticket
 	@GetMapping("/tickets/{id}/event")
 	public ResponseEntity<Event> getEvent(@PathVariable("id") Long eventId) {
 		Optional<Ticket> ticketData = trepository.findById(eventId);
@@ -95,6 +99,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to get the SaleEvent associated with a ticket
 	@GetMapping("/tickets/{id}/sales")
 	public ResponseEntity<SaleEvent> getSaleEvent(@PathVariable("id") Long saleEventId) {
 		Optional<Ticket> ticketData = trepository.findById(saleEventId);
@@ -112,6 +117,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to create a new ticket
 	@PostMapping("/tickets")
 	public ResponseEntity<Ticket> createTicket(@Valid @RequestBody Ticket ticket) {
 
@@ -123,6 +129,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to update a ticket by its ID
 	@PutMapping("/tickets/{id}")
 	public ResponseEntity<Ticket> updateTicket(@PathVariable("id") Long ticketId, @Valid @RequestBody Ticket ticket) {
 
@@ -139,6 +146,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to delete a ticket by its ID
 	@DeleteMapping("/tickets/{id}")
 	public ResponseEntity<HttpStatus> deleteTicket(@PathVariable("id") Long ticketId) {
 
@@ -150,6 +158,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to get a ticket by its barcode
 	@GetMapping("/tickets/barcode/{barcode}")
 	public ResponseEntity<Ticket> getTicketByBarcode(@PathVariable String barcode) {
 		Optional<Ticket> ticket = trepository.findByBarcode(barcode);
@@ -160,6 +169,7 @@ public class RestTicketController {
 		}
 	}
 
+	// Endpoint to update the checked status of a ticket
 	@PatchMapping("/tickets/barcode/{barcode}/checked")
 	public ResponseEntity<Ticket> updateTicketCheckedStatus(@PathVariable("barcode") String barcode,
 			@RequestBody Map<String, Boolean> updates) {
