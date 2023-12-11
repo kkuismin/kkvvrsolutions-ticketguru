@@ -35,16 +35,29 @@ public class WebSecurityConfiguration {
                 http
                                 .authorizeHttpRequests(authorize -> {
                                         authorize
+                                                        // Restrict access to /api/users/** to only ADMIN
                                                         .requestMatchers(new AntPathRequestMatcher("/api/users/**"))
                                                         .hasAuthority("ADMIN")
-                                                        .requestMatchers(new AntPathRequestMatcher("/api/**"))
-                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
+
+                                                        // Allow TICKETSELLER to only POST/DELETE on /api/sales/**
                                                         .requestMatchers(new AntPathRequestMatcher("/api/sales/**",
                                                                         HttpMethod.POST.name()))
-                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
+                                                        .hasAuthority("TICKETSELLER")
                                                         .requestMatchers(new AntPathRequestMatcher("/api/sales/**",
                                                                         HttpMethod.DELETE.name()))
-                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
+                                                        .hasAuthority("TICKETSELLER")
+
+                                                        // Allow TICKETSELLER to perform GET requests on all other
+                                                        // /api/** endpoints
+                                                        .requestMatchers(new AntPathRequestMatcher("/api/**",
+                                                                        HttpMethod.GET.name()))
+                                                        .hasAuthority("TICKETSELLER")
+
+                                                        // ADMIN has full access to all /api/** endpoints
+                                                        .requestMatchers(new AntPathRequestMatcher("/api/**"))
+                                                        .hasAuthority("ADMIN")
+
+                                                        // Ensure all other requests are authenticated
                                                         .anyRequest().authenticated();
                                 })
                                 .formLogin(Customizer.withDefaults())

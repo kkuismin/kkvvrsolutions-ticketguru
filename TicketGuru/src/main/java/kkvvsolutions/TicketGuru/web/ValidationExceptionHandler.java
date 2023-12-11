@@ -15,8 +15,7 @@ import java.util.Map;
 public class ValidationExceptionHandler {
 
     // This exception handler is for handling the case when a user tries to update
-    // an
-    // existing entity
+    // an existing entity
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
