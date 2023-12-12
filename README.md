@@ -142,20 +142,20 @@ The tables of the database with their data are described in the diagram below. T
 ## Technical description
 
 ### Server implementation
-The release of the server implementation uses Maven's JKube and has been released in Rahti server. The database is MySQL with a [creation script](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/develop/TicketGuru/src/main/resources/ticketguruDBSchema.sql), which is also published on the same server.
+The release of the server implementation uses Maven's JKube and has been released in Rahti server. The database is MySQL with a [creation script](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/main/TicketGuru/src/main/resources/ticketguruDBSchema.sql), which is also published on the same server.
 
 ### Architecture
 ![image](https://github.com/kkuismin/kkvvrsolutions-ticketguru/assets/131862365/92299053-8023-4e34-b2a0-9c46150844f4)
 
 ### Key interfaces
-Here is a more detailed [documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/develop/TicketGuru/API%20Doc) for the API, which includes descriptions of each endpoint and sample content.
+Here is a more detailed [documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/tree/main/TicketGuru/API%20Doc) for the API, which includes descriptions of each endpoint and sample content.
 
 ## Client
 [Link to Client](https://isanaiya.github.io/tg-client/)
 [Link to Client's code](https://github.com/Isanaiya/tg-client/tree/main)
 
 ## Testing
-[Link to test documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/develop/TicketGuru/TicketGuruTestDocumentation.md)
+[Link to test documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/main/TicketGuru/TicketGuruTestDocumentation.md)
 
 ## Installation
 For this application we used `Eclipse` as the programming environment, `Rahti` as the production environment and `MySQL` as the database.
