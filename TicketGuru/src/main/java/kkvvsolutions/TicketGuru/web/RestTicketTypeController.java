@@ -28,6 +28,7 @@ public class RestTicketTypeController {
 	@Autowired
 	private TicketTypeRepository ticketTypeRepository;
 
+	// Endpoint to retrieve all ticket types
 	@GetMapping("/tickettypes")
 	public ResponseEntity<List<TicketType>> getAllTicketTypes() {
 		try {
@@ -42,6 +43,7 @@ public class RestTicketTypeController {
 		}
 	}
 
+	// Endpoint to retrieve a ticket type by its ID
 	@GetMapping("/tickettypes/{id}")
 	public ResponseEntity<TicketType> getTicketTypeById(@PathVariable("id") Long typeId) {
 		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(typeId);
@@ -52,6 +54,7 @@ public class RestTicketTypeController {
 		}
 	}
 
+	// Endpoint to retrieve the event of a ticket type by its ID
 	@GetMapping("/tickettypes/{id}/event")
 	public ResponseEntity<Event> getEvent(@PathVariable("id") Long eventId) {
 		Optional<TicketType> ticketTypeData = ticketTypeRepository.findById(eventId);
@@ -68,6 +71,7 @@ public class RestTicketTypeController {
 		}
 	}
 
+	// Endpoint to create a new ticket type
 	@PostMapping("/tickettypes")
 	public ResponseEntity<TicketType> createTicketType(@Valid @RequestBody TicketType ticketType) {
 
@@ -79,6 +83,7 @@ public class RestTicketTypeController {
 		}
 	}
 
+	// Endpoint to update an existing ticket type by its ID
 	@PutMapping("/tickettypes/{id}")
 	public ResponseEntity<TicketType> updateTicketType(@PathVariable("id") Long typeId,
 			@Valid @RequestBody TicketType ticketType) {
@@ -95,6 +100,7 @@ public class RestTicketTypeController {
 		}
 	}
 
+	// Endpoint to delete all ticket types
 	@DeleteMapping("/tickettypes")
 	public ResponseEntity<HttpStatus> deleteAllTicketTypes() {
 
@@ -106,6 +112,7 @@ public class RestTicketTypeController {
 		}
 	}
 
+	// Endpoint to delete a ticket type by its ID
 	@DeleteMapping("/tickettypes/{id}")
 	public ResponseEntity<HttpStatus> deleteTicketType(@PathVariable("id") Long typeId) {
 

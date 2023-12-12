@@ -21,6 +21,7 @@ public class RestVenueController {
     @Autowired
     private VenueRepository venueRepository;
 
+    // Endpoint to retrieve all venues
     @GetMapping("/venues")
     public ResponseEntity<List<Venue>> getAllVenues() {
         try {
@@ -39,6 +40,7 @@ public class RestVenueController {
         }
     }
 
+    // Endpoint to retrieve a venue by its ID
     @GetMapping("/venues/{id}")
     public ResponseEntity<Venue> getVenueById(@PathVariable("id") Long venueId) {
         Optional<Venue> venueData = venueRepository.findById(venueId);
@@ -50,6 +52,7 @@ public class RestVenueController {
         }
     }
 
+    // Endpoint to create a new venue
     @PostMapping("/venues")
     public ResponseEntity<Venue> createVenue(@Valid @RequestBody Venue venue) {
         try {
@@ -61,6 +64,7 @@ public class RestVenueController {
         }
     }
 
+    // Endpoint to update a venue by its ID
     @PutMapping("/venues/{id}")
     public ResponseEntity<Venue> updateVenue(@PathVariable("id") Long venueId, @Valid @RequestBody Venue venue) {
         Optional<Venue> venueData = venueRepository.findById(venueId);
@@ -78,6 +82,7 @@ public class RestVenueController {
         }
     }
 
+    // Endpoint to delete a venue by its ID
     @DeleteMapping("/venues/{id}")
     public ResponseEntity<HttpStatus> deleteVenue(@PathVariable("id") Long venueId) {
         try {
@@ -88,6 +93,7 @@ public class RestVenueController {
         }
     }
 
+    // Endpoint to delete all venues
     @DeleteMapping("/venues")
     public ResponseEntity<HttpStatus> deleteAllVenues() {
         try {

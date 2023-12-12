@@ -29,21 +29,35 @@ public class WebSecurityConfiguration {
         @Autowired
         private UserDetailServiceImpl userDetailsService;
 
+        // Configures the security filter chain
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 http
                                 .authorizeHttpRequests(authorize -> {
                                         authorize
+                                                        // Restrict access to /api/users/** to only ADMIN
                                                         .requestMatchers(new AntPathRequestMatcher("/api/users/**"))
                                                         .hasAuthority("ADMIN")
-                                                        .requestMatchers(new AntPathRequestMatcher("/api/**"))
-                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
+
+                                                        // Allow TICKETSELLER to only POST/DELETE on /api/sales/**
                                                         .requestMatchers(new AntPathRequestMatcher("/api/sales/**",
                                                                         HttpMethod.POST.name()))
-                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
+                                                        .hasAuthority("TICKETSELLER")
                                                         .requestMatchers(new AntPathRequestMatcher("/api/sales/**",
                                                                         HttpMethod.DELETE.name()))
-                                                        .hasAnyAuthority("ADMIN", "TICKETSELLER")
+                                                        .hasAuthority("TICKETSELLER")
+
+                                                        // Allow TICKETSELLER to perform GET requests on all other
+                                                        // /api/** endpoints
+                                                        .requestMatchers(new AntPathRequestMatcher("/api/**",
+                                                                        HttpMethod.GET.name()))
+                                                        .hasAuthority("TICKETSELLER")
+
+                                                        // ADMIN has full access to all /api/** endpoints
+                                                        .requestMatchers(new AntPathRequestMatcher("/api/**"))
+                                                        .hasAuthority("ADMIN")
+
+                                                        // Ensure all other requests are authenticated
                                                         .anyRequest().authenticated();
                                 })
                                 .formLogin(Customizer.withDefaults())
@@ -54,18 +68,21 @@ public class WebSecurityConfiguration {
 
                 return http.build();
         }
-        
+
+        // CORS configuration to allow requests from different origins
         @Bean
         CorsConfigurationSource corsConfigurationSource() {
-        	CorsConfiguration configuration = new CorsConfiguration();
-        	configuration.setAllowedOrigins(Arrays.asList("*")); // Esim. "https://localhost:8080"
-        	configuration.setAllowedMethods(Arrays.asList("*")); // ("GET", "POST"), jne.
-        	configuration.setAllowedHeaders(Arrays.asList("*"));
-        	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        	source.registerCorsConfiguration("/**", configuration);
-        	return source;
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.setAllowedOrigins(Arrays.asList("*")); // Esim. "https://localhost:8080"
+                configuration.setAllowedMethods(Arrays.asList("*")); // ("GET", "POST"), jne.
+                configuration.setAllowedHeaders(Arrays.asList("*"));
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**", configuration);
+                return source;
         }
 
+        // Configures the global authentication manager with a userDetailsService and
+        // password encoder
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
                 auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());

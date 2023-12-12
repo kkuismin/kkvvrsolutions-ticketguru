@@ -14,6 +14,8 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationExceptionHandler {
 
+    // This exception handler is for handling the case when a user tries to update
+    // an existing entity
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
@@ -26,6 +28,8 @@ public class ValidationExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    // This exception handler is for handling the case when a user tries to create a
+    // new entity
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDataIntegrityViolationException(
             DataIntegrityViolationException ex) {

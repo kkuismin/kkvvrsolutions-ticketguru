@@ -43,6 +43,7 @@ public class Ticket {
 
 	private static final AtomicLong counter = new AtomicLong();
 
+	// Automatic constructors for Ticket
 	public Ticket() {
 		this.barcode = generateBarcode();
 		this.isChecked = false;
@@ -58,6 +59,7 @@ public class Ticket {
 		}
 	}
 
+	// Automatic barcode generation
 	private String generateBarcode() {
 		long currentTime = System.currentTimeMillis();
 		long count = counter.incrementAndGet();

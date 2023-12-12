@@ -158,7 +158,20 @@ Here is a more detailed [documentation](https://github.com/kkuismin/kkvvrsolutio
 [Link to test documentation](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/develop/TicketGuru/TicketGuruTestDocumentation.md)
 
 ## Installation
-Add text here
+For this application we used `Eclipse` as the programming environment, `Rahti` as the production environment and `MySQL` as the database.
+
+### Initializing the development environment
+- Install `Eclipse`.
+- Clone this project with `git clone https://github.com/kkuismin/kkvvrsolutions-ticketguru.git`.
+- Import the existing Maven project from the folder you cloned the project in.
+- Run the application as a java application, and open `http://localhost:8080/` in your browser.
+
+### Database
+- Download and install MySQL.
+- Update `application.properties` to use the MySQL database.
+- For the creation of the database we have created [ticketguruDBSchema](https://github.com/kkuismin/kkvvrsolutions-ticketguru/blob/main/TicketGuru/src/main/resources/ticketguruDBSchema.sql)
+
+The official MySQL documentation can be found [here](https://dev.mysql.com/doc/).
 
 ## Startup and instructions
 Link to the front page: https://ticketguru-tg.rahtiapp.fi/
