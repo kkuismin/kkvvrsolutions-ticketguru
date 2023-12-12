@@ -166,6 +166,11 @@ For this application we used `Eclipse` as the programming environment, `Rahti` a
 - Import the existing Maven project from the folder you cloned the project in.
 - Run the application as a java application, and open `http://localhost:8080/` in your browser.
 
+| Username     | Password     |
+| ------------ | ------------ |
+| admin        | admin        |
+| ticketseller | ticketseller |
+
 ### Database
 - Download and install MySQL.
 - Update `application.properties` to use the MySQL database.
